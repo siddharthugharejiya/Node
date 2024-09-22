@@ -1,6 +1,6 @@
 const express = require('express'); 
 const app = express();
-console.log(app);
+// console.log(app);
 
 const arr ={
     "id" : "1",
