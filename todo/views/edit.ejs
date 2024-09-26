@@ -3,13 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Task</title>
+    <title>Edit Task</title>  
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000c7;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1 {
+            margin-top: 30px;
+            color: #fff;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            max-width: 600px;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            background-color: #1e1e1e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+        input::placeholder {
+            color: #aaa;
+        }
+        button {
+            padding: 10px;
+            background-color: #db348d;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
     <h1>Edit Task</h1>
-    <form action="/edit/<%= taskToEdit.id %>" method="POST">
-        <input type="text" name="task" value="<%= taskToEdit.task %>">
-        <button type="submit">Update Task</button>
+    <form action="/edit/<%= task.id %>" method="POST">
+        <input type="text" name="task" value="<%= task.task %>" required>
+        <button type="submit">Save Changes</button>
     </form>
 </body>
 </html>
