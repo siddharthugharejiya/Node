@@ -8,11 +8,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 let todo = [];
 
-
 app.get("/", (req, res) => {
-    res.render("todo", { todo });
+    // Check if todo is empty and pass an appropriate variable
+    res.render("todo", { todo, isEmpty: todo.length === 0 });
 });
-
 
 app.get("/add", (req, res) => {
     res.render("add");
@@ -24,7 +23,6 @@ app.post("/add", (req, res) => {
     res.redirect("/");
 });
 
-
 app.post("/complete/:id", (req, res) => {
     const id = parseInt(req.params.id);
     const t = todo.find(el => el.id === id);
@@ -34,13 +32,11 @@ app.post("/complete/:id", (req, res) => {
     res.redirect("/");
 });
 
-
 app.post("/delete/:id", (req, res) => {
     const id = parseInt(req.params.id);
     todo = todo.filter(el => el.id !== id);
     res.redirect("/");
 });
-
 
 app.get("/edit/:id", (req, res) => {
     const id = parseInt(req.params.id);
