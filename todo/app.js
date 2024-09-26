@@ -9,7 +9,7 @@ app.set('views', path.join(__dirname, 'views'));
 let todo = [];
 
 app.get("/", (req, res) => {
-    // Check if todo is empty and pass an appropriate variable
+
     res.render("todo", { todo, isEmpty: todo.length === 0 });
 });
 
@@ -48,7 +48,7 @@ app.get("/edit/:id", (req, res) => {
     }
 });
 
-// Route to handle the form submission for editing a task
+
 app.post("/edit/:id", (req, res) => {
     const id = parseInt(req.params.id);
     const { task } = req.body;
