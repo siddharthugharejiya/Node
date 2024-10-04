@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+
+        <form action="/edite/<%= data._id%>" method="POST">
+            <input type="text" placeholder="Enter username" value="<%=data.username%>" name="username">
+            <input type="text" placeholder="Enter email" value="<%=data.email%>" name="email">
+            <input type="text" placeholder="Enter password" value="<%=data.password%>" name="password">
+            <input type="submit">
+        </form>
+    </center>
+</body>
+</html>
