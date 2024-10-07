@@ -4,19 +4,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Book</title>
-    <link rel="stylesheet" href="style.css">
+   
+    <style>
+        body {
+            background-color: #1c1e29;
+            font-family: sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-box {
+            background-color: #15172b;
+            border-radius: 20px;
+            box-sizing: border-box;
+            padding: 20px;
+            width: 320px;
+        }
+
+        h1 {
+            color: #eee;
+            font-size: 36px;
+            font-weight: 600;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #eee;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .input-container {
+            height: 50px;
+            position: relative;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .ic1 {
+            margin-top: 40px;
+        }
+
+        .ic2 {
+            margin-top: 30px;
+        }
+
+        .input {
+            background-color: #303245;
+            border-radius: 12px;
+            border: 0;
+            box-sizing: border-box;
+            color: #eee;
+            font-size: 18px;
+            height: 100%;
+            outline: 0;
+            padding: 4px 20px 0;
+            width: 100%;
+        }
+
+        .cut {
+            background-color: #15172b;
+            border-radius: 10px;
+            height: 20px;
+            left: 20px;
+            position: absolute;
+            top: -20px;
+            transform: translateY(0);
+            transition: transform 200ms;
+            width: 76px;
+        }
+
+        .cut-short {
+            width: 50px;
+        }
+
+        .iLabel {
+            color: #65657b;
+            line-height: 14px;
+            pointer-events: none;
+            position: absolute;
+            transform-origin: 0 50%;
+            transition: transform 200ms, color 200ms;
+            top: 20px;
+            left: 20px;
+        }
+
+        .input:focus ~ .cut,
+        .input.filled ~ .cut {
+            transform: translateY(8px);
+        }
+
+        .input:focus ~ .iLabel,
+        .input.filled ~ .iLabel {
+            transform: translateY(-30px) translateX(10px) scale(0.75);
+        }
+
+        .input:not(:focus) ~ .iLabel {
+            color: #808097;
+        }
+
+        .input:focus ~ .iLabel {
+            color: #dc2f55;
+        }
+
+        .submit {
+            background-color: #08d;
+            border-radius: 12px;
+            border: 0;
+            box-sizing: border-box;
+            color: #eee;
+            cursor: pointer;
+            font-size: 18px;
+            height: 50px;
+            margin-top: 38px;
+            text-align: center;
+            width: 100%;
+        }
+
+    </style>
 </head>
 <body>
-    <center>
+    <div class="main-box">
+        <h1>Edit Book</h1>
+        <div class="subtitle">Modify the details below</div>
         <form action="/edit/<%= data._id %>" method="POST">
-            <input type="text" placeholder="Enter your Bookname" value="<%= data.bookname %>" name="bookname" required>
-            <input type="text" placeholder="Enter Image URL" value="<%= data.image %>" name="image" required>
-            <input type="number" placeholder="Enter price" value="<%= data.price %>" name="price" required>
-            <input type="date" placeholder="Enter your release date" value="<%= data.date %>" name="date" required>
-            <input type="text" placeholder="Enter your author" value="<%= data.author %>" name="author" required>
-            <textarea placeholder="Enter description" name="description" required><%= data.description %></textarea>
-            <input type="submit" value="Update Book">
+            <div class="input-container ic1">
+                <input id="bookname" class="input" type="text" placeholder=" " value="<%= data.bookname %>" name="bookname" required>
+                <div class="cut"></div>
+                <label for="bookname" class="iLabel">Book Name</label>
+            </div>
+            <div class="input-container ic2">
+                <input id="image" class="input" type="text" placeholder=" " value="<%= data.image %>" name="image" required>
+                <div class="cut"></div>
+                <label for="image" class="iLabel">Image URL</label>
+            </div>
+            <div class="input-container ic2">
+                <input id="price" class="input" type="number" placeholder=" " value="<%= data.price %>" name="price" required>
+                <div class="cut cut-short"></div>
+                <label for="price" class="iLabel">Price</label>
+            </div>
+            <div class="input-container ic2">
+                <input id="date" class="input" type="date" placeholder=" " value="<%= data.date %>" name="date" required>
+                <div class="cut cut-short"></div>
+                <label for="date" class="iLabel">Release Date</label>
+            </div>
+            <div class="input-container ic2">
+                <input id="author" class="input" type="text" placeholder=" " value="<%= data.author %>" name="author" required>
+                <div class="cut cut-short"></div>
+                <label for="author" class="iLabel">Author</label>
+            </div>
+            <div class="input-container ic2">
+                <textarea id="description" class="input" name="description" required><%= data.description %></textarea>
+                <div class="cut"></div>
+                <label for="description" class="iLabel">Description</label>
+            </div>
+            <button type="submit" class="submit">Update Book</button>
         </form>
-    </center>
+    </div>
+
+   
 </body>
+<script>
+ 
+    const inputs = document.querySelectorAll('.input');
+
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.classList.add('filled');
+        });
+
+        input.addEventListener('blur', () => {
+            if (input.value === '') {
+                input.classList.remove('filled');
+            }
+        });
+        if (input.value) {
+            input.classList.add('filled');
+        }
+    });
+</script>
 </html>

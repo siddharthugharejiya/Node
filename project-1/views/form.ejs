@@ -8,16 +8,44 @@
 </head>
 <body>
     <center>
-
-        <form action="/" method="POST">
-            <input type="text" placeholder="Enter your Bookname" name="bookname">
-            <input type="text" placeholder="Enter Image URL " name="image">
-            <input type="number" placeholder="Enter price " name="price">
-            <input type="date" placeholder="Enter your realse date " name="date">
-            <input type="text" placeholder="Enter your author" name="author">
-            <input type="textarea" placeholder="Enter description" name="description">
-            <input type="submit">
-        </form>
+        <div class="form">
+            <div class="title">Book Details</div>
+            <div class="subtitle">Enter the details below</div>
+            <form action="/" method="POST">
+                <div class="input-container ic1">
+                    <input id="bookname" class="input" type="text" placeholder=" " name="bookname">
+                    <div class="cut"></div>
+                    <label for="bookname" class="iLabel">Book Name</label>
+                </div>
+                <div class="input-container ic2">
+                    <input id="image" class="input" type="text" placeholder=" " name="image">
+                    <div class="cut"></div>
+                    <label for="image" class="iLabel">Image URL</label>
+                </div>
+                <div class="input-container ic2">
+                    <input id="price" class="input" type="number" placeholder=" " name="price">
+                    <div class="cut cut-short"></div>
+                    <label for="price" class="iLabel">Price</label>
+                </div>
+                <div class="input-container ic2">
+                    <input id="date" class="input" type="date" placeholder=" " name="date">
+                    <div class="cut cut-short"></div>
+                    <label for="date" class="iLabel">Release Date</label>
+                </div>
+                <div class="input-container ic2">
+                    <input id="author" class="input" type="text" placeholder=" " name="author">
+                    <div class="cut cut-short"></div>
+                    <label for="author" class="iLabel">Author</label>
+                </div>
+                <div class="input-container ic2">
+                    <input id="description" class="input" type="textarea" placeholder=" " name="description">
+                    <div class="cut"></div>
+                    <label for="description" class="iLabel">Description</label>
+                </div>
+                <button type="submit" class="submit">Submit</button>
+            </form>
+        </div>
     </center>
 </body>
 </html>
+`

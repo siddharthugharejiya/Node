@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Book List</h1>
-    <div>
-        <% data.forEach((el) => { %>
-            <div>
-                <h2><%= el.bookname %></h2>
-                <img src="<%= el.image %>" alt="<%= el.bookname %>" style="width:100px;">
-                <p>Price: $<%= el.price %></p>
-                <p>Release Date: <%= el.date %></p>
-                <p>Author: <%= el.author %></p>
-                <p>Description: <%= el.description %></p>
-                <a href="/delete/<%= el.id %>">Delete</a>
-                <a href="/edit/<%= el.id %>">Edit</a>
-            </div>
-            <hr>
-        <% }) %>
+    <div class="main-box">
+        <h1>Book List</h1>
+        <div class="book-list">
+            <% data.forEach((el) => { %>
+                <div class="book-card">
+                    <img src="<%= el.image %>" alt="<%= el.bookname %>" class="book-image">
+                    <div class="book-details">
+                        <h2><%= el.bookname %></h2>
+                        <p><strong>Price:</strong> $<%= el.price %></p>
+                        <p><strong>Release Date:</strong> <%= el.date %></p>
+                        <p><strong>Author:</strong> <%= el.author %></p>
+                        <p class="description"><strong>description :</strong>  <%= el.description %></p>
+                        <div class="actions">
+                            <a href="/edit/<%= el.id %>" class="btn edit-btn">Edit</a>
+                            <a href="/delete/<%= el.id %>" class="btn delete-btn">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
     </div>
 </body>
 </html>
- 
