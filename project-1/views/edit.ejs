@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+        <form action="/edit/<%= data._id %>" method="POST">
+            <input type="text" placeholder="Enter your Bookname" value="<%= data.bookname %>" name="bookname" required>
+            <input type="text" placeholder="Enter Image URL" value="<%= data.image %>" name="image" required>
+            <input type="number" placeholder="Enter price" value="<%= data.price %>" name="price" required>
+            <input type="date" placeholder="Enter your release date" value="<%= data.date %>" name="date" required>
+            <input type="text" placeholder="Enter your author" value="<%= data.author %>" name="author" required>
+            <textarea placeholder="Enter description" name="description" required><%= data.description %></textarea>
+            <input type="submit" value="Update Book">
+        </form>
+    </center>
+</body>
+</html>
