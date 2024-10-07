@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "mongoose",
   "version": "1.0.0",
   "main": "app.js",
@@ -11,4 +12,20 @@
   "dependencies": {
     "mongoose": "^8.7.0"
   }
+=======
+  "dependencies": {
+    "mongoose": "^8.7.0"
+  },
+  "name": "mongoose",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+>>>>>>> 163b29b2238c651a7fa9507b66bea41367e92a7b
 }
