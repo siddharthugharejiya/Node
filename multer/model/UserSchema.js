@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = mongoose.Schema({
       image : String
 })
-const UserModel = mongoose.model('data')
+const UserModel = mongoose.model('data',UserSchema)
