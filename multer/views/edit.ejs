@@ -6,10 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/edit" method="POST" enctype="multipart/form-data">
-        <input type="text" value="<%=data.email%>">
-        <input type="text" value="<%=data.pass%>">
-        <input type="file" name="<%=data.image%>" id="">
+    <form action="/edit/<%=data._id%>" method="POST" enctype="multipart/form-data">
+     
+            <img src="/<%=data.image%>" alt="">
+            <input type="text" name="email" value="<%=data.email%>" placeholder="enter your emai">
+            <input type="text" value="<%=data.pass%>" name="pass" placeholder="enter your password">
+            <input type="file" value="./image/<%=data.image%>" name="image">
+ 
+        <button type="submit">Upload</button>
+       
     </form>
 </body>
 </html>
