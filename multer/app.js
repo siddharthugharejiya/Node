@@ -4,12 +4,11 @@ const app = express();
 const multer = require('multer');
 const path = require('path'); 
 const UserModel = require('./model/UserSchema');
-const  mongoose  = require('mongoose');
-
+const fs = require('fs')
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -19,21 +18,36 @@ const storage = multer.diskStorage({
     filename: function(req, file, cb) {
         cb(null, file.originalname); 
     }
-});
-// console.log(path.join(__dirname,"./public/image"))
+})
 
 const upload = multer({storage: storage});
 
 app.get("/", (req, res) => {
     res.render('form.ejs');
 });
+app.get("/data",async(req,res)=>{
+    let data = await UserModel.find()
+//    console.log(data); 
+    res.render('data.ejs',{data})
+})
+app.get("/delete/:id",async(req,res)=>{
+     let {id} = req.params
+     let data =await UserModel.findById(id)
+     console.log(data);
+     await UserModel.findByIdAndDelete(id)
+        const image_path=path.join(__dirname,'./public/image',data.image)
+        fs.unlinkSync(image_path)
+          res.redirect("/data")
+   
+})
+
+
+
 app.post("/form", upload.single("image"), async(req, res) => {
-         await UserModel.create({
-           
+     await UserModel.create({    
             image:req.file.filename
          })
-         
-    res.redirect("/")
+    res.redirect("/data")
 });
 
 
