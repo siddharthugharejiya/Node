@@ -64,10 +64,19 @@ app.get("/edit/:id",upload.single("image"),async(req,res)=>{
 app.post(("/edit/:id",upload.single("image"),async(req,res)=>{
     const {id} = req.params
     const data = await UserModel.findById(id)
-        const d = await UserModel.findByIdAndUpdate(data, {
+           const image_path = path.join(__dirname,'../multer/public/image',data.image)
+     fs.unlinkSync(image_path)
+   console.log(req.file);
+   
+     if (req.file) {
+        const d = await UserModel.findByIdAndUpdate(id, {
             ...req.body,
             image: req.file.filename
         });
+    } else {
+        await UserModel.findByIdAndUpdate(id, req.body);
+    }
+    
         res.redirect("/data")
     
 }))
