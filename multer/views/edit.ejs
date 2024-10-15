@@ -8,7 +8,7 @@
 <body>
     <form action="/edit/<%=data._id%>" method="POST" enctype="multipart/form-data">
      
-            <img src="/<%=data.image%>" alt="">
+            <img src="/image/<%=data.image%>" alt="image" width="200px" height="200px">
             <input type="text" name="email" value="<%=data.email%>" placeholder="enter your emai">
             <input type="text" value="<%=data.pass%>" name="pass" placeholder="enter your password">
             <input type="file" value="./image/<%=data.image%>" name="image">

@@ -6,16 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>data</h1>
-    
+      
     <%data.map((el)=>{  %>
-           <h1><%=el.email%></h1>
-           <h1><%=el.pass%></h1>
-           <img src="./image/<%=el.image%>" alt="">
-           <a href="/delete/<%=el.id%>">Delete</a>
-           <a href="/edit/<%=el.id%>">Edite</a>
+        <h1><%=el.email%></h1>
+        <img src="/image/<%= el.image %>" alt="Image" width="200">
+        <h1><%=el.pass%></h1>
+        <a href="/delete/<%=el.id%>">Delete</a>
+        <a href="/edit/<%=el.id%>">Edite</a>
 
- <%  })   %>
-
+<%  })   %>
 </body>
 </html>
