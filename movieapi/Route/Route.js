@@ -1,3 +1,3 @@
 const express = require('express')
-const home_route = express.Router()
-home_route.get()
+const route = express.Router()
+route.get("/user",UserRoute)
