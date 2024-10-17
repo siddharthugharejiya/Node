@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Data</h1>
-    <% d.forEach((el) => { %>
-        <div>
-            <img src="<%= el.image %>" alt="image" style="max-width: 200px; height: auto;">
-            <h3>Title: <%= el.title %></h3>
-            <h3>Director: <%= el.director %></h3>
-            <h3>Category: <%= el.category %></h3>
-            <a href="/edit/<%= el._id %>">Edit</a>
-            <a href="/delete/<%= el._id %>">Delete</a>
-        </div>
-    <% }) %>
+    <div class="container a">
+        <h1>Movie Data</h1>
+        <% d.forEach((el) => { %>
+            <div class="movie-card">
+                <img src="<%= el.image %>" alt="image" class="movie-image">
+                <div class="movie-details">
+                    <h3>Title: <%= el.title %></h3>
+                    <h3>Director: <%= el.director %></h3>
+                    <h3>Category: <%= el.category %></h3>
+                </div>
+                <div class="movie-actions">
+                    <a href="/edit/<%= el._id %>" class="btn">Edit</a>
+                    <a href="/delete/<%= el._id %>" class="btn delete">Delete</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
 </body>
 </html>
