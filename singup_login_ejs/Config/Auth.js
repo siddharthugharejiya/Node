@@ -1,12 +1,11 @@
-const Auth = (req,res,next)=>{
+const Auth = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        console.log(`Cookies Is ${req.cookies.login}`);
+        next();
+    } else {
+        console.log("User not logged in");
+        res.redirect("/user/login");
+    }
+};
 
-    if(req.cookies && req.cookies.login){
-         console.log(`Cookies Is ${req.cookies.login}`)
-         next()
-    }
-    else{
-        console.log("User not loggin")
-        res.redirect("/user/login")
-    }
-}
-module.exports=Auth
+module.exports = Auth;
