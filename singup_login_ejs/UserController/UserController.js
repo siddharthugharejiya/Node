@@ -11,6 +11,7 @@ const product=(req,res)=>{
 }
 
 const Login_post = async (req, res) => {
+
      let { email, password } = req.body;
      let d = await UserModel.findOne({ email });  
        console.log(d);
