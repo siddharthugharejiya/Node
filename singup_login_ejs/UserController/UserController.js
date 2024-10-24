@@ -26,7 +26,7 @@ const Login_post = async (req, res) => {
      }
  
      console.log("Successfully logged in");
-     res.cookie("login", d.email);  
+     res.cookie('login', d.email, { maxAge: 10000, httpOnly: true });
      return res.redirect("/user/product")
  };
 
