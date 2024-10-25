@@ -1,12 +1,18 @@
-const Auth = (req,res,next)=>{
+const Auth = (req, res, next) => {
+    try {
+        if (req.isAuthenticated()) {
+          
+            console.log(`Cookies: ${JSON.stringify(req.cookies)}`);
+            return next();
+        } else {
+            
+            console.log("User not logged in");
+            return res.redirect("/user/login");
+        }
+    } catch (error) {
+        console.error("Error in Auth middleware:", error);
+        res.status(500).send("Internal Server Error");
+    }
+};
 
-    if(req.cookies && req.cookies.login){
-         console.log(`Cookies Is ${req.cookies.login}`)
-         next()
-    }
-    else{
-        console.log("User not loggin")
-        res.redirect("/user/login")
-    }
-}
-module.exports=Auth
+module.exports = Auth;
