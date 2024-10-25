@@ -33,7 +33,6 @@ const Login_post = async (req, res) => {
 const Form_Post_Con=async(req,res)=>{
      console.log(req.cookies);
      await UserModel.create(req.body)
-     console.log('Cookies: ', req.cookies)
      res.redirect("/user/login")
 
      
