@@ -1,61 +1,42 @@
-const express = require("express");
-const Connect = require("./config/server");
-const UserRoute = require("./Route/UserRoute");
-const password = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session');
-const Usermodel = require("./Model/Userschema");
-const passport = require("passport");
+const express = require('express')
+const UserRoute = require('./route/UserRoute')
+const Connect = require('./Config/Server')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const session = require('express-session')
+const UserModel = require('./model/UserModel')
+const app = express()
 
-const app = express();
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
-require("dotenv").config();
-
+app.set('view engine','ejs')
+app.use(express.urlencoded({extended:true}))
 app.use(session({
-  secret: "sid",
-}));
-
-app.use(passport.initialize()); 
+    secret:"sid"
+}))
+app.use(passport.initialize())
 app.use(passport.session())
-
-
-password.use(new LocalStrategy(
-   async (username, password, done) => {
-    try {
-      let data = await Usermodel.findOne({ username: username });
-      console.log({ username: username }, data);
-      
-      if (!data) {
-        return done(null, false, { msg: "User not registered" });
-      }
-      
-      if (data.password !== password) {
-        return done(null, false, { msg: "Invalid password" });
-      }
-      
-      return done(null, data)
-    } catch (err) {
-      return done(err);
+app.use("/",UserRoute)
+passport.use(new LocalStrategy(
+    async(username,password,done)=>{
+     let data = await UserModel.findOne({username : username})
+     if(!data)
+     {
+        return done(null,false,{msg:"user not register"})
+     }
+     if(data.password !=  password)
+     {
+        return done(null,false,{msg:"password wrong"})
+     }
+     done(null,data)
     }
-}));
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);   
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const data = await Usermodel.findById(id);
-    done(null, data);    
-  } catch (error) {
-    done(error);
-  }
-});
-
-app.use("/", UserRoute);
-
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
-  Connect();
-});
+))
+passport.serializeUser((user,done)=>{
+    done(null,user._id)
+})
+passport.deserializeUser(async(id,done)=>{
+  let data=await UserModel.findById(id)
+  done(null,data)
+})
+app.listen(process.env.PORT,()=>{
+    console.log("server is running")
+    Connect()
+})

@@ -1,31 +1,30 @@
-const express = require('express')
-const Usermodel = require('../Model/Userschema')
-const Auth = require('../config/Auth')
-const passport = require('passport')
-const UserRoute = express.Router()
+    const express = require('express')
+    const UserModel = require('../model/UserModel')
+    const passport = require('passport')
+const Auth = require('../Config/Auth')
+    const UserRoute = express.Router()
 
-UserRoute.get("/signup",(req,res)=>{
-      res.render("signup.ejs")
-})
-UserRoute.get("/login",(req,res)=>{
-    res.render("login.ejs")
-})
-UserRoute.get("/product", (req, res) => {
-    const username = req.user ? req.user.username : "Guest"; 
-    console.log(username);
-    
-    res.render("product", { username });
-});
-UserRoute.post("/signup",async(req,res)=>{
-    const data = await Usermodel.create(req.body)
-    console.log(data)
+    UserRoute.get("/",(req,res)=>{
+    res.render('signup.ejs')
+    })
+    UserRoute.get("/login",(req,res)=>{
+        res.render("login.ejs")
+    })
+    UserRoute.get("/product",Auth,(req,res)=>{
+        res.render("product.ejs")
+    })
+    UserRoute.post("/",async(req,res)=>{
+    let d=await UserModel.create(req.body)
+    console.log(d);
     res.redirect("/login")
-})
-UserRoute.post("/login",
-    passport.authenticate('local', {
+    
+    })
+    UserRoute.post("/login", passport.authenticate('local', {
         successRedirect: "/product",
-        failureRedirect: "/login", 
-        failureFlash: true
-        })
-);
-module.exports=UserRoute
+        failureRedirect: "/login"
+    }),async(req,res)=>{
+    
+    })
+
+
+    module.exports=UserRoute
