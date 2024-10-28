@@ -18,6 +18,8 @@ app.use("/",UserRoute)
 passport.use(new LocalStrategy(
     async(username,password,done)=>{
      let data = await UserModel.findOne({username : username})
+     console.log(data);
+     
      if(!data)
      {
         return done(null,false,{msg:"user not register"})
@@ -26,8 +28,8 @@ passport.use(new LocalStrategy(
      {
         return done(null,false,{msg:"password wrong"})
      }
-     done(null,data)
-    }
+      done(null,data)
+    }   
 ))
 passport.serializeUser((user,done)=>{
     done(null,user._id)
