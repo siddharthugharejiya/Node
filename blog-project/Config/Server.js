@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
-const Connect = async() =>{
-   await mongoose.connect('mongodb+srv://multiera95:95@blog.najk7.mongodb.net/?retryWrites=true&w=majority&appName=blog')
-   console.log("Mongoose connected successfully")
-   
+const connect = async() =>{
+     await mongoose.connect(process.env.MONGOOSE_URL)
+     console.log('mongoose connected successfully')
 
 }
-module.exports=Connect
+module.exports=connect

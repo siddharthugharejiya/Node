@@ -1,42 +1,47 @@
 const express = require('express')
-const Connect = require('./Config/Server')
 const UserRoute = require('./Route/UserRoute')
-const app = express()
-const session = require('express-session')
+const connect = require('./config/server')
 const passport = require('passport')
-const Usermodel = require('./Model/UserModel')
 const LocalStrategy = require('passport-local').Strategy
+const session = require('express-session')
+const SignupModel = require('./model/authSchema')
 
-app.use(express.urlencoded({extended:true}))
+const app = express()
+require('dotenv').config()
 app.set('view engine','ejs')
-app.use(express.static('public'));
+app.use(express.urlencoded({extended:true}))
+app.use(express.static('public'))
 app.use(session({
-  secret: "sid"
-}));
+    secret : "sid"
+}))
 app.use(passport.initialize())
 app.use(passport.session())
-
 passport.use(new LocalStrategy(
-  async (username, password, done) => {
-      let data = await Usermodel.findOne({ username: username });
-      if (!data) {
-          return done(null, false, { msg: "User not Registered" });
-      }
-      if (data.password !== password) {
-          return done(null, false, { msg: "Password invalid" });
-      }
-      return done(null, data);
-  }
-));
-passport.serializeUser(async(user,done)=>{
-        done(null,user.id)
+    async (username,password,done) =>{
+     let data = await SignupModel.findOne({username:username})
+     
+     if(!data)
+     {
+     return done(null,false,{msg : "data not found"})
+     }
+     if(data.password != password)
+     {
+      return done(null,false,{msg : "invalid password"})
+     }
+     done(null,data)
+    }
+))
+
+passport.serializeUser((user,done)=>{
+    done(null,user._id)  
 })
+
 passport.deserializeUser(async(id,done)=>{
-   let data= await Usermodel.findById(id)
-  done(null,data)
+    let data = await SignupModel.findById(id)
+      done(null,data)
 })
 app.use("/",UserRoute)
-app.listen(9595,()=>{
-    console.log("Server is running on port ")
-    Connect()
+app.listen(process.env.PORT,()=>{
+    console.log('Port is running')
+    connect()
 })

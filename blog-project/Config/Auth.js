@@ -1,11 +1,10 @@
-const Auth = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        console.log("successfully login")
-        next()
-    } else {
-        console.log("faild login")
-        res.redirect("/login");
-    }
+const Auth = (req,res,next) =>{
+   if(req.isAuthenticated())
+   {
+    next()
+   }
+   else{
+    res.redirect("/login")
+   }
 }
-
-module.exports = Auth;
+module.exports=Auth
