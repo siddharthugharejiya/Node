@@ -1,0 +1,10 @@
+const express = require('express')
+const Connect = require('./Config/Server')
+const UserRoute = require('./Routes/UserRourtes')
+const app = express()
+app.use(express.json())
+app.use("/",UserRoute)
+app.listen(9595, () => {
+    Connect()
+    console.log("port is connected")
+}) 
