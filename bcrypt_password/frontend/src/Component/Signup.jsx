@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
     const [state, setState] = useState({
@@ -15,6 +16,7 @@ function Signup() {
         });
     };
 
+    const navigate = useNavigate()
     const submit = async (e) => {
         e.preventDefault();
         try { 
@@ -25,11 +27,10 @@ function Signup() {
                     },
                     body:JSON.stringify(state)
                 })
-           
-
         } catch (error) {
             console.log(error)
         }
+        navigate("/login")
     };
 
     return (
