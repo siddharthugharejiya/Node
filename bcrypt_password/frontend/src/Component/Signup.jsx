@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Signup() {
     const [state, setState] = useState({
@@ -17,18 +17,18 @@ function Signup() {
 
     const submit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch(`http://localhost:9595/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(state)
-            });
-            const data = await response.json();
-            console.log("Response:", data); // handle success or display a message
+        try { 
+                await fetch(`http://localhost:9595/`,{
+                    method : "POST",
+                    headers :{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(state)
+                })
+           
+
         } catch (error) {
-            console.error("Error:", error);
+            console.log(error)
         }
     };
 
