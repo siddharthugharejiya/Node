@@ -1,0 +1,12 @@
+const express = require('express')
+const server = require('./confing/Server')
+const UserRoute = require('./Route/UserRoute')
+const cors = require('cors')
+const app = express()
+app.use(cors())
+app.use(express.json())
+app.use("/",UserRoute)
+app.listen(9595,()=>{
+    console.log("Server is running on port")
+    server()
+})
