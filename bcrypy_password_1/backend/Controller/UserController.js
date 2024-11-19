@@ -79,7 +79,7 @@ const change = async (req, res) => {
 
 const Forget = async (req, res) => {
     try {
-        // Generate a 4-digit numeric OTP
+      
         const OTP = otpGenerator.generate(4, {
             upperCaseAlphabets: false,
             lowerCaseAlphabets: false,
@@ -98,12 +98,11 @@ const Forget = async (req, res) => {
                 user: "multiera96@gmail.com", 
                 pass:"poqr wanm qppf wmwi" 
             }
-        });
+        })
 
-        // Prepare the email
         const mailOptions = {
-            from: "multiera96@gmail.com", // Sender address
-            to: email,                    // Recipient email
+            from: "multiera96@gmail.com",
+            to: email,               
             subject: "Password Reset OTP",
             text: `Your OTP for password reset is: ${OTP}`
         };
