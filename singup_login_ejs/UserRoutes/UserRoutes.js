@@ -8,5 +8,5 @@ UserRoute.get("/",Form_Con)
 UserRoute.get("/login",Login)
 UserRoute.get("/product",Auth,product)
 UserRoute.post("/",Form_Post_Con)
-UserRoute.post("/login", passport.authenticate('local', { failureRedirect: '/user/login' }), Login_post)
+UserRoute.post("/login",passport.authenticate('local',{successRedirect : "/user/product", failureRedirect : "/user/"}))
 module.exports=UserRoute

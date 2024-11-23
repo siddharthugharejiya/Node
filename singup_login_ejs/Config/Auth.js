@@ -1,8 +1,6 @@
 const Auth = (req, res, next) => {
     try {
         if (req.isAuthenticated()) {
-          
-            console.log(`Cookies: ${JSON.stringify(req.cookies)}`);
             return next();
         } else {
             
@@ -10,9 +8,8 @@ const Auth = (req, res, next) => {
             return res.redirect("/user/login");
         }
     } catch (error) {
-        console.error("Error in Auth middleware:", error);
-        res.status(500).send("Internal Server Error");
+        console.error(error);
+      
     }
-};
-
+}
 module.exports = Auth;

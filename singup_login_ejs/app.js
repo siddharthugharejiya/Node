@@ -26,12 +26,11 @@ const bcrypt = require('bcrypt');
 
 passport.use(new LocalStrategy(
     async function (username, password, done) {
-        let data = await UserModel.findOne({ username });
+        let data = await UserModel.findOne({username:username} );
         if (!data) {
             return done(null, false, { msg: "Data Not Found" });
-        }
-        const isMatch = await bcrypt.compare(password, data.password);
-        if (!isMatch) {
+        }       
+        if (data.password != password) {
             return done(null, false, { msg: "Incorrect Password" });
         }
         return done(null, data);
@@ -42,12 +41,10 @@ passport.serializeUser((user,done)=>{
 })
 
 passport.deserializeUser(async (id, done) => {
-    try {
+   
         const user = await UserModel.findById(id);
         done(null, user);
-    } catch (err) {
-        done(err);
-    }
+  
 });
 
 app.use("/user", UserRoute);
