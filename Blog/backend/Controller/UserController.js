@@ -37,24 +37,30 @@ const Register = async(req,res) =>{
 const Login = async(req,res) =>{
        const {email , password } = req.body
        const data =  await UserModel.findOne({email:email})
+       if(data)
+       {
+        bcrypt.compare(password,data.password,async(error,result)=>{
+            if(error)
+            {
+                res.send({msg : {error}})
+            }
+            else if(result)
+            {
+                
+                const token = jwt.sign({userId:data._id },"blog")
+                res.status(200).send({msg : "User Login SuccessFully",token})
+          
+               
+            }
+            else{
+                res.status(400).send({msg : "Incorret email or password"})
+            }
+           }) 
+       }
+       else{
+        console.log("user not found")
+       }
     //    console.log(data.password)
-       bcrypt.compare(password,data.password,async(error,result)=>{
-        if(error)
-        {
-            res.send({msg : {error}})
-        }
-        else if(result)
-        {
-            res.status(200).send({msg : "User Login SuccessFully"})
-            
-           const token = jwt.sign({userId : data._id },"SID")
-        //    const token = jwt.sign({userid : data._id}, "SID")
-           res.send({msg : token})
-           
-        }
-        else{
-            res.status(400).send({msg : "Incorret email or password"})
-        }
-       }) 
+     
 }
 module.exports ={ Register , Login}
