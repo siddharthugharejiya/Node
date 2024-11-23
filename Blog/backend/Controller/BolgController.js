@@ -1,4 +1,8 @@
 const BlogModel = require("../Model/BlogModel")
+const blog = async(req,res) =>{
+       let data=await BlogModel.find().populate("userId","username email")
+       res.send(data)
+}
 const blog_add = async (req, res) => {
     const { title, image, description } = req.body;
     console.log("Request user:", req.user);
@@ -28,4 +32,4 @@ const blog_add = async (req, res) => {
         res.status(500).json({ message: "An error occurred while creating the blog post." });
     }
 };
-module.exports={blog_add}
+module.exports={blog_add,blog}
