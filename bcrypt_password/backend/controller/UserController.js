@@ -6,11 +6,11 @@ const signup = async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
-        
+
         const hash = await bcrypt.hash(password, 10);
         console.log(hash);
 
-        
+
         const newUser = await UserModel.create({
             username,
             email,
@@ -28,7 +28,7 @@ const signup = async (req, res) => {
 
 const login_controller = async (email, password) => {
     try {
-   
+
         const data = await UserModel.findOne({ email: email });
 
         if (!data) {
@@ -36,7 +36,6 @@ const login_controller = async (email, password) => {
             return { message: "User not found" };
         }
 
-      
         const valid = await bcrypt.compare(password, data.password);
 
         if (valid) {
