@@ -1,9 +1,10 @@
 const express = require('express')
 const { register, Login } = require('../Controller/UserController')
-const { blog } = require('../Controller/BlogController')
+const { blog, blog_post } = require('../Controller/BlogController')
 const Auth = require('../config/auth')
 const UserRoute = express()
 UserRoute.post("/register",register)
 UserRoute.post("/login",Login)
-UserRoute.get("/",Auth,blog)
+UserRoute.get("/blog",Auth,blog)
+UserRoute.post("/add",Auth,blog_post)
 module.exports=UserRoute

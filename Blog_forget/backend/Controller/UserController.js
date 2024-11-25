@@ -1,54 +1,58 @@
-const bcrypt = require('bcrypt')
-const UserModel = require('../Model/UserModel')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
+const UserModel = require('../Model/UserModel');
+const jwt = require('jsonwebtoken');
+
 const register = async (req, res) => {
-    const { username, email, password } = req.body
-    //    let data = await UserModel.find({email : email})
-    //    if(data)
-    //    {
-    //     console.log("User Already register")
-    //   }
-    bcrypt.hash(password, 10, async (err, hash) => {
-        if (err) {
-            console.log(err)
-        }
-        if (hash) {
-            await UserModel.create({
-                username,
-                email,
-                password: hash
-            })
-            res.send({ msg: "Register successfully" })
+    const { username, email, password } = req.body;
 
+    try {
+        const existingUser = await UserModel.findOne({ email });
+        if (existingUser) {
+            return res.status(400).send({ message: "User already registered" });
         }
-    })
-}
-const Login = async(req,res) => {
-    const {email,password}=req.body
-    const data = await UserModel.findOne({email : email}) 
-    if(data)
-    {
-        const token = jwt.sign({userid : data._id},"SID")
-        console.log(token);
-        // res.send({"msg" : "Login successfull" ,token : token})
-        bcrypt.compare(password,data.password,(err,result)=>{
-            if(err)
-            {
-               console.log(err)
-            }
-            if(result)
-            {
-               console.log({result : token})
-            }
-            res.send({msg : "user login"})
-           })
-    }
-    else{
-        console.log("Email or Password invalid")
-    }
-    
-    
-      
-}
 
-module.exports = { register , Login}
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await UserModel.create({
+            username,
+            email,
+            password: hashedPassword,
+        });
+
+        return res.status(201).send({ message: "Registered successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: "Internal Server Error" });
+    }
+};
+
+const Login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            return res.status(400).send({ message: "Invalid Email" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).send({ message: "Invalid Password" });
+        }
+
+        const token = jwt.sign({ email: user.email, userid: user._id }, "SID", { expiresIn: "1h" });
+       console.log(token);
+       
+        res.cookie("authToken", token, {
+            httpOnly: true,
+            secure: true, 
+        });
+
+        return res.status(200).send({ message: "Login Successful" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: "Internal Server Error" });
+    }
+};
+
+module.exports = { register, Login };

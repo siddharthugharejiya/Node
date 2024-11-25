@@ -1,14 +1,19 @@
-const jwt = require('jsonwebtoken')
-const Auth = (req,res,next) =>{
-     let token = req.headers.authorization.split(" ")[1]
-     if(token)
-     {
-        const decode = jwt.verify(token,"SID")
-        req.body.userId = decode.userid
-        next() 
-     }
-     else{
-        res.send({msg : "user not authorize"})
-     }
-}
-module.exports=Auth
+const jwt = require('jsonwebtoken');
+
+const Auth = (req, res, next) => {
+  const token = req.headers.authorization && req.headers.authorization.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).send({ msg: "User not authorized" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, 'SID');
+    req.user = decoded; 
+    next();
+  } catch (error) {
+    return res.status(401).send({ msg: "Invalid or expired token" });
+  }
+};
+
+module.exports = Auth;

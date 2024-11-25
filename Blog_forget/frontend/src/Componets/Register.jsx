@@ -30,7 +30,7 @@ function Register() {
         } catch (error) {
             console.error("Error during registration:", error.response || error.message);
             alert("Failed to register. Please try again.");
-            // console.log("Submitting data:", state);
+         
         }
     }
 
