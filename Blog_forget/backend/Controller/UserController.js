@@ -43,10 +43,7 @@ const Login = async (req, res) => {
         const token = jwt.sign({userid: user._id },"SID");
         console.log(token);
        
-        // res.local("authToken", token, {
-        //     httpOnly: true,
-        //     secure: true, 
-        // });
+      
         res.send({msg : token , token : token})
 
         return res.status(200).send({ message: "Login Successful" });

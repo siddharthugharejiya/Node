@@ -1,4 +1,5 @@
  const BlogModel = require("../Model/BlogModel");
+ const mongoose = require('mongoose')
 
 const blog = async (req, res) => {
     try {
@@ -14,13 +15,10 @@ const blog_post = async (req, res) => {
     const { title, image, description, userId } = req.body;
     
     try {
-       
-       
-
-      
         const newBlog = await BlogModel.create({
             title,
-            content,
+            image,
+            description,
             userId: new mongoose.Types.ObjectId(userId)
         });
 
