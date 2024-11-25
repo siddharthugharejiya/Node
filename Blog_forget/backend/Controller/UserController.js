@@ -40,13 +40,14 @@ const Login = async (req, res) => {
             return res.status(400).send({ message: "Invalid Password" });
         }
 
-        const token = jwt.sign({ email: user.email, userid: user._id }, "SID", { expiresIn: "1h" });
-       console.log(token);
+        const token = jwt.sign({userid: user._id },"SID");
+        console.log(token);
        
-        res.cookie("authToken", token, {
-            httpOnly: true,
-            secure: true, 
-        });
+        // res.local("authToken", token, {
+        //     httpOnly: true,
+        //     secure: true, 
+        // });
+        res.send({msg : token , token : token})
 
         return res.status(200).send({ message: "Login Successful" });
     } catch (error) {

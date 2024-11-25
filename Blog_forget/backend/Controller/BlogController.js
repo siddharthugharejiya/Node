@@ -1,13 +1,8 @@
-    const BlogModel = require("../Model/BlogModel");
+ const BlogModel = require("../Model/BlogModel");
 
 const blog = async (req, res) => {
     try {
         let data = await BlogModel.find().populate('userId', 'username email');
-        
-        if (data.length === 0) {
-            return res.status(404).send({ msg: "No blogs found" });
-        }
-
         res.status(200).send({ msg: "Blogs fetched successfully", data });
     } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -20,9 +15,7 @@ const blog_post = async (req, res) => {
     
     try {
        
-        if (!userId) {
-            return res.status(400).send({ msg: "User ID is required" });
-        }
+       
 
       
         const newBlog = await BlogModel.create({

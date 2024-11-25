@@ -9,7 +9,7 @@ const Auth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, 'SID');
-    req.user = decoded; 
+    req.body.userId = decoded.userid
     next();
   } catch (error) {
     return res.status(401).send({ msg: "Invalid or expired token" });
