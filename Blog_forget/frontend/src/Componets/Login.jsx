@@ -14,7 +14,6 @@ function Login() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    // Handle input changes
     const change = (e) => {
         const { name, value } = e.target;
         setState({
@@ -36,8 +35,7 @@ function Login() {
             });
             console.log('Login successful:', response.data);
             const token = response.data.token;
-            
-            
+            console.log(token);
             localStorage.setItem('authToken', token);
             navigate('/blog');
         } catch (err) {

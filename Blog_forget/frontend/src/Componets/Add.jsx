@@ -42,7 +42,7 @@ function Add() {
                     title,
                     image,
                     description,
-                    userId: 'someUserId',
+                    userId: localStorage.getItem('userId'),
                 }),
             });
 

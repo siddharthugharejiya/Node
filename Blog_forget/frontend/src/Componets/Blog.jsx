@@ -1,51 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react' ;
 
-function Blog() {
-    const [state, setState] = useState(null);
-    const [loading, setLoading] = useState(true); // State to manage loading
-    const [error, setError] = useState(null); // State to handle errors
+ function Blog() {
+    const [state, setState] = useState([]);     
+    const token = localStorage.getItem('authToken');
+    
+    fetch("http://localhost:9595/blog",{
+        headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res); 
+        setState(res.data || [])
+        
+    })
+    .catch(err => {
+        console.log('Error fetching blog posts:', err);
+        
+    });
 
-    useEffect(() => {
-        fetch("http://localhost:9595/blog")
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error("Failed to fetch blogs");
-                }
-                return res.json();
-                
-            })
-            .then(res => {
-                setState(res.data); // Assuming the response has 'data' property
-                setLoading(false);
-            })
-            .catch(err => {
-                setError(err.message);
-                setLoading(false);
-            });
-    }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+   
 
     return (
         <div>
-            <h1>Blog Posts</h1>
-            {state && state.length > 0 ? (
-                state.map((blog, index) => (
-                    <div key={index}>
-                        <h2>{blog.title}</h2>
-                        <img src={blog.image} alt={blog.title} />
-                        <p>{blog.description}</p>
-                    </div>
-                ))
-            ) : (
-                <p>No blogs available</p>
-            )}
+            
+            {state.map((el) => (
+                <div key={el.id}>
+                    <h2>{el.title}</h2>
+                    <p>{el.description}</p> 
+                    <img src={el.image} alt={el.title} />
+                </div>
+            ))}
         </div>
     );
 }
