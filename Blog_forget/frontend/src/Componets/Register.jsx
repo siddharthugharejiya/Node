@@ -23,17 +23,22 @@ function Register() {
     const submit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:9595/register", state);
-            alert("Registration successful!");
-            nav("/login");
-            console.log("Backend response:", response);
+             fetch("http://localhost:9595/register",{
+                method : "POST",
+                headers : {
+                 "Content-Type" : "Application/json"
+                },
+                body:JSON.stringify(state)
+              })
+            nav("/login")
         } catch (error) {
-            console.error("Error during registration:", error.response || error.message);
-            alert("Failed to register. Please try again.");
-         
+            console.log(error);
+            
         }
-    }
+     
 
+    };
+    
     return (
         <>
 

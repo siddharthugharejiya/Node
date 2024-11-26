@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     const { username, email, password } = req.body;
+    console.log(username, email, password );
+    
 
     try {
         const existingUser = await UserModel.findOne({ email });
@@ -44,9 +46,9 @@ const Login = async (req, res) => {
         console.log(token);
        
       
-        res.send({msg : token , token : token})
+        res.send({msg : "User login Successfully" , token : token ,})
 
-        return res.status(200).send({ message: "Login Successful" });
+        // return res.status(200).send({ message: "Login Successful" });
     } catch (error) {
         console.error(error);
         return res.status(500).send({ message: "Internal Server Error" });

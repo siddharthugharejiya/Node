@@ -28,5 +28,29 @@ const blog_post = async (req, res) => {
         res.status(500).send({ msg: "Internal Server Error", error: error.message });
     }
 };
+const Own_blog = async (req, res) => {
+    try {
+      const { userId } = req.body;
+      console.log(`This is userId: ${userId}`);
+  
+      if (!userId) {
+        return res.status(400).send({ message: "UserId is required" }); // Early return if no userId
+      }
+  
+      const blogs = await BlogModel.findOne({ userId }).populate('userId', 'username email');
+      console.log(blogs);
+  
+    
+  
+    //   return res.status(200).send({ data: blogs }); // Send the response
+    } catch (error) {
+      console.error("Error fetching the blog:", error);
+  
+      if (!res.headersSent) {
+        return res.status(500).send({ message: "Internal server error" }); // Ensure only one response is sent
+      }
+    }
+  };
 
-module.exports = { blog, blog_post };
+
+module.exports = { blog, blog_post ,Own_blog };
