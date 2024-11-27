@@ -9,9 +9,9 @@ const Auth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, 'SID');
-  let data= req.body.userId = decoded.userid
-    // console.log(req.body.userId = decoded.userid);
-    res.send({userId :data })
+    
+    req.body.userId = decoded.userid
+    
     
     next();
   } catch (error) {
