@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 function Own() {
   const [state, setState] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -62,6 +62,10 @@ console.log(token);
               <p><strong>Posted by:</strong> {blog.userId?.username}</p>
             </div>
           ))}
+          <h1 style={{textAlign:"center"}}>
+
+          <Link to="/add">ADD BLogs</Link>
+          </h1>
         </div>
       ) : (
         <div>No blogs found for this user.</div>

@@ -1,21 +1,22 @@
-const BlogModel = require("../Model/BlogModel");
+ const BlogModel = require("../Model/BlogModel");
+
 
 const blog = async (req, res) => {
-  try {
-    let data = await BlogModel.find();
-    let one = await BlogModel.findOne({ userId: data?.[0]?.userId });
-    console.log(one);
-
-    res.send({
-      msg: "This is all blog data",
-      data: data,
-      userId: one,
-    });
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    res.status(500).send({ msg: "Failed to fetch blogs", error: error.message });
-  }
+ 
+    try {
+        let data = await BlogModel.find()
+        let one = await BlogModel.findOne(data.userId)
+        console.log(one);
+        
+       
+        res.send({msg : `this is all blog data is`, data : data,userId : one })
+   
+    } catch (error) {
+        console.error("Error fetching blogs:", error);
+      
+    }
 };
+
 
 const blog_post = async (req, res) => {
   const { title, image, description, userId } = req.body;
@@ -25,7 +26,7 @@ const blog_post = async (req, res) => {
       title,
       image,
       description,
-      userId,
+      userId: userId, // Ensure the key matches the field in the schema
     });
 
     res.status(201).send({
@@ -39,15 +40,32 @@ const blog_post = async (req, res) => {
 };
 
 const own = async (req, res) => {
-  // console.log(req.body.params);
-  
-  // console.log(req.body.userId);
-  let Blogs = await BlogModel.find({ userId: req.body.userId }).populate(
-    "userId",
-    "username email"
-  );
-  console.log(Blogs);
-  res.send({ data: Blogs });
+  try {
+    console.log(req.body.userId);
+
+    let blogs = await BlogModel.find({ userId: req.body.userId }).populate(
+      "userId",
+      "username email"
+    );
+
+    console.log(blogs);
+
+    res.send({
+      msg: "User-specific blogs fetched successfully",
+      data: blogs,
+    });
+  } catch (error) {
+    console.error("Error fetching user blogs:", error);
+    res.status(500).send({ msg: "Failed to fetch user blogs", error: error.message });
+  }
 };
 
-module.exports = { blog, blog_post, own };
+const del = (req,res) =>{
+  const {id}=req.body.params
+  console.log(id);
+  res.send({msg : "User data finde"})
+  
+
+}
+
+module.exports = { blog, blog_post ,own ,del};
