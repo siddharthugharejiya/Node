@@ -4,6 +4,9 @@ import Register from '../Componets/Register'
 import Login from '../Componets/Login'
 import Blog from '../Componets/Blog'
 import Add from '../Componets/Add'
+import Own from '../Componets/Own'
+
+
 function MainRoute() {
   return (
     <>
@@ -12,6 +15,8 @@ function MainRoute() {
         <Route path="/" element={<Register/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/add" element={<Add/>}></Route>
+        <Route path="/own/:id" element={<Own/>}></Route>
+      
     </Routes>
     </>
   )

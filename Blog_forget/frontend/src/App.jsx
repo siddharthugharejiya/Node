@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MainRoute from './Route/MainRoute';
 function App() {
-  // const [count, setCount] = useState(0)
+
 
 
   return (

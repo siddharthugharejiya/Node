@@ -1,67 +1,53 @@
- const BlogModel = require("../Model/BlogModel");
- const mongoose = require('mongoose')
+const BlogModel = require("../Model/BlogModel");
 
 const blog = async (req, res) => {
- 
-    try {
-        let data = await BlogModel.find()
-        // console.log(data); 
-        res.send({msg : `this is all blog data is`,data : data})
-   
-    } catch (error) {
-        console.error("Error fetching blogs:", error);
-      
-    }
+  try {
+    let data = await BlogModel.find();
+    let one = await BlogModel.findOne({ userId: data?.[0]?.userId });
+    console.log(one);
+
+    res.send({
+      msg: "This is all blog data",
+      data: data,
+      userId: one,
+    });
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    res.status(500).send({ msg: "Failed to fetch blogs", error: error.message });
+  }
 };
 
 const blog_post = async (req, res) => {
-    const { title, image, description, userId } = req.body;
-    console.log(title, image, description, userId);
-    
+  const { title, image, description, userId } = req.body;
 
-        const newBlog = await BlogModel.create({
-            title,
-            image,
-            description,
-            userId: userId
-        });
+  try {
+    const newBlog = await BlogModel.create({
+      title,
+      image,
+      description,
+      userId,
+    });
 
-        res.status(201).send({ msg: "Blog added successfully", data: newBlog });
-
-};
-const Own_blog = async (req, res) => {
-    try {
-      const { userId } = req.body;
-      console.log(`This is userId: ${userId}`);
-  
-      if (!userId) {
-        return res.status(400).send({ message: "UserId is required" }); 
-      }
-  
-      const blogs = await BlogModel.findOne({ userId }).populate('userId', 'username email');
-      console.log(blogs);
-  
-    
-  
-  
-    } catch (error) {
-      console.error("Error fetching the blog:", error);
-  
-      if (!res.headersSent) {
-        return res.status(500).send({ message: "Internal server error" }); 
-      }
-    }
-  };
-
-
-  const singleBlog = async (req,res)=>{
-     try {
-        let data = await BlogModel.findById(req.params.id)
-        res.send({data : data})
-     } catch (error) {
-         res.send({err : error.message})
-     }
+    res.status(201).send({
+      msg: "Blog added successfully",
+      blog: newBlog,
+    });
+  } catch (error) {
+    console.error("Error adding blog:", error);
+    res.status(500).send({ msg: "Failed to add blog", error: error.message });
   }
+};
 
+const own = async (req, res) => {
+  // console.log(req.body.params);
+  
+  // console.log(req.body.userId);
+  let Blogs = await BlogModel.find({ userId: req.body.userId }).populate(
+    "userId",
+    "username email"
+  );
+  console.log(Blogs);
+  res.send({ data: Blogs });
+};
 
-module.exports = { blog, blog_post ,Own_blog ,singleBlog};
+module.exports = { blog, blog_post, own };

@@ -1,49 +1,56 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "../App.css";
 
 function Blog() {
-    const [state, setState] = useState([]);
-    const token = localStorage.getItem("authToken");
-        // console.log(token);
-            
-    useEffect(() => {
-        if (token) {
-           fetch("http://localhost:9595/blog", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res.data);
-                    
-                    setState(res.data);
-                })
-                .catch((err) => {
-                    console.log("Error fetching blog posts:", err);
-                });
-        } else {
-            console.log("No token found.");
-        }
-    }, [token]);
+  const [state, setState] = useState([]);
+  const token = localStorage.getItem("authToken");
+  const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState("");
 
-    return (
-        <div>
-     
-            {   
-                state.map((el) => (
-                    <div key={el.id}>
-                        <h2>{el.title}</h2>
-                        <p>{el.description}</p>
-                        <img src={el.image} alt={el.title} />
-                    </div>
-                ))
-            
-        }
-        </div>
-            
-        
+  useEffect(() => {
+    if (token) {
+      fetch("http://localhost:9595/blog", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(`This is our user id: ${res.userId.userId}`);
+          localStorage.setItem("UserId", res.userId.userId);
+          setUserId(res.userId.userId);
+          setState(res.data);
+        })
+        .catch((err) => console.error("Error fetching blog posts:", err))
+        .finally(() => setLoading(false));
+    } else {
+      console.log("No token found.");
+      setLoading(false);
+    }
+  }, [token]);
 
-    )
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  return (
+    <div className="blog-container">
+      <h1 className="blog-title">All Blogs</h1>
+      <div className="blog-grid">
+        {state.map((el) => (
+          <div key={el.id} className="blog-card">
+            <img src={el.image} alt={el.title} className="blog-image" />
+            <div className="blog-content">
+              <h2 className="blog-heading">{el.title}</h2>
+              <p className="blog-description">{el.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Link to={`/own/${userId}`} className="own-link">
+        View Your Blogs
+      </Link>
+    </div>
+  );
 }
 
 export default Blog;
