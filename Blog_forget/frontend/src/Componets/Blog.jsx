@@ -32,11 +32,7 @@ function Blog() {
     return <div className="loading">Loading...</div>;
   }
 
-  const change= (id)=>{
-    console.log(id);
-    
-  }
-  return (
+    return (
     <div className="blog-container">
       <h1 className="blog-title">All Blogs</h1>
       <div className="blog-grid">
@@ -47,7 +43,7 @@ function Blog() {
               <h2 className="blog-heading">{el.title}</h2>
               <p className="blog-description">{el.description}</p>
             </div>
-            <button onClick={()=>change(el.id)}>Delete</button>
+            {/* <button onClick={()=>change(el.id)}>Delete</button> */}
             
           </div>
         ))}

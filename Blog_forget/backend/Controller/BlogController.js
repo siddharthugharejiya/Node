@@ -26,7 +26,7 @@ const blog_post = async (req, res) => {
       title,
       image,
       description,
-      userId: userId, // Ensure the key matches the field in the schema
+      userId: userId,
     });
 
     res.status(201).send({
@@ -42,17 +42,19 @@ const blog_post = async (req, res) => {
 const own = async (req, res) => {
   try {
     console.log(req.body.userId);
-
+    
     let blogs = await BlogModel.find({ userId: req.body.userId }).populate(
       "userId",
       "username email"
     );
 
-    console.log(blogs);
+    // console.log(blogs);
 
     res.send({
       msg: "User-specific blogs fetched successfully",
       data: blogs,
+      userId : req.body.userId
+
     });
   } catch (error) {
     console.error("Error fetching user blogs:", error);
@@ -61,11 +63,11 @@ const own = async (req, res) => {
 };
 
 const del = (req,res) =>{
-  const {id}=req.body.params
+  const { id } = req.params; 
+  const { userId } = req.body;
   console.log(id);
-  res.send({msg : "User data finde"})
+  console.log(userId)
   
-
 }
 
 module.exports = { blog, blog_post ,own ,del};

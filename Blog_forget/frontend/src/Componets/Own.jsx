@@ -31,7 +31,7 @@ console.log(token);
           setState(res);
         })
         .catch(err => {
-          // console.error(err);
+          
           setError(err.message);
         })
         .finally(() => setLoading(false));
@@ -49,6 +49,43 @@ console.log(token);
     return <div>Error: {error}</div>;
   }
 
+  const handleClick = (id) => {
+    console.log(id)
+    const userId = localStorage.getItem("UserId")
+    
+   
+    if (!userId) {
+      setError("UserId not found");
+      return;
+    }
+  
+    fetch(`http://localhost:9595/own/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId }), 
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Failed to delete blog");
+        }
+        return res.json();
+      })
+      .then(() => {
+       
+        setState(prevState => ({
+          ...prevState,
+          data: prevState.data.filter(blog => blog.id !== id),
+        }));
+      })
+      .catch(err => {
+        setError(err.message);
+      });
+  };
+  
+  
   return (
     <div>
       {state?.data && state.data.length > 0 ? (
@@ -60,6 +97,7 @@ console.log(token);
               <img src={blog.image} alt={blog.title} style={{ width: '100px', height: '100px' }} />
               <p>{blog.description}</p>
               <p><strong>Posted by:</strong> {blog.userId?.username}</p>
+              <button onClick={()=>handleClick(blog.id)}>delete</button>
             </div>
           ))}
           <h1 style={{textAlign:"center"}}>
