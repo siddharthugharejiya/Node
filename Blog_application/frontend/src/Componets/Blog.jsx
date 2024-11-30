@@ -26,18 +26,12 @@ function Blog() {
       });
   }, [token]);
   const nav=useNavigate()
-  const submit=(id)=>{
-    console.log(id);
-    nav(`/single/${id}`)
-
-    
-  }
-
+  
   return (
     <div>
       <h1>Blog Posts</h1>
       {state.map((el) => (
-        <div key={el._id} onClick={()=>submit(el._id)}>
+        <div key={el._id}>
           <h1>{el.title}</h1>
           <img src={el.image} alt="img" />
           <p>{el.description}</p>

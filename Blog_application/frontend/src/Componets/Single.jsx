@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import "../App.css"
 
 function Single() {
-  const [state, setState] = useState([]); // Correct capitalization
-  const { id } = useParams(); // Destructure 'id' from useParams
+  const [state, setState] = useState([]);
+  const { id } = useParams(); 
   const token = localStorage.getItem('Token')
   useEffect(() => {
     fetch(`http://localhost:9595/single/${id}`, {
@@ -15,8 +16,8 @@ function Single() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res); // Log the full response
-        console.log(res.data); // Log the specific data field
+        console.log(res);
+        console.log(res.data);
         setState(res.data)
       })
       .catch((error) => {
@@ -27,7 +28,7 @@ function Single() {
   return (
     <>
        <div>
-      <h1>OWn Posts</h1>
+      <h1>Single page</h1>
       {state.map((el) => (
         <div key={el._id}>
           <h1>{el.title}</h1>
