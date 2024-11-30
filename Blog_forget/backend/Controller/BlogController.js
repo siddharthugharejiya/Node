@@ -48,7 +48,6 @@ const own = async (req, res) => {
       "username email"
     );
 
-    // console.log(blogs);
 
     res.send({
       msg: "User-specific blogs fetched successfully",
@@ -62,12 +61,19 @@ const own = async (req, res) => {
   }
 };
 
+const single = async(req,res) =>{
+  let id = req.params.id
+   const data = await BlogModel.findById({ _id : id})
+   res.send({data : data})
+
+}
+
 const del = (req,res) =>{
-  const { id } = req.params; 
-  const { userId } = req.body;
-  console.log(id);
-  console.log(userId)
+  // const { id } = req.params; 
+  // const { userId } = req.body;
+  // console.log(id);
+  // console.log(userId)
   
 }
 
-module.exports = { blog, blog_post ,own ,del};
+module.exports = { blog, blog_post ,own ,del,single};

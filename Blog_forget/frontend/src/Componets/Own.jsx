@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 function Own() {
   const [state, setState] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const data = localStorage.getItem("UserId");
-  console.log(data);
-  
   const token = localStorage.getItem("authToken");
-console.log(token);
 
   useEffect(() => {
     if (data && token) {
@@ -26,20 +24,43 @@ console.log(token);
           }
           return res.json();
         })
-        .then(res => {
-          console.log(res);
-          setState(res);
-        })
-        .catch(err => {
-          
-          setError(err.message);
-        })
+        .then(res => setState(res))
+        .catch(err => setError(err.message))
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
       setError("No UserId or token found in localStorage");
     }
   }, [data, token]);
+
+  const handleDelete = (id) => {
+    if (!data) {
+      setError("UserId not found");
+      return;
+    }
+
+    fetch(`http://localhost:9595/own/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: data }),
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Failed to delete blog");
+        }
+        return res.json();
+      })
+      .then(() => {
+        setState(prevState => ({
+          ...prevState,
+          data: prevState.data.filter(blog => blog.id !== id),
+        }));
+      })
+      .catch(err => setError(err.message));
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -49,43 +70,6 @@ console.log(token);
     return <div>Error: {error}</div>;
   }
 
-  const handleClick = (id) => {
-    console.log(id)
-    const userId = localStorage.getItem("UserId")
-    
-   
-    if (!userId) {
-      setError("UserId not found");
-      return;
-    }
-  
-    fetch(`http://localhost:9595/own/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId }), 
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error("Failed to delete blog");
-        }
-        return res.json();
-      })
-      .then(() => {
-       
-        setState(prevState => ({
-          ...prevState,
-          data: prevState.data.filter(blog => blog.id !== id),
-        }));
-      })
-      .catch(err => {
-        setError(err.message);
-      });
-  };
-  
-  
   return (
     <div>
       {state?.data && state.data.length > 0 ? (
@@ -97,12 +81,11 @@ console.log(token);
               <img src={blog.image} alt={blog.title} style={{ width: '100px', height: '100px' }} />
               <p>{blog.description}</p>
               <p><strong>Posted by:</strong> {blog.userId?.username}</p>
-              <button onClick={()=>handleClick(blog.id)}>delete</button>
+              <button onClick={() => handleDelete(blog.id)}>Delete</button>
             </div>
           ))}
-          <h1 style={{textAlign:"center"}}>
-
-          <Link to="/add">ADD BLogs</Link>
+          <h1 style={{ textAlign: "center" }}>
+            <Link to="/add">ADD Blogs</Link>
           </h1>
         </div>
       ) : (
