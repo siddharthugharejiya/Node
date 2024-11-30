@@ -32,10 +32,14 @@ const blog_own = async (req,res) =>{
   res.send({data : data})    
 }
 const blog_single = async(req,res) =>{
- const {id} = req.params
- console.log(id);
- 
- const data = await BlogModel.findOne({id})
- res.json({data : data})
+   try { 
+      let id = req.params.id
+      let data = await BlogModel.findById({ _id : id });
+      console.log(data);
+      res.status(200).json(data);
+  } catch (error) {
+      res.status(401).json({ error: "Failed to fetch blog by ID" });
+  }
+
 }
  module.exports={Blog,Blog_Add,blog_own , blog_single}

@@ -63,7 +63,7 @@ const own = async (req, res) => {
 
 const single = async(req,res) =>{
   let id = req.params.id
-   const data = await BlogModel.findById({ _id : id})
+   const data = await BlogModel.findById({_id : id})
    res.send({data : data})
 
 }

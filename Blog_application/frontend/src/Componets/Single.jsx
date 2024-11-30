@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import "../App.css"
+import "../App.css";
 
 function Single() {
   const [state, setState] = useState([]);
-  const { id } = useParams(); 
-  const token = localStorage.getItem('Token')
+  const { id } = useParams();
+ 
+
   useEffect(() => {
-    fetch(`http://localhost:9595/single/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(`http://localhost:9595/single/${id}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         console.log(res.data);
-        setState(res.data)
+        console.log(res);
+        setState(res.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -27,18 +22,17 @@ function Single() {
 
   return (
     <>
-       <div>
-      <h1>Single page</h1>
-      {state.map((el) => (
-        <div key={el._id}>
-          <h1>{el.title}</h1>
-          <img src={el.image} alt="img" />
-          <p>{el.description}</p>
-          <button></button>
-        </div>
-      ))}
-     
-    </div>
+      <div className="single-page">
+        <h1>Single page</h1>
+        {
+          <div key={state._id} className="single-item">
+            <h1 className="item-title">{state.title}</h1>
+            <img src={state.image} alt="img" className="item-image" />
+            <p className="item-description">{state.description}</p>
+            <button className="item-button"></button>
+          </div>
+        }
+      </div>
     </>
   );
 }
