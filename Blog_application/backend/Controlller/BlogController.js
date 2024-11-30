@@ -33,7 +33,8 @@ const blog_own = async (req,res) =>{
 }
 const blog_single = async(req,res) =>{
  const {id} = req.params
- log
+ console.log(id);
+ 
  const data = await BlogModel.findOne({id})
  res.json({data : data})
 }
