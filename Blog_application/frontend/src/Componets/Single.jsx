@@ -11,14 +11,13 @@ function Single() {
     fetch(`http://localhost:9595/single/${id}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.data);
-        console.log(res);
-        setState(res.data);
+        console.log(res)
+        setState(res);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [id]);
+  }, []);
 
   return (
     <>

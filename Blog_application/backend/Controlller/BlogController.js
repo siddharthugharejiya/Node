@@ -34,12 +34,15 @@ const blog_own = async (req,res) =>{
 const blog_single = async(req,res) =>{
    try { 
       let id = req.params.id
-      let data = await BlogModel.findById({ _id : id });
-      console.log(data);
+      let data = await BlogModel.findById(id);
+      console.log(data);    
       res.status(200).json(data);
   } catch (error) {
       res.status(401).json({ error: "Failed to fetch blog by ID" });
   }
 
 }
- module.exports={Blog,Blog_Add,blog_own , blog_single}
+const Del = async() =>{
+   await BlogModel.findById9
+}
+ module.exports={Blog,Blog_Add,blog_own , blog_single , Del}
