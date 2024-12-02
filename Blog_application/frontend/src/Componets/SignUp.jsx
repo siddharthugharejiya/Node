@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [state, setState] = useState({
@@ -15,18 +16,34 @@ function SignUp() {
       [name]: value,
     });
   };
+      const nav = useNavigate()
+      const submit = async (e) => {
+        e.preventDefault();
+        
+        try {
+          const response = await fetch("http://localhost:9595/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(state),
+          });
+      
 
-  const submit = async (e) => {
-    e.preventDefault();
-    await fetch("http://localhost:9595/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(state),
-    });
-    alert("Data added");
-  };
+          const data = await response.json();
+      
+          if (response.ok) {
+            alert("Data added successfully");
+            nav("/login"); 
+          } else {
+            alert("Error: " + data.message || "Something went wrong");
+          }
+        } catch (error) {
+          console.error("Error during sign up:", error);
+          alert("An error occurred while signing up.");
+        }
+      };
+      
 
   return (
     <div className="a">

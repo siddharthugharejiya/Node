@@ -11,6 +11,7 @@ const register = async (req, res) => {
             email,
             password: hash
         })
+        res.json(data)
         console.log(data);
     })
 

@@ -2,7 +2,7 @@ const BlogModel = require("../model/BlogModel")
 
 const Blog = async(req,res) =>{
     let data= await BlogModel.find()
-    console.log(data);
+    // console.log(data);
     if(!data)
     {
     res.json({data : "Data not added"})

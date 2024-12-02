@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
   localStorage.setItem('Token', token);
   localStorage.setItem('UserId', userId);
+  const nav = useNavigate()
 
   const [state, setState] = useState({
     email: '',
@@ -33,6 +35,7 @@ function Login() {
       .then((res) => {
         setToken(res.token);
         setUserId(res.data._id);
+        nav("/own")
       });
   };
 

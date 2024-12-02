@@ -8,14 +8,14 @@ const Auth = async (req, res, next) => {
             return res.status(401).json({ message: "Authorization token missing or invalid" });
         }
 
-        const token = authHeader.split(" ")[1]; // Extract the token
+        const token = authHeader.split(" ")[1]; 
         console.log("Token:", token);
 
-        const decoded = jwt.verify(token, "SID"); // Verify the token
-        req.body.userId = decoded.userId; // Attach userId to the request body
+        const decoded = jwt.verify(token, "SID"); 
+        req.body.userId = decoded.userId; 
         console.log("Decoded User ID:", req.body.userId);
 
-        next(); // Proceed to the next middleware or route handler
+        next(); 
     } catch (error) {
         console.error("Authentication Error:", error.message);
         res.status(401).json({ message: "Authentication failed" });
