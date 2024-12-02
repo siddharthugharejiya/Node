@@ -1,0 +1,10 @@
+const express = require('express')
+const Connected = require('./Config/Server')
+const UserRote = require('./Route/UserRoute')
+const app = express()
+app.use(express.json())
+app.use('/',UserRote)
+app.listen(9595,()=>{
+    Connected()
+    console.log("port is running on port")
+})
