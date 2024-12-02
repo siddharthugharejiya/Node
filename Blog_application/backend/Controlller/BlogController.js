@@ -42,7 +42,58 @@ const blog_single = async(req,res) =>{
   }
 
 }
-const Del = async() =>{
-   await BlogModel.findById9
-}
- module.exports={Blog,Blog_Add,blog_own , blog_single , Del}
+
+const Del = async (req, res) => {
+   try {
+       const { id } = req.body;
+       console.log(id);
+       
+       const deletedBlog = await BlogModel.deleteOne({_id : id})
+       if (deletedBlog) {
+           res.status(200).json({ message: "Blog deleted successfully" });
+       } else {
+           res.status(404).json({ message: "Blog not found" });
+       }
+   } catch (error) {
+       res.status(500).json({ message: "Server error", error: error.message });
+   }
+};
+const edite_get = async (req, res) => {
+    const { id } = req.params
+  
+    try {
+      const data = await BlogModel.findById(id);
+  
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).json({ msg: "Blog not found" });
+      }
+    } catch (error) {
+      console.error("Error fetching blog data:", error);
+      res.status(500).json({ msg: "Server error" });
+    }
+  };
+  const edite_post = async (req, res) => {
+    const { id } = req.params;
+    const { title, image, description } = req.body;
+  
+    try {
+      const updatedBlog = await BlogModel.findByIdAndUpdate(
+        id,
+        { title, image, description },
+        { new: true, runValidators: true }
+      );
+  
+      if (updatedBlog) {
+        res.status(200).json(updatedBlog);
+      } else {
+        res.status(404).json({ msg: "Blog not found" });
+      }
+    } catch (error) {
+      res.status(500).json({ msg: "Server error" });
+    }
+  };
+  
+
+ module.exports={Blog,Blog_Add,blog_own , blog_single , Del,edite_get , edite_post}

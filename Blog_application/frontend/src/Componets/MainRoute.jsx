@@ -6,6 +6,8 @@ import Blog from './Blog'
 import Add from './Add'
 import Own from './Own'
 import Single from './Single'
+import Edite from './Edite'
+// import Del from './Del'
 function MainRoute() {
   return (
     <Routes>
@@ -15,6 +17,7 @@ function MainRoute() {
      <Route path='/add' element={<Add/>}></Route>
      <Route path='/own' element={<Own/>}></Route>
      <Route path='/single/:id' element={<Single/>}></Route>
+     <Route path='/edite/:id' element={<Edite/>}></Route>
     </Routes>
   )
 }
