@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const UserModel = require('../Model/UserModel');
-
+const jwt = require('jsonwebtoken')
 const Register = async (req, res) => {
     try {
         const { password } = req.body;      
@@ -9,7 +9,9 @@ const Register = async (req, res) => {
             ...req.body,
             password: hash
         });
-        res.json({ data });
+        const token = jwt.sign({userId : data._id , UserRole : data.role})
+        res.send({ data , token})
+
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
