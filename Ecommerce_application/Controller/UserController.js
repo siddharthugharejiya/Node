@@ -22,11 +22,11 @@ const Login = async (req, res) => {
         if (!data) {
             res.json({ msg: "Email not Found" });
         }
+       
         const match_password = await bcrypt.compare(password, data.password);
         if (!match_password) {
             res.json({ msg: "Email is Invalid" });
-        }
-        if (match_password) {
+        }else if (match_password) {
             res.status(200).json({ msg: "User Login Successfully" });
         }
     } catch (error) {
