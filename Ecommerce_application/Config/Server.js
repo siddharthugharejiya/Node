@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-
+require('dotenv').config();
 const Connected = async() =>{
-       await mongoose.connect("mongodb+srv://multiera95:95@ecommerce.ofpkg.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=ecommerce")
+       await mongoose.connect(process.env.MONGO_URI)
        console.log("Server is connected")
 }
 

@@ -4,7 +4,7 @@ const UserRote = require('./Route/UserRoute')
 const app = express()
 app.use(express.json())
 app.use('/',UserRote)
-app.listen(9595,()=>{
+app.listen(process.env.PORT,()=>{
     Connected()
     console.log("port is running on port")
 })
