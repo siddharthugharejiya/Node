@@ -25,7 +25,7 @@ const Form = async(req,res)=>{
 }
 
 const getall_data = async(req,res)=>{
-        const data = await CategoryModel.find()
+        const data = await CategoryModel.find().populate("categoryes")
         console.log(data)
         res.send({data})
         
