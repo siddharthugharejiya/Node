@@ -5,7 +5,7 @@ function Signup() {
         username : "",
         email : "",
         password : "",
-        role : ""
+        // role : ""
     })
     const change = (e) =>{
         const {name,value}= e.target
@@ -44,7 +44,7 @@ function Signup() {
         <input type="text" placeholder='email' name='email' onChange={change} value={state.email} />
         <input type="text" placeholder='password' name='password' onChange={change} value={state.password} />
         <input type="text" placeholder='role' name='role' onChange={change} value={state.role} />
-        {/* <input type="text" placeholder='username' name='username' onChange={change} value={state.username} /> */}
+        <input type="text" placeholder='username' name='username' onChange={change} value={state.username} />
         <input type="submit" />
     </form>
   )

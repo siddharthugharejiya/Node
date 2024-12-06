@@ -1,3 +1,4 @@
+const CategoryModel = require("../Model/Catrgory_Model");
 const UserModel = require("../Model/UserModel");
 require('dotenv').config()
 
@@ -22,4 +23,11 @@ const Form = async(req,res)=>{
     }
   
 }
-module.exports={Form}
+
+const getall_data = async(req,res)=>{
+        const data = await CategoryModel.find()
+        console.log(data)
+        res.send({data})
+        
+}
+module.exports={Form,getall_data}
