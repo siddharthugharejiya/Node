@@ -1,15 +1,16 @@
 const CategoryModel = require("../Model/Catrgory_Model");
 const UserModel = require("../Model/UserModel");
-require('dotenv').config()
+require('dotenv').config(); 
+
 
 const Form = async(req,res)=>{
-    console.log("Admin Secret Key from .env: ", process.env.adminsecretkey);
-    // console.log(process.env);
+  const adminsecretkey = "123"
+    console.log("Admin Secret Key from .env: ", adminsecretkey);
     try {
         const {username,email,password,role,secretkey}=req.body
         
         if (role === "admin") {
-            if (process.env.adminsecretkey !== secretkey) {
+            if (adminsecretkey !== secretkey) {
               return res.send({ msg: "You are not authorized" }); 
             }
           }

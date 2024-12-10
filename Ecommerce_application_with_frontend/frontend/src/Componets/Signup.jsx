@@ -15,6 +15,8 @@ function Signup() {
             [name]:value
         })
     } 
+    console.log(state);
+    
     const submit = async (e) => {
         e.preventDefault();
         try {
@@ -33,7 +35,10 @@ function Signup() {
         <input type="text" placeholder='username' name='username' onChange={change} value={state.username} />
         <input type="text" placeholder='email' name='email' onChange={change} value={state.email} />
         <input type="text" placeholder='password' name='password' onChange={change} value={state.password} />
-        <input type="text" placeholder='role' name='role' onChange={change} value={state.role} />
+          <select name="role" id="" value={state.role}  onChange={change}  >
+            <option value="admin">admin</option>
+            <option value="user" >User</option>
+          </select>
         <input type="text" placeholder='secretkey' name='secretkey' onChange={change} value={state.secretkey} />
         <input type="submit" />
     </form>
