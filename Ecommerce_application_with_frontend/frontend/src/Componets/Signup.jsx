@@ -35,7 +35,7 @@ function Signup() {
         <input type="text" placeholder='username' name='username' onChange={change} value={state.username} />
         <input type="text" placeholder='email' name='email' onChange={change} value={state.email} />
         <input type="text" placeholder='password' name='password' onChange={change} value={state.password} />
-          <select name="role" id="" value={state.role}  onChange={change}  >
+          <select name="role" value={state.role}  onChange={change}  >
             <option value="admin">admin</option>
             <option value="user" >User</option>
           </select>
