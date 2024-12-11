@@ -11,4 +11,13 @@ const category_add = async(req,res)=>{
      res.send({msg : error.massage})   
     }
 }
-module.exports = category_add
+const getCategory = async(req,res) =>{
+    try {
+        const data = await CategoryModel.find()
+        res.send({data})
+    } catch (error) {
+        console.log(error.massage);
+        
+    }
+}
+module.exports = {category_add, getCategory}
