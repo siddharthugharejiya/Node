@@ -14,4 +14,14 @@ const addproduct = async(req,res) =>{
     }
 }
 
-module.exports = {addproduct}
+const Getproduct = async(req,res) =>{
+    try {
+        const data = await ProductModel.find()
+        res.status(200).send({data})
+    } catch (error) {
+        res.status(400).send(error.massage)
+    }
+
+}
+
+module.exports = {addproduct , Getproduct}

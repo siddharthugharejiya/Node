@@ -1,5 +1,6 @@
 const CategoryModel = require("../Model/Catrgory_Model");
 const UserModel = require("../Model/UserModel");
+const jwt = require("jsonwebtoken")
 require('dotenv').config(); 
 
 const Form = async(req,res)=>{
@@ -29,16 +30,17 @@ const login = async(req,res) =>{
        console.log(email , password);
        
         const userdata = await UserModel.findOne({email : email})
-        console.log(userdata.password)
+        console.log(`data of user ${userdata.data}`)
         
-        if(!userdata)
-        {
-          res.send({msg : "User Not register"})
-        }
-        if(userdata.password !== password ){
-         res.send({msg : "Password is Wrong"})
-        }
-        res.send({msg : "user login successfully"})
+        // if(!userdata)
+        // {
+        //   res.send({msg : "User Not register"})
+        // }
+        // if(userdata.password !== password ){
+        //  res.send({msg : "Password is Wrong"})
+        // }
+        // const token = jwt.sign({userId : userdata._id, userRole : userdata.role},"SID")
+        // res.send({msg : "user login successfully",token : token})
 }
 const getall_data = async(req,res)=>{
         const data = await CategoryModel.find().populate("categoryes")

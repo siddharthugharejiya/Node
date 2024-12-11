@@ -13,11 +13,11 @@ function Login() {
             [name]:value
         })
     }
-
+ 
     const submit = (e) => {
         e.preventDefault()
         axios.post(`http://localhost:9595/login`,state)
-        .then(res => console.log(res.data))
+        .then(res => console.log(res))
     }
     
 
