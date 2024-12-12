@@ -5,9 +5,16 @@ const addproduct = async(req,res) =>{
     console.log(req.body);
     
     try {
-        const data = await ProductModel.create(req.body)
-        console.log(data);
-        
+        let obj={
+            title,
+            description,
+            image,
+            price,
+            adminid : req.user.userId,
+            category,
+            subcategory
+        }
+        const data = await ProductModel.create(obj)
         res.send({data})
     } catch (error) {
         res.send(error.massage)

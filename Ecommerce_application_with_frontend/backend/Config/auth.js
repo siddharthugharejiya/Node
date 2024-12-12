@@ -14,4 +14,15 @@ const validation = (req,res,next) =>{
         res.send({msg : "Your Not Login "})
       }
 }
-module.exports={validation}
+const Auth = (req,res,next) =>{
+   console.log(req.user);
+   if(req.user.useRole === "admin")
+   {
+    next()
+   }
+   else{
+    res.send({msg : "unothorize"})
+   }
+   
+}
+module.exports={validation,Auth}
