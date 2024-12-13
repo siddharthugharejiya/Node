@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 function Signup() {
     const [state,setstate]=useState({
         username : "",
@@ -17,6 +18,7 @@ function Signup() {
     } 
     console.log(state);
     
+    const nav = useNavigate()
     const submit = async (e) => {
         e.preventDefault();
         try {
@@ -24,6 +26,7 @@ function Signup() {
         .then(res => {
             console.log(res.data);
         })
+        nav("/login")
             
         } catch (error) {
             console.error("Error:", error);
@@ -36,6 +39,7 @@ function Signup() {
         <input type="text" placeholder='email' name='email' onChange={change} value={state.email} />
         <input type="text" placeholder='password' name='password' onChange={change} value={state.password} />
           <select name="role" value={state.role}  onChange={change}  >
+            <option value="select">Selete</option>
             <option value="admin">admin</option>
             <option value="user" >User</option>
           </select>

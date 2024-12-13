@@ -17,13 +17,19 @@ function Add_Pro() {
       [name]: value
     })
   }
+  const Token = localStorage.getItem("Token")
+  console.log(Token);
+  
   const handlesubmit = async (e) => {
     e.preventDefault()
     console.log(state);
     
-   await axios.post(`http://localhost:9595/addproduct`,state)
-      .then(res => console.log(res)
-      )
+ const res=await axios.post(`http://localhost:9595/addproduct`,state,{
+    headers : {
+      'Authorization' :  `Bearer ${Token}`
+    }
+   })
+   console.log('Product added successfully:', res.data);
       
   }
   const [category, setcategory] = useState([])
@@ -41,7 +47,7 @@ function Add_Pro() {
     })
   },[])
 console.log(subcategory);
-// console.log(subcategory._id);
+
 
 
 
