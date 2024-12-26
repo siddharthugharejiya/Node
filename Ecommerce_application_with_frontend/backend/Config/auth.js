@@ -7,6 +7,8 @@ const validation = (req, res, next) => {
     if (token) {
         try {
             let decode = jwt.verify(token, "SID")
+            console.log(decode);
+            
             req.user = decode
             next()
         } catch (error) {
@@ -18,6 +20,8 @@ const validation = (req, res, next) => {
 }
 
 const Auth = (req, res, next) => {
+    console.log(req.user);
+    
     if (req.user && req.user.useRole === "admin") {
         next()
     } else {

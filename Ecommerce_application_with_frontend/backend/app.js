@@ -15,9 +15,6 @@ app.use("/",Category_Router)
 app.use("/",Subcategory)
 
 app.listen(process.env.PORT,()=>{
-    // console.log('Loaded PORT:', process.env.PORT);
-
-    
     console.log("Port is running")
     Server()
 })

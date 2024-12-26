@@ -24,26 +24,32 @@ function Add_Pro() {
     e.preventDefault()
     console.log(state);
     
- const res=await axios.post(`http://localhost:9596/addproduct`,state,{
-    headers : {
-      'Authorization' :  `Bearer ${Token}`
-    }
+const data =  await axios.post(`http://localhost:9596/add`,state,{
+    // headers : {
+    //   'authorization' : `Bearer ${Token}`
+    // }
    })
-   console.log('Product added successfully:', res.data);
+   console.log('Product added successfully:', data.data);
       
   }
+
   const [category, setcategory] = useState([])
   const [subcategory,setsubcategory]= useState([])
   useEffect(() => {
     axios.get(`http://localhost:9596/getCategory`)
       .then(res => {
         setcategory(res.data.data)
+        console.log(res.data.data);
+        
+
       })
   }, [])
   useEffect(()=>{
     axios.get(`http://localhost:9596/subget`)
     .then(res =>{
       setsubcategory(res.data.data)
+      console.log(res.data.data);
+      
     })
   },[])
 console.log(subcategory);

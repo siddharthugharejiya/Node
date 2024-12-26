@@ -27,9 +27,20 @@ function Login() {
          localStorage.setItem("Token",Token)
          localStorage.setItem("UserId",decoded.userId)
          localStorage.setItem("UserRole",decoded.userRole)
-         console.log("Decode Token :",decoded);
+         let UserRole = localStorage.getItem("UserRole")
+         console.log(UserRole);
+         if(UserRole === "admin")
+         {
+          return nav("/add")
+         }
+         if(UserRole === "user")
+         {
+            return nav("/get")
+         }
+         
+         
         })
-        // nav("/add")
+        
     }
 
   return (
