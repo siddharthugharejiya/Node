@@ -22,7 +22,7 @@ function Signup() {
     const submit = async (e) => {
         e.preventDefault();
         try {
-         axios.post("http://localhost:9595/form",state)
+       await axios.post("http://localhost:9596/form",state)
         .then(res => {
             console.log(res.data);
         })

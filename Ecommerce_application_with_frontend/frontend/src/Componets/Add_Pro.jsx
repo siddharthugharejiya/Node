@@ -24,7 +24,7 @@ function Add_Pro() {
     e.preventDefault()
     console.log(state);
     
- const res=await axios.post(`http://localhost:9595/addproduct`,state,{
+ const res=await axios.post(`http://localhost:9596/addproduct`,state,{
     headers : {
       'Authorization' :  `Bearer ${Token}`
     }
@@ -35,13 +35,13 @@ function Add_Pro() {
   const [category, setcategory] = useState([])
   const [subcategory,setsubcategory]= useState([])
   useEffect(() => {
-    axios.get(`http://localhost:9595/getCategory`)
+    axios.get(`http://localhost:9596/getCategory`)
       .then(res => {
         setcategory(res.data.data)
       })
   }, [])
   useEffect(()=>{
-    axios.get(`http://localhost:9595/subget`)
+    axios.get(`http://localhost:9596/subget`)
     .then(res =>{
       setsubcategory(res.data.data)
     })

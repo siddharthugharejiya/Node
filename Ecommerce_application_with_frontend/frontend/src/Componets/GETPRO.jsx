@@ -4,7 +4,7 @@ function GETPRO() {
     const [state,setstate]=useState([])
     useEffect(()=>{
 
-        fetch(`http://localhost:9595/product`)
+        fetch(`http://localhost:9596/product`)
         .then(res => res.json())
         .then(res =>{
             

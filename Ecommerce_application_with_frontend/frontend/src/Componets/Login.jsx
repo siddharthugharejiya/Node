@@ -18,8 +18,10 @@ function Login() {
    const nav = useNavigate()
     const submit = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:9595/login`,state)
+        axios.post(`http://localhost:9596/login`,state)
         .then(res =>{
+            console.log(res);
+            
          const Token = res.data.token
          const decoded = jwtDecode(Token);
          localStorage.setItem("Token",Token)
@@ -27,7 +29,7 @@ function Login() {
          localStorage.setItem("UserRole",decoded.userRole)
          console.log("Decode Token :",decoded);
         })
-        nav("/add")
+        // nav("/add")
     }
 
   return (
