@@ -16,18 +16,18 @@ function Add_Pro() {
       ...state,
       [name]: value
     })
-  }
+  } 
   const Token = localStorage.getItem("Token")
-  console.log(Token);
+  console.log(`Token is = ${Token}`);
   
   const handlesubmit = async (e) => {
     e.preventDefault()
     console.log(state);
     
 const data =  await axios.post(`http://localhost:9596/add`,state,{
-    // headers : {
-    //   'authorization' : `Bearer ${Token}`
-    // }
+    headers : {
+      'authorization' : `Bearer ${Token}`
+    }
    })
    console.log('Product added successfully:', data.data);
       
@@ -40,10 +40,8 @@ const data =  await axios.post(`http://localhost:9596/add`,state,{
       .then(res => {
         setcategory(res.data.data)
         console.log(res.data.data);
-        
-
       })
-  }, [])
+  }, [state])
   useEffect(()=>{
     axios.get(`http://localhost:9596/subget`)
     .then(res =>{
@@ -51,7 +49,7 @@ const data =  await axios.post(`http://localhost:9596/add`,state,{
       console.log(res.data.data);
       
     })
-  },[])
+  },[state])
 console.log(subcategory);
 
 
