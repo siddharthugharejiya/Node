@@ -1,34 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 function GETPRO() {
-    const [state,setstate]=useState([])
-    useEffect(()=>{
+  const [state, setState] = useState([]);
 
-        fetch(`http://localhost:9596/product`)
-        .then(res => res.json())
-        .then(res =>{
-            
-       setstate(res.data)            
-        })
-    },[])
+  useEffect(() => {
+    fetch(`http://localhost:9596/product`)
+      .then((res) => res.json())
+      .then((res) => {
+        setState(res.data);
+      });
+  }, []);
+
   return (
-    <div>
-    {
-        state.map((el) => (
-            <>
-                <div key={el.id}>
-                   <p>
-                     {el.name}
-                    </p>
-                    <p>{el.category}</p>
-                    <p>{el.price}</p>
-                    </div>
-            </>
-        ))
-    }
-</div>
-
-  )
+    <div className="container my-5">
+      <div className="row">
+        {state.map((el) => (
+          <div className="col-md-4 mb-4" key={el.id}>
+            <div className="card border">
+              <img src={el.image} className="card-img-top" alt={el.name} height={300}/>
+              <div className="card-body">
+                <h5 className="card-title">{el.name}</h5>
+                <p className="card-text">Category: {el.category}</p>
+                <p className="card-text text-success">Price: ₹{el.price}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default GETPRO
+export default GETPRO;

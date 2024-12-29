@@ -6,9 +6,13 @@ const validation = (req, res, next) => {
     
     if (token) {
         try {
-            let decode = jwt.verify(token, "SID")
-            console.log(decode);
+            const extractedToken = token.split(" ")[1];
+            console.log(`this is extractedToken ${extractedToken}`);
             
+            let decode = jwt.verify(extractedToken, "SID")
+            
+            console.log(`Decoded Token: ${JSON.stringify(decode)}`);
+
             req.user = decode
             next()
         } catch (error) {
@@ -20,13 +24,11 @@ const validation = (req, res, next) => {
 }
 
 const Auth = (req, res, next) => {
-    console.log(req.user);
-    
-    if (req.user && req.user.useRole === "admin") {
-        next()
+    console.log(`User Role: ${req.user.userRole}`);
+    if (req.user && req.user.userRole === "admin") {
+        next();
     } else {
-        res.send({ msg: "Unauthorized" })
+        res.status(403).send({ data: "Unauthorized" });
     }
 }
-
 module.exports = { validation, Auth }

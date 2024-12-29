@@ -21,17 +21,30 @@ function Add_Pro() {
   console.log(`Token is = ${Token}`);
   
   const handlesubmit = async (e) => {
-    e.preventDefault()
-    console.log(state);
-    
-const data =  await axios.post(`http://localhost:9596/add`,state,{
-    headers : {
-      'authorization' : `Bearer ${Token}`
+    e.preventDefault();
+  
+    const Token = localStorage.getItem("Token");
+ 
+    try {
+      await fetch("http://localhost:9596/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", 
+          Authorization: `Bearer ${Token}`,
+        },
+        body: JSON.stringify(state)
+      })
+      .then(res => res.json())
+      .then(data =>{
+
+        console.log("Product added successfully:", data);
+        alert("Product added successfully!",data);
+      })
+    } catch (error) {
+      alert("Network error: Unable to add product");
     }
-   })
-   console.log('Product added successfully:', data.data);
-      
-  }
+  };
+  
 
   const [category, setcategory] = useState([])
   const [subcategory,setsubcategory]= useState([])

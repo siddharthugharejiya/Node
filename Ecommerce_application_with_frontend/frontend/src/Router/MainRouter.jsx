@@ -12,7 +12,7 @@ function MainRouter() {
      <Route path="/signup" element={<Signup/>} ></Route>
      <Route path="/login" element={<Login/>} ></Route>
      <Route path='/add' element={<Add_Pro/>}></Route>
-     <Route path='/get' element={<GETPRO/>}></Route>
+     <Route path='/' element={<GETPRO/>}></Route>
      </Routes>
      </>
   )

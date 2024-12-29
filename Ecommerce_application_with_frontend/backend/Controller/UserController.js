@@ -5,9 +5,8 @@ const jwt = require("jsonwebtoken")
 
 const Form = async (req, res) => {
   try {
-  
     const { username, email, password, role, secretkey } = req.body;
-    console.log(req.body);
+    
     
     if (role === "admin") {
       console.log(role);
@@ -16,19 +15,11 @@ const Form = async (req, res) => {
       if (process.env.adminsecretkey != secretkey) {
         return res.send({ msg: "You are not authorized" });
       }
-      else{
-        return res.send({msg : "Your Authorize"})
-      }
+      
     }
- const obj = {
-  username,
-   email,
-    password,
-     role : role,
-   secretkey
- }
 
-    const data = await UserModel.create(obj);
+
+    const data = await UserModel.create(req.body);
     console.log(data);
     return res.send({ data })
 
@@ -46,19 +37,20 @@ const login = async (req, res) => {
 
    
      const userdata = await UserModel.findOne({ email });
+
      console.log("Found User:", userdata);
+     console.log(`User ROle in login ${userdata.role}`);
+     
        
 
     if (!userdata) {
       return res.send({ msg: "User Not register" })
     }
-    // if (userdata.password !== password) {
-    //   return res.send({ msg: "Password is Wrong" })
-    // }
+ 
     const token = jwt.sign({ userId: userdata._id, userRole: userdata.role }, "SID")
     console.log(token);
 
-    return res.send({ msg: "user login successfully" ,token : token })
+    return res.send({ msg: "user login successfully" , token : token })
   }
   catch (error) {
     console.log(error);

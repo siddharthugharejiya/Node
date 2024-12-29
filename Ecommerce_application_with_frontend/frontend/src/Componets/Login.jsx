@@ -16,17 +16,17 @@ function Login() {
         })
     }
    const nav = useNavigate()
-    const submit = (e) => {
+    const submit = async(e) => {
         e.preventDefault()
-        axios.post(`http://localhost:9596/login`,state)
+     const data = await axios.post(`http://localhost:9596/login`,state)
         .then(res =>{
             console.log(res);
             
          const Token = res.data.token
          const decoded = jwtDecode(Token);
-         localStorage.setItem("Token",Token)
-         localStorage.setItem("UserId",decoded.userId)
-         localStorage.setItem("UserRole",decoded.userRole)
+         localStorage.setItem("Token", Token);
+         localStorage.setItem("UserId", decoded.userId);
+         localStorage.setItem("UserRole", decoded.userRole);
          let UserRole = localStorage.getItem("UserRole")
          console.log(UserRole);
          if(UserRole === "admin")
@@ -35,11 +35,15 @@ function Login() {
          }
          if(UserRole === "user")
          {
-            return nav("/get")
+            return nav("/")
          }
          
          
         })
+        .catch(error => {
+            console.error("Login failed", error);
+            alert("Login failed. Please check your credentials.");
+        });
         
     }
 
