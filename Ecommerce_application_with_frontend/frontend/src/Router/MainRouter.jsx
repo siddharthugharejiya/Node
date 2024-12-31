@@ -4,17 +4,24 @@ import Signup from '../Componets/Signup'
 import Login from '../Componets/Login'
 import Add_Pro from '../Componets/Add_Pro'
 import GETPRO from '../Componets/GETPRO'
+import { Dashboard } from '../Componets/Dashboard'
+import { Asidebar } from '../Componets/Asidebar'
+import Home from '../Componets/Home'
 
 function MainRouter() {
   return (
-     <>
-     <Routes>
-     <Route path="/signup" element={<Signup/>} ></Route>
-     <Route path="/login" element={<Login/>} ></Route>
-     <Route path='/add' element={<Add_Pro/>}></Route>
-     <Route path='/' element={<GETPRO/>}></Route>
-     </Routes>
-     </>
+    <>
+      <Routes>
+        <Route path="/signup" element={<Signup />} ></Route>
+        <Route path="/login" element={<Login />} ></Route>
+        <Route path='/add' element={<Add_Pro />}></Route>
+        <Route path='/add/:id' element={<Add_Pro />}></Route>
+        <Route path='/get' element={<GETPRO />}></Route>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/aside' element={<Asidebar/>}></Route>
+        <Route path='/desh' element={<Dashboard />}></Route>
+      </Routes>
+    </>
   )
 }
 

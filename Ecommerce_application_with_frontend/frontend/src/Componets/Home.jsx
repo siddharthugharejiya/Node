@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Asidebar } from "./Asidebar";
-import { useNavigate } from "react-router-dom";
 
-function GETPRO() {
+const Home = () => {
   const [state, setState] = useState([]);
 
   useEffect(() => {
@@ -11,37 +9,13 @@ function GETPRO() {
       .then((res) => {
         setState(res.data);
       });
-  }, []);
-  const handledelete = (id) =>{
-    console.log(id);
-    fetch(`http://localhost:9596/product/${id}`,{
-      method : "DELETE",
-      
-    })
-    .then(Res => Res.json())
-    .then(data =>{
-      console.log(data);
-      
-      alert(data)
-    })
-
-  }
-  const nav = useNavigate()
-  const handleedite = (id) =>{
-    nav(`/add/${id}`)
-  }
+  }, [state]);
+ 
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        
-        {/* Sidebar */}
-        <div className="col-md-3 col-lg-2 bg-light vh-100">
-          <Asidebar />
-        </div>
-        
-     
-        <div className="col-md-9 col-lg-10">
+  <>
+  <h1>Home</h1>
+  <div className="col-md-9 col-lg-10">
           <div className="container my-4">
             <h2 className="mb-4">Product List</h2>
             <div className="row">
@@ -59,10 +33,9 @@ function GETPRO() {
                       <div className="card-body">
                         <h5 className="card-title">{el.name}</h5>
                         <p className="card-text">Category: {el.category}</p>
-                        <p className="card-text">description: {el.description}</p>
                         <p className="card-text text-success">Price: ₹{el.price}</p>
-                        <button className="btn btn-danger" onClick={()=>handledelete(el._id)}>Delete</button>
-                        <button className="btn btn-primary" onClick={()=>handleedite(el._id)}>Edite</button>
+                        {/* <button className="btn btn-danger" onClick={()=>handledelete(el._id)}>Delete</button> */}
+                        {/* <button className="btn btn-primary" onClick={()=>handleedite(el._id)}>Delete</button> */}
                       </div>
                     </div>
                   </div>
@@ -75,9 +48,8 @@ function GETPRO() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+  </>
   );
-}
+};
 
-export default GETPRO;
+export default Home;

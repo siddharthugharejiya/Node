@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .main{
+    height: 100vh;
+    width: 81%;
+  
+    /* border: 1px solid red; */
+    margin-left: 17%;
+  }
+  /* Sidebar Styles */
+  #accordionSidebar {
+    width: 250px;
+    background-color: #4e73df; /* Blue background */
+    height: 100vh; /* Full height */
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    color: white;
+  }
+  
+  .sidebar-dark .navbar-nav .nav-item .nav-link {
+    color: rgba(255,255,255,.8);
+    font-weight: 600;
+  }
+  
+  .sidebar-dark .navbar-nav .nav-item .nav-link:hover {
+    color: #ffffff;
+    background-color: #2e59d9; /* Hover effect */
+  }
+  
+  .sidebar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    color: white;
+  }
+  
+  .sidebar-brand-icon {
+    font-size: 28px;
+    color: white;
+  }
+  
+  .sidebar-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .sidebar-heading {
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #d1d3e2; /* Light grey color */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+  }
+  
+  .collapse-inner {
+    padding-left: 20px;
+    color: black;
+  }
+  
+  .collapse-item {
+    padding: 5px 20px;
+    display: block;
+    font-size: 14px;
+    color: #4e73df; 
+  }
+  
+  .collapse-item:hover {
+    color: #224abe; 
+    text-decoration: none;
+  }
+  
+  .sidebar-dark .nav-item.active .nav-link {
+    color: #ffffff;
+    background-color: #2e59d9;
+  }
+  
+  .nav-item .nav-link {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 10px 15px;
+  }
+  
+  .nav-item .nav-link:hover {
+    color: white;
+  }
+  
+  .nav-item.active .nav-link {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* MainContent.css */
+  .container-fluid {
+    padding: 20px;
+  }
+  
+  .card {
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .progress-bar {
+    border-radius: 0.35rem;
+  }
+  
+  .font-weight-bold {
+    font-weight: 700;
+  }
+  
+  .small {
+    font-size: 0.85rem;
+  }
+  
+  
