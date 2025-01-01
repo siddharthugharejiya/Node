@@ -41,13 +41,13 @@ function GETPRO() {
         </div>
         
      
-        <div className="col-md-9 col-lg-10">
+        <div className="col-md-9 col-lg-5" style={{margin:"0px 100px"}}>
           <div className="container my-4">
             <h2 className="mb-4">Product List</h2>
             <div className="row">
               {state.length > 0 ? (
                 state.map((el) => (
-                  <div className="col-md-4 col-lg-3 mb-4" key={el.id}>
+                  <div className="col-md-4 col-lg-8 mb-4" key={el.id}>
                     <div className="card h-100 border">
                       <img
                         src={el.image}
@@ -61,8 +61,8 @@ function GETPRO() {
                         <p className="card-text">Category: {el.category}</p>
                         <p className="card-text">description: {el.description}</p>
                         <p className="card-text text-success">Price: ₹{el.price}</p>
-                        <button className="btn btn-danger" onClick={()=>handledelete(el._id)}>Delete</button>
-                        <button className="btn btn-primary" onClick={()=>handleedite(el._id)}>Edite</button>
+                        <button className="btn m-1 btn-danger" style={{borderRadius:"4px"}} onClick={()=>handledelete(el._id)}>Delete</button>
+                        <button className="btn btn-primary"style={{borderRadius:"4px"}} onClick={()=>handleedite(el._id)}>Edite</button>
                       </div>
                     </div>
                   </div>

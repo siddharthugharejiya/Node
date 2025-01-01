@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { addproduct, Getproduct, del, edite, edite_post } = require('../Controller/ProductController')
+const { addproduct, Getproduct, del, edite, edite_post, cart } = require('../Controller/ProductController')
 const { Auth, validation } = require('../Config/auth')
 const ProductRoute = Router()
 ProductRoute.post("/add", validation, Auth, addproduct)
@@ -7,4 +7,5 @@ ProductRoute.get("/product", Getproduct)
 ProductRoute.delete("/product/:id", del)
 ProductRoute.get("/product/:id",edite)
 ProductRoute.put("/product/:id",edite_post)
+ProductRoute.get("/product/cart/:id",cart)
 module.exports = ProductRoute

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Asidebar } from "./Asidebar";
 import { useParams } from "react-router-dom";
 
+
 function Add_Pro() {
   const [state, setstate] = useState({
     name: "",
@@ -63,8 +64,6 @@ function Add_Pro() {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-
             alert("Product added edite data !");
           });
           setupdate(true)
@@ -126,7 +125,7 @@ function Add_Pro() {
           </div>
 
 
-          <div className="col-lg-9 col-md-8">
+          <div className="col-lg-5 col-md-8" style={{ marginLeft: "30px" }}>
             <div className="container mt-5">
               <h2 className="mb-4">Add Product</h2>
               <form

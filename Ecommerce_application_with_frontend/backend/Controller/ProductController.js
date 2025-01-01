@@ -68,5 +68,15 @@ const edite_post = async(req,res) =>{
     
   }
 }
-
-module.exports = { addproduct, Getproduct ,del ,edite , edite_post}
+const cart = async (req,res) =>{
+  try {
+    const {id} = req.params
+    const data = await ProductModel.findById(id)
+     res.send({data})
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+module.exports = { addproduct, Getproduct ,del ,edite , edite_post , cart}

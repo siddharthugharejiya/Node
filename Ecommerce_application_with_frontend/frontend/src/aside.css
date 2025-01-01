@@ -1,0 +1,112 @@
+/* General Sidebar Styling */
+.sidebar {
+    background-color: #282c34; /* Dark gray theme */
+    color: #ffffff;
+    height: 100vh;
+    width: 100%;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    overflow-y: auto;
+    transition: width 0.3s ease;
+  }
+  
+
+  
+  .sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    font-size: 16px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar .nav-link i {
+    margin-right: 15px;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar .nav-item {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar .nav-link:hover {
+    background-color: #50575d; /* Highlight background */
+    color: #ffffff;
+    transform: translateX(10px); /* Slide effect */
+  }
+  
+  .sidebar .nav-link:hover i {
+    transform: rotate(15deg); /* Rotate icons slightly on hover */
+  }
+  
+  .sidebar .sidebar-heading {
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    color: #adb5bd;
+    border-bottom: 1px solid #50575d;
+  }
+  
+  /* Collapsible Section Styling */
+  .sidebar .collapse-inner {
+    background-color: #3c4147;
+    border-radius: 5px;
+    margin: 5px 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+  
+  .sidebar .nav-item .collapse-inner.open {
+    max-height: 300px; /* Maximum height when expanded */
+  }
+  
+  .sidebar .collapse-item {
+    color: #ced4da;
+    padding: 8px 20px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar .collapse-item:hover {
+    background-color: #6c757d;
+    color: #ffffff;
+  }
+  
+  /* Toggle Button */
+  #sidebarToggle {
+    background-color: #adb5bd;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 20px;
+    left: calc(50% - 20px);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  #sidebarToggle:hover {
+    background-color: #6c757d;
+    transform: rotate(360deg);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      z-index: 1050;
+      width: 250px;
+      transition: left 0.3s ease;
+    }
+  
+    .sidebar.show {
+      left: 0;
+    }
+  }
+  

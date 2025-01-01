@@ -1,167 +1,105 @@
 import React from "react";
-import "../App.css"
+import "../App.css";
 import { Asidebar } from "./Asidebar";
 
 export const Dashboard = () => {
   return (
-    <>
-   
-    <Asidebar/>
-    <div className="main">
-      <div className="container-fluid">
-        <div className="row">
-          {/* Projects Section */}
-          <div className="col-lg-6">
-            <div className="card shadow mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary">Projects</h6>
-              </div>
-              <div className="card-body">
-                <h4 className="small font-weight-bold">
-                  Server Migration <span className="float-right">20%</span>
-                </h4>
-                <div className="progress mb-4">
-                  <div
-                    className="progress-bar bg-danger"
-                    role="progressbar"
-                    style={{ width: "20%" }}
-                  ></div>
-                </div>
-                <h4 className="small font-weight-bold">
-                  Sales Tracking <span className="float-right">40%</span>
-                </h4>
-                <div className="progress mb-4">
-                  <div
-                    className="progress-bar bg-warning"
-                    role="progressbar"
-                    style={{ width: "40%" }}
-                  ></div>
-                </div>
-                <h4 className="small font-weight-bold">
-                  Customer Database <span className="float-right">60%</span>
-                </h4>
-                <div className="progress mb-4">
-                  <div
-                    className="progress-bar bg-primary"
-                    role="progressbar"
-                    style={{ width: "60%" }}
-                  ></div>
-                </div>
-                <h4 className="small font-weight-bold">
-                  Payout Details <span className="float-right">80%</span>
-                </h4>
-                <div className="progress mb-4">
-                  <div
-                    className="progress-bar bg-info"
-                    role="progressbar"
-                    style={{ width: "80%" }}
-                  ></div>
-                </div>
-                <h4 className="small font-weight-bold">
-                  Account Setup <span className="float-right">Complete!</span>
-                </h4>
-                <div className="progress">
-                  <div
-                    className="progress-bar bg-success"
-                    role="progressbar"
-                    style={{ width: "100%" }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-    
-          <div className="col-lg-6">
-            <div className="card shadow mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary">
-                  Illustrations
-                </h6>
-              </div>
-              <div className="card-body text-center">
-                <img
-                  className="img-fluid px-3 px-sm-4 mt-3 mb-4"
-                  style={{ width: "14rem" }}
-                  src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/undraw_like_post_dn6g_(1)_vgik.svg"
-                  alt="..."
-                />
-                <p>
-                  Add some quality, svg illustrations to your project courtesy
-                  of unDraw, a constantly updated collection of beautiful svg
-                  images that you can use completely free and without
-                  attribution!
-                </p>
-                <a
-                  href="https://undraw.co/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Browse Illustrations on unDraw →
-                </a>
-              </div>
-            </div>
-          </div>
+    <div className="dashboard container-fluid">
+      <div className="row">
+        {/* Sidebar Section */}
+        <div className="col-lg-3">
+          <Asidebar />
         </div>
 
-      
-        <div className="row shadow">
-          <div className="col-lg-6 mb-4 ">
-            <div className="card bg-primary text-white shadow">
-              <div className="card-body">
-                Primary
-                <div className="text-white-50 small">#4e73df</div>
+        {/* Main Content Section */}
+        <div className="col-lg-9">
+          <div className="main-content">
+            {/* Projects Section */}
+            <div className="row mb-4">
+              <div className="col-lg-5">
+                <div className="card shadow">
+                  <div className="card-header py-3">
+                    <h6 className="m-0 font-weight-bold text-primary">Projects</h6>
+                  </div>
+                  <div className="card-body">
+                    {[
+                      { title: "Server Migration", percent: 20, bg: "bg-danger" },
+                      { title: "Sales Tracking", percent: 40, bg: "bg-warning" },
+                      { title: "Customer Database", percent: 60, bg: "bg-primary" },
+                      { title: "Payout Details", percent: 80, bg: "bg-info" },
+                      { title: "Account Setup", percent: 100, bg: "bg-success" },
+                    ].map((item, idx) => (
+                      <div key={idx}>
+                        <h4 className="small font-weight-bold">
+                          {item.title}
+                          <span className="float-right">{item.percent}%</span>
+                        </h4>
+                        <div className="progress mb-4">
+                          <div
+                            className={`progress-bar ${item.bg}`}
+                            role="progressbar"
+                            style={{ width: `${item.percent}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Illustrations Section */}
+              <div className="col-lg-6">
+                <div className="card shadow">
+                  <div className="card-header py-3">
+                    <h6 className="m-0 font-weight-bold text-primary">Illustrations</h6>
+                  </div>
+                  <div className="card-body text-center">
+                    <img
+                      className="img-fluid px-3 px-sm-4 mt-3 mb-4"
+                      style={{ width: "14rem" }}
+                      src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/undraw_like_post_dn6g_(1)_vgik.svg"
+                      alt="Illustration"
+                    />
+                    <p>
+                      Add some quality SVG illustrations to your project courtesy of
+                      unDraw, a constantly updated collection of beautiful SVG images
+                      that you can use completely free and without attribution!
+                    </p>
+                    <a
+                      href="https://undraw.co/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Browse Illustrations on unDraw →
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="col-lg-6 mb-4">
-            <div className="card bg-success text-white shadow">
-              <div className="card-body">
-                Success
-                <div className="text-white-50 small">#1cc88a</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-6 mb-4">
-            <div className="card bg-info text-white shadow">
-              <div className="card-body">
-                Info
-                <div className="text-white-50 small">#36b9cc</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-6 mb-4">
-            <div className="card bg-warning text-white shadow">
-              <div className="card-body">
-                Warning
-                <div className="text-white-50 small">#f6c23e</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-6 mb-4">
-            <div className="card bg-danger text-white shadow">
-              <div className="card-body">
-                Danger
-                <div className="text-white-50 small">#e74a3b</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-6 mb-4">
-            <div className="card bg-secondary text-white shadow">
-              <div className="card-body">
-                Secondary
-                <div className="text-white-50 small">#858796</div>
-              </div>
+            {/* Color Cards Section */}
+            <div className="row">
+              {[
+                { title: "Primary", color: "#4e73df", bg: "bg-primary" },
+                { title: "Success", color: "#1cc88a", bg: "bg-success" },
+                { title: "Info", color: "#36b9cc", bg: "bg-info" },
+                { title: "Warning", color: "#f6c23e", bg: "bg-warning" },
+                { title: "Danger", color: "#e74a3b", bg: "bg-danger" },
+                { title: "Secondary", color: "#858796", bg: "bg-secondary" },
+              ].map((item, idx) => (
+                <div className="col-lg-4 mb-4" key={idx}>
+                  <div className={`card text-white shadow ${item.bg}`}>
+                    <div className="card-body">
+                      {item.title}
+                      <div className="text-white-50 small">{item.color}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </div>
-    </>
   );
 };
