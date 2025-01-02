@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
@@ -25,23 +26,14 @@ const Home = () => {
       });
   }, [state])
 
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState([])
+  const nav = useNavigate()
 
-  const add = (id) => {
-    console.log("Adding product with ID:", id);
-    fetch(`http://localhost:9596/product/cart/${id}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-     
-        const cartt = Array.isArray(res.data) ? res.data : [res.data]
-        console.log("Cartt:", cartt);
-        setProduct(cartt);
-      })
-      .catch((err) => console.error("Error fetching product:", err));
-  };
-
+  const add = async(id) => {
+    console.log(id);
+    nav(`/single/${id}`)
+    
+    };
   const slidess = [
     { img: 'images/banner-image-6.jpg', title: 'Soft leather jackets', description: 'Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.' },
     { img: 'images/banner-image-1.jpg', title: 'Soft leather jackets', description: 'Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.' },
@@ -84,7 +76,7 @@ const Home = () => {
                       product.map((el) => (
                         <>
                         <Card style={{ width: '18rem' }} key={el._id}>
-                        <Card.Img variant="top" src={el.image} />
+                        <Card.Img variant="top" src={el.image} height={100} width={"100%"} />
                         <Card.Body>
                           <Card.Title>Title : {el.name}</Card.Title>
                           <Card.Text>

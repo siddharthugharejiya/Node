@@ -7,6 +7,7 @@ import GETPRO from '../Componets/GETPRO'
 import { Dashboard } from '../Componets/Dashboard'
 import { Asidebar } from '../Componets/Asidebar'
 import Home from '../Componets/Home'
+import Singlepage from '../Componets/Singlepage'
 
 function MainRouter() {
   return (
@@ -19,6 +20,7 @@ function MainRouter() {
         <Route path='/get' element={<GETPRO />}></Route>
         <Route path='/' element={<Home />}></Route>
         <Route path='/aside' element={<Asidebar/>}></Route>
+        <Route path='/single/:id' element={<Singlepage/>}></Route>
         <Route path='/desh' element={<Dashboard />}></Route>
       </Routes>
     </>

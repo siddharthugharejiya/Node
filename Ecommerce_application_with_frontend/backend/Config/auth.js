@@ -1,34 +1,41 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 const validation = (req, res, next) => {
-  const token = req.headers.authorization
-    console.log(token);
-    
-    if (token) {
-        try {
-            const extractedToken = token.split(" ")[1];
-            console.log(`this is extractedToken ${extractedToken}`);
-            
-            let decode = jwt.verify(extractedToken, "SID")
-            
-            console.log(`Decoded Token: ${JSON.stringify(decode)}`);
+  const token = req.headers.authorization;
+  console.log(`Received Token: ${token}`);
 
-            req.user = decode
-            next()
-        } catch (error) {
-            res.send({ msg: "Invalid Token" })
-        }
-    } else {
-        res.send({ msg: "You are not logged in" })
+  if (token) {
+    try {
+      const extractedToken = token.split(" ")[1];
+      console.log(`Extracted Token: ${extractedToken}`);
+
+      const decoded = jwt.verify(extractedToken, "SID")
+  
+      console.log(`Decoded Token: ${decoded}`)
+
+      req.user = { userId: decoded.userId, role: decoded.role };
+      console.log(`this is req.user = ${req.user}`);
+      
+
+      next();
+    } catch (error) {
+      console.error("Token Verification Error:", error.message);
+      res.status(401).send({ msg: "Invalid Token" });
     }
-}
+  } else {
+    console.error("Authorization header is missing.");
+    res.status(401).send({ msg: "You are not logged in" });
+  }
+};
 
 const Auth = (req, res, next) => {
-    console.log(`User Role: ${req.user.userRole}`);
-    if (req.user && req.user.userRole === "admin") {
-        next();
-    } else {
-        res.status(403).send({ data: "Unauthorized" });
-    }
-}
-module.exports = { validation, Auth }
+  console.log(`req.user: ${JSON.stringify(req.user)}`);
+
+  if (req.user && req.user.role === "admin") {
+    next();
+  } else {
+    res.status(403).send({ data: "Unauthorized" });
+  }
+};
+
+module.exports = { validation, Auth };
