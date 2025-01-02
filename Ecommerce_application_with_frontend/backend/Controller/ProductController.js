@@ -1,4 +1,4 @@
-const { trusted } = require("mongoose");
+
 const ProductModel = require("../Model/ProductModel");
 const CartModel = require("../Model/CartModel");
 
@@ -81,35 +81,29 @@ const edite_post = async (req, res) => {
 // }
 const cart_post = async (req, res) => {
   try {
-    const { id } = req.params; // Product ID from URL
-    const userId = req.user.userId; // User ID from decoded token
+    const {id} = req.params
     console.log(req.body);
+    const data = await CartModel.create({ ...req.body, id });
+    res.send({data : data})
     
     
-    console.log("Product ID:", id);
-    console.log("User ID:", userId);
-
-    // Check if the cart already exists for the user
-    let cart = await CartModel.findByIdAndUpdate(id,{userId,...req.body})
-    console.log(cart);
-    
-    
-    
-    
-    res.status(200).send({ msg: "Product added to cart", cart: cart });
   } catch (error) {
-    console.error("Error adding to cart:", error.message);
-    res.status(400).send({ msg: error.message });
+    console.log(error);
+    
   }
 }
 
 const singledata = async(req,res) =>{
-        const {id} = req.params
-       const data = await ProductModel.findById(id)
-       console.log(data);
-       
-       res.send({data})
-        
+  const { id } = req.params;
+  try {
+      const data = await ProductModel.findById(id);
+      if (!data) {
+          return res.status(404).send({ message: "Product not found" });
+      }
+      res.send({ data });
+  } catch (error) {
+      res.status(500).send({ message: "Server error" });
+  }
 }
 
 module.exports = { addproduct, Getproduct, del, edite, edite_post, cart_post , singledata}

@@ -8,6 +8,6 @@ ProductRoute.delete("/product/:id", del)
 ProductRoute.get("/product/:id",edite)
 ProductRoute.put("/product/:id",edite_post)
 // ProductRoute.get("/product/cart/:id",cart)
-ProductRoute.post("/cart/:id",validation,cart_post)
-ProductRoute.post("/single/:id",singledata)
+ProductRoute.post("/cart/:id",cart_post)
+ProductRoute.get("/single/:id",singledata)
 module.exports = ProductRoute

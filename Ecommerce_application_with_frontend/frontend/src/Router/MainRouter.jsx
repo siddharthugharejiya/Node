@@ -15,10 +15,10 @@ function MainRouter() {
       <Routes>
         <Route path="/signup" element={<Signup />} ></Route>
         <Route path="/login" element={<Login />} ></Route>
-        <Route path='/add' element={<Add_Pro />}></Route>
         <Route path='/add/:id' element={<Add_Pro />}></Route>
         <Route path='/get' element={<GETPRO />}></Route>
         <Route path='/' element={<Home />}></Route>
+        <Route path='/add' element={<Add_Pro />}></Route>
         <Route path='/aside' element={<Asidebar/>}></Route>
         <Route path='/single/:id' element={<Singlepage/>}></Route>
         <Route path='/desh' element={<Dashboard />}></Route>
