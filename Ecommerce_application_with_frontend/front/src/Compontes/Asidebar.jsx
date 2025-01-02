@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../aside.css"
+// import "../aside.css"
 
 export const Asidebar = () => {
   return (

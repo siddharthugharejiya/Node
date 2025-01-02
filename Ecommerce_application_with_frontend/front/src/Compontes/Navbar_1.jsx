@@ -140,7 +140,7 @@ function Navbar_1() {
                     <Link id="top" to={"/signup"}>Register</Link>
                     <Link id="middle" to={"/checkout"}>Checkout</Link>
                     <Link id="bottom" to={"/login"}>Login</Link>
-                    <Link id="bottom" to={"/addmin"}>admin</Link>
+                    <Link id="bottom" to={"/add"}>admin</Link>
                   </div>
                 </div>
               </div>

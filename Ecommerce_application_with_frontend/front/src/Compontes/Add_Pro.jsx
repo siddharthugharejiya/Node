@@ -4,7 +4,7 @@ import { Asidebar } from "./Asidebar";
 import { useParams } from "react-router-dom";
 
 
-function Add_Pro() {
+export function Add_Pro() {
   const [state, setstate] = useState({
     name: "",
     image: "",
@@ -131,7 +131,7 @@ function Add_Pro() {
               <form
                 onSubmit={handlesubmit}
                 className="p-4 border rounded bg-white shadow"
-                style={{ width: "45%" }}
+                style={{ width: "70%" }}
               >
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
@@ -245,4 +245,4 @@ function Add_Pro() {
   );
 }
 
-export default Add_Pro;
+

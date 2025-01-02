@@ -1745,6 +1745,202 @@ i.fa-solid.fa-bag-shopping{
   height: 100vh;
   width: 100%;
 }
+/* General Sidebar Styling */
+.sidebar {
+  background-color: orange; /* Dark theme */
+  color: #ffffff;
+  height: 100vh;
+  width: 100%;
+}
+
+.sidebar a {
+  color: #ffffff; /* Default link color */
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .nav-link i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.sidebar .nav-item {
+  margin-bottom: 10px;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #495057; /* Slightly lighter than the background */
+  color: #ffffff;
+  text-decoration: none;
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.sidebar .sidebar-heading {
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  color: #adb5bd; /* Muted text */
+  border-bottom: 1px solid #495057;
+}
+
+.sidebar .collapse-inner {
+  background-color: #495057; /* Collapsed background */
+  border-radius: 5px;
+}
+
+.sidebar .collapse-item {
+  color: #ced4da; /* Lighter text for collapse items */
+  padding: 8px 20px;
+}
+
+.sidebar .collapse-item:hover {
+  background-color: #6c757d; /* Slightly lighter for hover effect */
+  color: #ffffff;
+}
+
+.sidebar .sidebar-divider {
+  border-top: 1px solid #495057;
+}
+
+.sidebar .sidebar-brand {
+  padding: 15px;
+  text-align: center;
+}
+
+.sidebar .sidebar-brand-icon {
+  font-size: 30px;
+}
+
+.sidebar .sidebar-brand-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Toggle Button */
+#sidebarToggle {
+  background-color: #adb5bd;
+  width: 30px;
+  height: 30px;
+}
+
+#sidebarToggle:hover {
+  background-color: #6c757d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    height: 100%;
+    width: 250px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+  }
+}
+
+
+/* General container styling */
+.singlepage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Light background for contrast */
+  padding: 20px;
+}
+
+/* Card wrapper */
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Card styling */
+.custom-card {
+  width: 22rem;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  background-color: #ffffff;
+}
+
+.custom-card:hover {
+  transform: scale(1.05);
+}
+
+/* Card Image */
+.custom-card-img {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Product Title */
+.product-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #343a40;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Product Description */
+.product-description {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Product Price */
+.product-price {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Button Styling */
+.custom-button {
+  display: block;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.902);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 5px;
+  color: #ffffff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.custom-button:hover {
+  background-color: #343d46;
+}
+
+/* Loading message styling */
+.loading-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
 @media (max-width:2000px) {
   .t{
     height: auto;
