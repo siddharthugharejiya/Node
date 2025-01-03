@@ -11,6 +11,7 @@ import { Dashboard } from '../Compontes/Dashboard';
 import { Asidebar } from '../Compontes/Asidebar';
 import { Add_Pro } from '../Compontes/Add_Pro';
 import GETPRO from '../Compontes/GETPRO';
+import PriveRoute from '../Compontes/PriveRoute';
 
 
 const MainRouter = () => {
@@ -20,7 +21,11 @@ const MainRouter = () => {
          <Route element={<Cart/>} path='/cart/:id'></Route>
          <Route element={<Signup/>} path='/signup'></Route>
          <Route element={<Login/>} path='/login'></Route>
-         <Route element={<AllProduct/>} path='/product'></Route>
+         <Route element={
+            <PriveRoute>
+                <AllProduct/>
+                </PriveRoute>
+            } path='/product'></Route>
          <Route element={<Singlepage/>} path='/single/:id'></Route>
          <Route path='/desh' element={<Dashboard/>}></Route>
          <Route path='/add' element={<Add_Pro/>}></Route>

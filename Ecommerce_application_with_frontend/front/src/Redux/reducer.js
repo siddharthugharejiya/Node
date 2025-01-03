@@ -42,21 +42,8 @@ const initialState = {
       case "CART_ADD":
         return {
           ...state,
-          data: [...state.data, action.payload], // Append new product to the cart
-        };
-  
-      case "CART_FETCH":
-        return {
-          ...state,
-          data: action.payload, // Replace with fetched data
-        };
-  
-      case "REMOVE_FROM_CART":
-        return {
-          ...state,
-          data: state.data.filter((item) => item.id !== action.payload)
-        };
-  
+          data: [...state.data, action.payload]
+        };  
       default:
         return state;
     }
@@ -86,7 +73,7 @@ export const remove_reducer = (state = remove_data,action) =>{
         case "REMOVE_FROM_CART":
         return {
             ...state,
-            data : state.data.filter(item = item.id !== action.payload)
+            data : action.payload
         };
         default : return state;
       }

@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Asidebar } from "./Asidebar";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardMedia, Button, Typography, Grid, Container } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+  Grid,
+  Container,
+  Box,
+} from "@mui/material";
 import "../App.css";
 
 function GETPRO() {
@@ -18,10 +27,10 @@ function GETPRO() {
       .catch((error) => console.error("Error fetching data:", error));
   };
 
-  // Fetch data when the component mounts
+
   useEffect(() => {
     fetchData();
-  }, []); // Empty dependency array means this effect runs once after initial render
+  }, []);
 
   const handledelete = (id) => {
     fetch(`http://localhost:9596/product/${id}`, {
@@ -29,9 +38,8 @@ function GETPRO() {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert(data.message); // Assuming API returns message on successful delete
-        // Re-fetch the data after deletion to reflect updated list
-        fetchData(); // Refetch the data immediately after deletion
+        alert(data.message);
+        fetchData();
       })
       .catch((error) => console.error("Error deleting product:", error));
   };
@@ -41,70 +49,100 @@ function GETPRO() {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-       
-        <div className="col-md-3 col-lg-2 bg-light vh-100">
-          <Asidebar />
-        </div>
+    <Box display="flex">
+      {/* Sidebar */}
+      <Box width="25%" bgcolor="lightgray" p={2}>
+        <Asidebar />
+      </Box>
 
-        <div className="col-md-9 col-lg-10" style={{ margin: "0px 100px" }}>
-          <div className="container my-4">
-            <h2 className="mb-4">Product List</h2>
-            <Grid container spacing={4}>
-              {state.length > 0 ? (
-                state.map((el) => (
-                  <Grid item xs={12} sm={6} md={4} key={el._id}>
-                    <Card sx={{ height: "100%" }}>
-                      <CardMedia
-                        component="img"
-                        height="200"
-                        image={el.image}
-                        alt={el.name}
-                        sx={{ objectFit: "cover" }}
-                      />
-                      <CardContent>
-                        <Typography variant="h5" component="div">
-                          {el.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          Category: {el.category}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          Description: {el.description}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          Price: ₹{el.price}
-                        </Typography>
-                        <Button 
-                          variant="contained" 
-                          color="error" 
-                          sx={{ marginTop: 1 }}
-                          onClick={() => handledelete(el._id)}
-                        >
-                          Delete
-                        </Button>
-                        <Button 
-                          variant="contained" 
-                          sx={{ marginTop: 1, marginLeft: 1 }}
-                          onClick={() => handleedite(el._id)}
-                        >
-                          Edit
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                ))
-              ) : (
-                <div className="col-12 text-center">
-                  <p className="text-muted">No products available</p>
-                </div>
-              )}
-            </Grid>
-          </div>
-        </div>
-      </div>
-    </div>
+      {/* Main Content */}
+      <Box flex={1} p={3} bgcolor="#f7f8fa">
+        <Container maxWidth="lg">
+          <Typography variant="h4" component="h1" gutterBottom>
+            Product List
+          </Typography>
+
+          <Grid container spacing={3}>
+            {state.length > 0 ? (
+              state.map((el) => (
+                <Grid item xs={12} sm={6} md={4} key={el._id}>
+                  <Card
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      boxShadow: 3,
+                      borderRadius: 2,
+                      transition: "transform 0.3s ease",
+                      "&:hover": { transform: "scale(1.03)" },
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      height="180"
+                      image={el.image || "https://via.placeholder.com/150"}
+                      alt={el.name}
+                    />
+                    <CardContent>
+                      <Typography variant="h6" component="div" gutterBottom>
+                        {el.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        Category: {el.category}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        {el.description}
+                      </Typography>
+                      <Typography variant="subtitle1" color="primary">
+                        ₹{el.price}
+                      </Typography>
+                    </CardContent>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        px: 2,
+                        pb: 2,
+                        mt: "auto",
+                      }}
+                    >
+                      <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => handledelete(el._id)}
+                      >
+                        Delete
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleedite(el._id)}
+                      >
+                        Edit
+                      </Button>
+                    </Box>
+                  </Card>
+                </Grid>
+              ))
+            ) : (
+              <Grid item xs={12}>
+                <Typography variant="body1" color="textSecondary" align="center">
+                  No products available
+                </Typography>
+              </Grid>
+            )}
+          </Grid>
+        </Container>
+      </Box>
+    </Box>
   );
 }
 

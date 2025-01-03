@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -31,28 +32,40 @@ const Login = () => {
       const { token } = response.data;
       const decoded = jwtDecode(token);
 
-      // Store token and user details in localStorage
       localStorage.setItem("Token", token);
+      localStorage.setItem("login", true);
       localStorage.setItem("UserId", decoded.userId);
       localStorage.setItem("UserRole", decoded.userRole);
 
-      // Navigate based on user role
       const userRole = decoded.userRole;
       if (userRole === "admin") {
         navigate("/add");
       } else if (userRole === "user") {
         navigate("/");
       }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful!',
+        text: 'You have successfully logged in.',
+        confirmButtonText: 'Proceed',
+      });
+
     } catch (error) {
       console.error("Login failed", error);
-      alert("Login failed. Please check your credentials.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed!',
+        text: 'Please check your credentials and try again.',
+        confirmButtonText: 'Retry',
+      });
     }
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-95">
+    <div className="d-flex justify-content-center align-items-center" style={{height:"75vh"}}>
       <Form
-        className="border border-1 p-4 p-md-5"
+        className="border border-1 p-4 p-md-5 shadow"
         style={{ width: "90%", maxWidth: "500px" }}
         onSubmit={handleSubmit}
       >
@@ -64,6 +77,7 @@ const Login = () => {
         <Row>
           <Col xs={12} className="mb-3">
             <Form.Label>Email</Form.Label>
+            <div className='d-flex justify-content-center align-items-center'>
             <Form.Control
               type="email"
               name="email"
@@ -71,21 +85,32 @@ const Login = () => {
               onChange={handleChange}
               placeholder="Enter email"
             />
+            </div>
+           
           </Col>
           <Col xs={12} className="mb-3">
             <Form.Label>Password</Form.Label>
+            <div className='d-flex justify-content-center align-items-center'>
+
             <Form.Control
               type="password"
               name="password"
               value={state.password}
               onChange={handleChange}
               placeholder="Enter password"
-            />
+              />
+              </div>
           </Col>
         </Row>
-        <Button className="btn btn-success w-100" type="submit">
+        <div className='d-flex justify-content-center align-items-center'>
+
+        <Button
+          className="btn btn-dark w-100"
+          type="submit"
+          >
           Submit
         </Button>
+          </div>
       </Form>
     </div>
   );

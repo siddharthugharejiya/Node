@@ -69,29 +69,58 @@ const edite_post = async (req, res) => {
 
   }
 }
-// const cart = async (req,res) =>{
-//   try {
-//     const userId = req.user.id;
-//     const cartItems = await CartModel.find({ userId }).populate("productId").exec();
-//     res.status(200).send({ cartItems });
-//   } catch (error) {
-//     console.error("Error fetching cart items:", error);
-//     res.status(500).send({ message: error.message });
-//   }
-// }
-const cart_post = async (req, res) => {
+const cart = async (req,res) =>{
   try {
-    const {id} = req.params
-    console.log(req.body);
-    const data = await CartModel.create({ ...req.body, id });
-    res.send({data : data})
-    
-    
+    const cartItems = await CartModel.find()
+    res.status(200).send({ cartItems });
   } catch (error) {
-    console.log(error);
-    
+    console.error("Error fetching cart items:", error);
+    res.status(500).send({ message: error.message });
   }
 }
+const cart_del = async (req,res) =>{
+  try {
+    const {id} = req.params
+    const data = await CartModel.findByIdAndDelete(id)
+    res.status(200).send({data})
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+
+  }
+}
+const cart_post = async (req, res) => {
+  const { id } = req.params;
+  const product = req.body;
+
+  try {
+    console.log(product);  // Debugging to see the received product data
+
+    const existingCartItem = await CartModel.findOne({ userId: id, productId: product._id });
+
+    if (existingCartItem) {
+      existingCartItem.quantity += 1;
+      await existingCartItem.save();
+      return res.json(existingCartItem);
+    } else {
+      const newCartItem = new CartModel({
+        userId: id,
+        image: product.image,
+        description: product.description,
+        productId: product._id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+      });
+      await newCartItem.save();
+      return res.json(newCartItem);
+    }
+  } catch (error) {
+    console.error("Error adding item to cart:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
 
 const singledata = async(req,res) =>{
   const { id } = req.params;
@@ -106,4 +135,4 @@ const singledata = async(req,res) =>{
   }
 }
 
-module.exports = { addproduct, Getproduct, del, edite, edite_post, cart_post , singledata}
+module.exports = { addproduct, Getproduct, del, edite, edite_post, cart_post , singledata,cart,cart_del}

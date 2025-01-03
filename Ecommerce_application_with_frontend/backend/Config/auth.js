@@ -9,13 +9,11 @@ const validation = (req, res, next) => {
       const extractedToken = token.split(" ")[1];
       console.log(`Extracted Token: ${extractedToken}`);
 
-      const decoded = jwt.verify(extractedToken, "SID")
-  
-      console.log(`Decoded Token: ${decoded}`)
+      const decoded = jwt.verify(extractedToken, "SID");
+      console.log("Decoded Token:", decoded);
 
       req.user = { userId: decoded.userId, role: decoded.role };
-      console.log(`this is req.user = ${req.user}`);
-      
+      console.log("req.user:", req.user); // Log as an object, not as part of a string
 
       next();
     } catch (error) {
@@ -29,7 +27,7 @@ const validation = (req, res, next) => {
 };
 
 const Auth = (req, res, next) => {
-  console.log(`req.user: ${JSON.stringify(req.user)}`);
+  console.log("req.user:", req.user);
 
   if (req.user && req.user.role === "admin") {
     next();

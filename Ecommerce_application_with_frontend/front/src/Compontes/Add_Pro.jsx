@@ -2,75 +2,71 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
 import { Asidebar } from "./Asidebar";
 import { useParams } from "react-router-dom";
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  MenuItem,
+  Grid,
+  Paper,
+  Box,
+} from "@mui/material";
 
 
 export function Add_Pro() {
-  const [state, setstate] = useState({
+  const [state, setState] = useState({
     name: "",
     image: "",
     price: "",
     description: "",
     category: "",
     subcategory: "",
-  })
-  const [update, setupdate] = useState(true)
+  });
+  const [update, setUpdate] = useState(true);
 
   const change = (e) => {
     const { name, value } = e.target;
-    setstate({
+    setState({
       ...state,
       [name]: value,
     });
-  }
+  };
 
-  const Token = localStorage.getItem("Token")
-  const { id } = useParams()
-  console.log(id);
-  
+  const Token = localStorage.getItem("Token");
+  const { id } = useParams();
+
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:9596/product/${id}`, {
-        method: "GET",
-      })
-      .then(res => res.json())
-      .then(res => {
-          console.log(res)
-          console.log(res.data)
-          console.log(res.data.name)
-          setstate({
+      fetch(`http://localhost:9596/product/${id}`)
+        .then((res) => res.json())
+        .then((res) => {
+          setState({
             name: res.data.name,
             image: res.data.image,
             price: res.data.price,
             description: res.data.description,
             category: res.data.category,
             subcategory: res.data.subcategory,
-          })
-        })
-        setupdate(false)
+          });
+        });
+      setUpdate(false);
     }
-  }, [id])
+  }, [id]);
 
-  const handlesubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      if (update == false) {
+      if (!update) {
         await fetch(`http://localhost:9596/product/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(state),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            alert("Product added edite data !");
-          });
-          setupdate(true)
-      }
-
-
-      else {
+        });
+        alert("Product updated successfully!");
+      } else {
         await fetch("http://localhost:9596/add", {
           method: "POST",
           headers: {
@@ -78,171 +74,159 @@ export function Add_Pro() {
             Authorization: `Bearer ${Token}`,
           },
           body: JSON.stringify(state),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            alert("Product added successfully!");
-          });
+        });
+        alert("Product added successfully!");
       }
-      setupdate(true)
-      console.log(update);
-      
+      setUpdate(true);
+    } catch (error) {
+      alert("Backend server error.");
     }
+  };
 
-    catch (error) {
-      alert("backend is not runing on server side");
-    }
-
-
-  }
-
-
-
-
-
-  const [category, setcategory] = useState([]);
-  const [subcategory, setsubcategory] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [subcategory, setSubcategory] = useState([]);
 
   useLayoutEffect(() => {
     axios.get(`http://localhost:9596/getCategory`).then((res) => {
-      setcategory(res.data.data);
+      setCategory(res.data.data);
     });
   }, []);
 
   useLayoutEffect(() => {
     axios.get(`http://localhost:9596/subget`).then((res) => {
-      setsubcategory(res.data.data);
+      setSubcategory(res.data.data);
     });
   }, []);
 
   return (
-    <>
-      <div className="container-fluid">
-        <div className="row">
+    <Box display="flex" minHeight="100vh">
+    
+      <Box width="240px" bgcolor="lightgray" p={2}>
+        <Asidebar />
+      </Box>
 
-          <div className="col-lg-3 col-md-4 bg-light vh-100">
-            <Asidebar />
-          </div>
-
-
-          <div className="col-lg-5 col-md-8" style={{ marginLeft: "30px" }}>
-            <div className="container mt-5">
-              <h2 className="mb-4">Add Product</h2>
-              <form
-                onSubmit={handlesubmit}
-                className="p-4 border rounded bg-white shadow"
-                style={{ width: "70%" }}
-              >
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Product Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
+    
+      <Box flex={1} p={4} bgcolor="#f7f8fa">
+        <Container maxWidth="sm">
+          <Paper elevation={3} sx={{ padding: 4 }}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              {update ? "Add Product" : "Update Product"}
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={3}>
+                {/* Product Name */}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Product Name"
                     name="name"
-                    placeholder="Enter product name"
                     value={state.name}
                     onChange={change}
+                    variant="outlined"
+                    required
                   />
-                </div>
+                </Grid>
 
-                <div className="mb-3">
-                  <label htmlFor="image" className="form-label">
-                    Image URL
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="image"
+                {/* Image URL */}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Image URL"
                     name="image"
-                    placeholder="Enter image URL"
                     value={state.image}
                     onChange={change}
+                    variant="outlined"
+                    required
                   />
-                </div>
+                </Grid>
 
-                <div className="mb-3">
-                  <label htmlFor="price" className="form-label">
-                    Price
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="price"
+                {/* Price */}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Price"
                     name="price"
-                    placeholder="Enter product price"
                     value={state.price}
                     onChange={change}
+                    variant="outlined"
+                    required
+                    type="number"
                   />
-                </div>
+                </Grid>
 
-                <div className="mb-3">
-                  <label htmlFor="description" className="form-label">
-                    Description
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="description"
+                {/* Description */}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Description"
                     name="description"
-                    placeholder="Enter product description"
                     value={state.description}
                     onChange={change}
+                    variant="outlined"
+                    multiline
+                    rows={4}
+                    required
                   />
-                </div>
+                </Grid>
 
-                <div className="mb-3">
-                  <label htmlFor="category" className="form-label">
-                    Category
-                  </label>
-                  <select
-                    id="category"
+                {/* Category */}
+                <Grid item xs={12}>
+                  <TextField
+                    select
+                    fullWidth
+                    label="Category"
                     name="category"
-                    className="form-select"
                     value={state.category}
                     onChange={change}
+                    variant="outlined"
+                    required
                   >
-                    <option value="">Select Category</option>
+                    <MenuItem value="">Select Category</MenuItem>
                     {category.map((el) => (
-                      <option value={el._id} key={el._id}>
+                      <MenuItem key={el._id} value={el._id}>
                         {el.name}
-                      </option>
+                      </MenuItem>
                     ))}
-                  </select>
-                </div>
+                  </TextField>
+                </Grid>
 
-                <div className="mb-3">
-                  <label htmlFor="subcategory" className="form-label">
-                    Subcategory
-                  </label>
-                  <select
-                    id="subcategory"
+                {/* Subcategory */}
+                <Grid item xs={12}>
+                  <TextField
+                    select
+                    fullWidth
+                    label="Subcategory"
                     name="subcategory"
-                    className="form-select"
                     value={state.subcategory}
                     onChange={change}
+                    variant="outlined"
+                    required
                   >
-                    <option value="">Select Subcategory</option>
+                    <MenuItem value="">Select Subcategory</MenuItem>
                     {subcategory.map((el) => (
-                      <option value={el._id} key={el._id}>
+                      <MenuItem key={el._id} value={el._id}>
                         {el.name}
-                      </option>
+                      </MenuItem>
                     ))}
-                  </select>
-                </div>
+                  </TextField>
+                </Grid>
 
-                <button type="submit" className="btn btn-primary w-100">
-                  {update == true ? "Submit" : "Update"}
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+                {/* Submit Button */}
+                <Grid item xs={12}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    type="submit"
+                    style={{background:"black"}}
+                  >
+                    {update ? "Submit" : "Update"}
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Paper>
+        </Container>
+      </Box>
+    </Box>
   );
 }
-
-

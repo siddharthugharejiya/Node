@@ -8,7 +8,6 @@ import { TabsList as BaseTabsList } from "@mui/base/TabsList";
 import { TabPanel as BaseTabPanel } from "@mui/base/TabPanel";
 import { buttonClasses } from "@mui/base/Button";
 import Card from "react-bootstrap/Card";
-
 import { Skeleton } from "@mui/material";
 import "react-loading-skeleton/dist/skeleton.css";
 // import Button from "react-bootstrap/Button";
