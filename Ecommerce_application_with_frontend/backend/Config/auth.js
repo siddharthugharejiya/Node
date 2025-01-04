@@ -13,8 +13,7 @@ const validation = (req, res, next) => {
       console.log("Decoded Token:", decoded);
 
       req.user = { userId: decoded.userId, role: decoded.role };
-      console.log("req.user:", req.user); // Log as an object, not as part of a string
-
+      console.log("req.user:", req.user); 
       next();
     } catch (error) {
       console.error("Token Verification Error:", error.message);
