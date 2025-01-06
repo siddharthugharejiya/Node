@@ -9,19 +9,22 @@ import { useNavigate } from "react-router-dom";
 const AllProduct = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.data.data);
-  const [filtered,setfiltered]=useState([])
+  const [filtered, setfiltered] = useState([]);
 
   useEffect(() => {
     dispatch(product_action());
   }, [dispatch]);
-  useEffect(()=>{
- setfiltered(products)
-  },[products])
+
+  useEffect(() => {
+    setfiltered(products);
+  }, [products]);
+
   const [price, setprice] = useState([300]);
-  const handlefilter = () =>{
-    const fillter_pro = products.filter((el)=>el.price <= price)
-     setfiltered(fillter_pro)
-  }
+
+  const handlefilter = () => {
+    const filter_pro = products.filter((el) => el.price <= price);
+    setfiltered(filter_pro);
+  };
 
   useLayoutEffect(() => {
     const containers = document.querySelectorAll(".image-container");
@@ -52,23 +55,22 @@ const AllProduct = () => {
       }
     });
   }, [products]);
-  const nav= useNavigate()
-  const handleclick=(id)=>{
+
+  const nav = useNavigate();
+  const handleclick = (id) => {
     console.log(id);
-    
-   nav(`/single/${id}`)
-  }
+    nav(`/single/${id}`);
+  };
 
   return (
     <>
-      <div className="row justify-content-center">
+      <div className="row justify-content-center bg-dark text-light">
         <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-8">
           <div className="row">
             <div className="col-xxl-12 cate">
               <div className="cate-sub col-xxl-9 col-sm-12 col-12">
                 <div className="px-b bbb">
-                  {" "}
-                  <b>Category </b>
+                  <b>Category</b>
                 </div>
                 <div className="bo"></div>
                 <div className="dair">
@@ -80,7 +82,7 @@ const AllProduct = () => {
                       id="flexCheckIndeterminate"
                     />
                     <label
-                      class="form-check-label"
+                      class="form-check-label text-light"
                       for="flexCheckIndeterminate"
                       id="flex"
                     >
@@ -99,7 +101,7 @@ const AllProduct = () => {
                       id="flexCheckIndeterminate"
                     />
                     <label
-                      class="form-check-label"
+                      class="form-check-label text-light"
                       for="flexCheckIndeterminate"
                       id="flex"
                     >
@@ -118,7 +120,7 @@ const AllProduct = () => {
                       id="flexCheckIndeterminate"
                     />
                     <label
-                      class="form-check-label"
+                      class="form-check-label text-light"
                       for="flexCheckIndeterminate"
                       id="flex"
                     >
@@ -131,24 +133,20 @@ const AllProduct = () => {
 
               <div className="cate-sub col-xxl-9 col-sm-12">
                 <div className="px-b bbb">
-                  {" "}
-                  <b>Price </b>
+                  <b>Price</b>
                 </div>
                 <div className="bo"></div>
                 <div className="dair">
                   <Form.Range onChange={(e) => setprice([e.target.value])} />
                 </div>
                 <div className="d-flex">
-                  <b> Price </b> : ${price[0]}
+                  <b> Price </b>: ${price[0]}
                 </div>
                 <div>
                   <button
-                    className="btn"
-                    style={{
-                      background: "rgb(100 180 150 / 1)",
-                      color: "white",
-                    }}
-                    onClick={handlefilter}   >
+                    className="btn btn-outline-light"
+                    onClick={handlefilter}
+                  >
                     Filter
                   </button>
                 </div>
@@ -156,8 +154,7 @@ const AllProduct = () => {
 
               <div className="cate-sub col-xxl-9">
                 <div className="px-b bbb">
-                  {" "}
-                  <b>Colors </b>
+                  <b>Colors</b>
                 </div>
                 <div className="bo"></div>
                 <div className="dair">
@@ -169,7 +166,7 @@ const AllProduct = () => {
                       id="flexCheckIndeterminate"
                     />
                     <label
-                      class="form-check-label"
+                      class="form-check-label text-light"
                       for="flexCheckIndeterminate"
                       id="flex"
                     >
@@ -188,7 +185,7 @@ const AllProduct = () => {
                       id="flexCheckIndeterminate"
                     />
                     <label
-                      class="form-check-label"
+                      class="form-check-label text-light"
                       for="flexCheckIndeterminate"
                       id="flex"
                     >
@@ -206,7 +203,7 @@ const AllProduct = () => {
                       id="flexCheckIndeterminate"
                     />
                     <label
-                      class="form-check-label"
+                      class="form-check-label text-light"
                       for="flexCheckIndeterminate"
                       id="flex"
                     >
@@ -225,7 +222,7 @@ const AllProduct = () => {
                       id="flexCheckIndeterminate"
                     />
                     <label
-                      class="form-check-label"
+                      class="form-check-label text-light"
                       for="flexCheckIndeterminate"
                       id="flex"
                     >
@@ -236,147 +233,86 @@ const AllProduct = () => {
                 </div>
               </div>
 
-              <div className="cate-sub col-xxl-9">
-                <div className="px-b bbb">
-                  {" "}
-                  <b>Weight </b>
-                </div>
-                <div className="bo"></div>
-                <div className="dair">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckIndeterminate"
-                    />
-                    <label
-                      class="form-check-label"
-                      for="flexCheckIndeterminate"
-                      id="flex"
-                    >
-                      2kg Pack
-                    </label>
-                  </div>
-                  {/* <span>[20]</span> */}
-                </div>
-
-                <div className="dair">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckIndeterminate"
-                    />
-                    <label
-                      class="form-check-label"
-                      for="flexCheckIndeterminate"
-                      id="flex"
-                    >
-                      20kg Pack
-                    </label>
-                  </div>
-                </div>
-
-                <div className="dair">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckIndeterminate"
-                    />
-                    <label
-                      class="form-check-label"
-                      for="flexCheckIndeterminate"
-                      id="flex"
-                    >
-                      30kg Pack
-                    </label>
-                  </div>
-                  {/* <span>[64]</span> */}
-                </div>
-              </div>
-
               <div className="cate-subb col-xxl-9">
                 <div className="px-b bbb">
-                  {" "}
-                  <b>Tages </b>
+                  <b>Tags</b>
                 </div>
                 <div className="bo"></div>
 
-                <div className="foo">Vegetables</div>
-                <div className="foo">Juice</div>
+                <div className="foo text-light">Vegetables</div>
+                <div className="foo text-light">Juice</div>
 
-                <div className="foo">Vegetables</div>
+                <div className="foo text-light">Vegetables</div>
 
-                <div className="foo">Food</div>
-                <div className="foo">Dry Fruit</div>
+                <div className="foo text-light">Food</div>
+                <div className="foo text-light">Dry Fruit</div>
               </div>
             </div>
           </div>
         </div>
         <div className="col-xxl-8 d-flex flex-wrap justify-content-around">
-  {products?.length > 0 ? (
-    products.map((el, index) => (
-      <Card
-        id="card-product"
-        key={index}
-        onClick={() => handleclick(el._id)}
-        style={{ height: "fit-content" }}
-      >
-        <div className="image-container">
-          <Card.Img
-            variant="top"
-            alt="image"
-            src={el.image}
-            className="zoom-image"
-          />
+          {products?.length > 0 ? (
+            products.map((el, index) => (
+              <Card
+                id="card-product"
+                key={index}
+                onClick={() => handleclick(el._id)}
+                style={{
+                  height: "fit-content",
+                  backgroundColor: "#343a40",
+                  color: "white",
+                }}
+              >
+                <div className="image-container">
+                  <Card.Img
+                    variant="top"
+                    alt="image"
+                    src={el.image}
+                    className="zoom-image"
+                  />
+                </div>
+                <div id="shop">
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div id="product-icon">
+                  <i className="fa-regular fa-eye p-3" id="product-icon-1"></i>
+                  <i className="fa-regular fa-heart p-3" id="product-icon-1"></i>
+                </div>
+                <Card.Body id="card-body-1">
+                  <Card.Title
+                    style={{
+                      fontSize: "15px",
+                      color: "rgb(119 119 119 / 1)",
+                    }}
+                  >
+                    {el.category || "Card Title"}
+                  </Card.Title>
+                  <Card.Text>
+                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>{" "}
+                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>{" "}
+                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
+                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
+                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
+                  </Card.Text>
+                  <Card.Text>
+                    {el.description || "Description goes here."}
+                  </Card.Text>
+                  <Card.Text
+                    style={{
+                      padding: "10px",
+                      color: "rgb(100 180 150 / 1)",
+                      fontWeight: "800",
+                    }}
+                  >
+                    ${el.price}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            ))
+          ) : (
+            <div>No products available</div>
+          )}
         </div>
-        <div id="shop">
-          <i className="fa-solid fa-bag-shopping"></i>
-        </div>
-        <div id="product-icon">
-          <i className="fa-regular fa-eye p-3" id="product-icon-1"></i>
-          <i className="fa-regular fa-heart p-3" id="product-icon-1"></i>
-        </div>
-        <Card.Body id="card-body-1">
-          <Card.Title
-            style={{
-              fontSize: "15px",
-              color: "rgb(119 119 119 / 1)",
-            }}
-          >
-            {el.category || "Card Title"}
-          </Card.Title>
-          <Card.Text>
-            <i className="fa-regular fa-star" style={{ color: "orange" }}></i>{" "}
-            <i className="fa-regular fa-star" style={{ color: "orange" }}></i>{" "}
-            <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
-            <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
-            <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
-          </Card.Text>
-          <Card.Text>
-            {el.description || "Description goes here."}
-          </Card.Text>
-          <Card.Text
-            style={{
-              padding: "10px",
-              color: "rgb(100 180 150 / 1)",
-              fontWeight: "800",
-            }}
-          >
-            ${el.price}
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    ))
-  ) : (
-    <div>No products available</div>
-  )}
-</div>
-
       </div>
     </>
   );

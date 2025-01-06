@@ -27,7 +27,6 @@ function GETPRO() {
       .catch((error) => console.error("Error fetching data:", error));
   };
 
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -49,16 +48,16 @@ function GETPRO() {
   };
 
   return (
-    <Box display="flex">
+    <Box display="flex" bgcolor="#121212">
       {/* Sidebar */}
-      <Box width="25%" bgcolor="lightgray" p={2}>
+      <Box width="25%" bgcolor="#1f1f1f" p={2} height={"95vh"}>
         <Asidebar />
       </Box>
 
       {/* Main Content */}
-      <Box flex={1} p={3} bgcolor="#f7f8fa">
+      <Box flex={1} p={3} bgcolor="#181818">
         <Container maxWidth="lg">
-          <Typography variant="h4" component="h1" gutterBottom>
+          <Typography variant="h4" component="h1" gutterBottom color="white">
             Product List
           </Typography>
 
@@ -75,6 +74,8 @@ function GETPRO() {
                       borderRadius: 2,
                       transition: "transform 0.3s ease",
                       "&:hover": { transform: "scale(1.03)" },
+                      backgroundColor: "#2c2c2c",
+                      color: "white",
                     }}
                   >
                     <CardMedia
@@ -134,7 +135,12 @@ function GETPRO() {
               ))
             ) : (
               <Grid item xs={12}>
-                <Typography variant="body1" color="textSecondary" align="center">
+                <Typography
+                  variant="body1"
+                  color="textSecondary"
+                  align="center"
+                  style={{ color: "white" }}
+                >
                   No products available
                 </Typography>
               </Grid>
