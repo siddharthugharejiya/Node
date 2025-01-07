@@ -2,14 +2,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* font-family: "Raleway", serif !important */
+  font-family: "Cinzel Decorative", serif;
 }
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 .row{
   --bs-gutter-x:0.rem !important;  
 }
 body{
   scroll-behavior: smooth;
-  /* transition: ; */
+
 }
 /* Container styling for cart items */
 .cart-item {
@@ -23,6 +26,10 @@ body{
 /* Image section styling */
 .cart-item-image {
   text-align: center;
+}
+
+.css-zsp0bh-MuiInputBase-root-MuiOutlinedInput-root,.css-1blp12k-MuiInputBase-root-MuiOutlinedInput-root{
+  color: white !important;
 }
 
 .cart-item-img {
@@ -169,7 +176,7 @@ body{
   display: none;
 }
 
-.paste-button:hover .dropdown-content {
+.paste-buttonn:hover .dropdown-content {
   display: block;
 }
 
@@ -219,11 +226,11 @@ i {
   align-items: center;
 }
 
-.paste-button {
+.paste-buttonn {
   position: relative;
 }
 
-.paste-button button {
+.paste-button buttonn {
   background-color: transparent;
   border: none;
   /* padding: 10px 20px; */
@@ -233,9 +240,9 @@ i {
   cursor: pointer;
 }
 
-.paste-button .dropdown-content {
+.paste-buttonn .dropdown-content {
   display: none;
-  top: 45px !important;
+  /* top: 45px !important; */
   border-radius: 10px;
   position: absolute;
   background-color: white;
@@ -247,18 +254,18 @@ i {
   top: 45px !important;
 }
 
-.paste-button .dropdown-content a {
+.paste-buttonn .dropdown-content a {
   padding: 8px 16px;
   display: block;
   color: black;
   text-decoration: none;
 }
 
-.paste-button .dropdown-content a:hover {
+.paste-buttonn .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
 
-.paste-button:hover .dropdown-content {
+.paste-buttonn:hover .dropdown-content {
   display: block;
 }
 
@@ -393,7 +400,7 @@ i {
 
 
 
-.paste-button {
+.paste-buttonn {
   position: relative;
   display: block;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

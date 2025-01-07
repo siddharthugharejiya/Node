@@ -31,18 +31,31 @@ ChartJS.register(
   Legend,
   ArcElement,
   DoughnutController
-);
+)
+// Satisfaction Chart Data
+const satisfactionData = {
+  labels: ["Satisfied", "Neutral", "Unsatisfied"],
+  datasets: [
+    {
+      label: "User Satisfaction",
+      data: [70, 20, 10],
+      backgroundColor: ["#4caf50", "#ffeb3b", "#f44336"],
+      hoverBackgroundColor: ["#66bb6a", "#ffee58", "#e57373"],
+    },
+  ],
+};
+
 
 export const Dashboard = () => {
 
-  const [state, setState] = useState([])
+  const [state, setState] = useState([]);
   useLayoutEffect(() => {
     fetch(`http://localhost:9596/login`)
       .then(res => res.json())
       .then(res => {
         setState(res.data)
       })
-  }, [])
+  }, []);
 
   const userGrowthData = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -103,6 +116,39 @@ export const Dashboard = () => {
     ],
   };
 
+  const revenueData = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "Monthly Revenue",
+        data: [75, 85, 95, 105, 115, 125, 135],
+        backgroundColor: "#ff9f40",
+      },
+    ],
+  };
+
+  const performanceData = {
+    labels: ["Q1", "Q2", "Q3", "Q4"],
+    datasets: [
+      {
+        label: "Performance",
+        data: [120, 130, 140, 150],
+        backgroundColor: "#6a67ce",
+      },
+    ],
+  };
+
+  const engagementData = {
+    labels: ["Likes", "Comments", "Shares"],
+    datasets: [
+      {
+        label: "User Engagement",
+        data: [400, 300, 200],
+        backgroundColor: ["#42a5f5", "#66bb6a", "#ffa726"],
+      },
+    ],
+  };
+
   return (
     <div className="dashboard container-fluid bg-dark text-white">
       <div className="row">
@@ -116,7 +162,6 @@ export const Dashboard = () => {
 
             <div className="row mb-4">
               <div className="col-12">
-
                 <div className="card shadow bg-dark text-white">
                   <div className="card-header py-3">
                     <h6 className="m-0 font-weight-bold text-light">User Data</h6>
@@ -135,7 +180,7 @@ export const Dashboard = () => {
                           <tr key={el._id}>
                             <td>{el.username}</td>
                             <td>{el.email}</td>
-                            <td>{el.role}</td> 
+                            <td>{el.role}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -148,9 +193,9 @@ export const Dashboard = () => {
             {/* Social Media Section */}
             <div className="row justify-content-between">
               {[{ platform: "Facebook", logo: "facebook-f", data: "1.2k Followers" },
-                { platform: "Twitter", logo: "twitter", data: "800 Followers" },
-                { platform: "Instagram", logo: "instagram", data: "1.5k Followers" },
-                { platform: "LinkedIn", logo: "linkedin-in", data: "500 Connections" }]
+              { platform: "Twitter", logo: "twitter", data: "800 Followers" },
+              { platform: "Instagram", logo: "instagram", data: "1.5k Followers" },
+              { platform: "LinkedIn", logo: "linkedin-in", data: "500 Connections" }]
                 .map((social, idx) => (
                   <div className="col-lg-3 col-md-6 col-sm-12 mb-4" key={idx}>
                     <div className="card shadow text-center bg-dark text-white">
@@ -224,6 +269,54 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Additional Charts Section */}
+            <div className="row mb-4">
+              <div className="col-lg-6 col-md-12">
+                <div className="card shadow bg-dark text-white">
+                  <div className="card-header py-3">
+                    <h6 className="m-0 font-weight-bold text-light">Revenue Chart</h6>
+                  </div>
+                  <div className="card-body">
+                    <Bar data={revenueData} />
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6 col-md-12">
+                <div className="card shadow bg-dark text-white">
+                  <div className="card-header py-3">
+                    <h6 className="m-0 font-weight-bold text-light">Performance Chart</h6>
+                  </div>
+                  <div className="card-body">
+                    <Bar data={performanceData} />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="row mb-4">
+                <div className="col-lg-6 col-md-12">
+                  <div className="card shadow bg-dark text-white">
+                    <div className="card-header py-3">
+                      <h6 className="m-0 font-weight-bold text-light">Admin Engagement Chart</h6>
+                    </div>
+                    <div className="card-body">
+                      <Doughnut data={engagementData} />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-12">
+                  <div className="card shadow bg-dark text-white">
+                    <div className="card-header py-3">
+                      <h6 className="m-0 font-weight-bold text-light">User Satisfaction Chart</h6>
+                    </div>
+                    <div className="card-body">
+                      <Doughnut data={satisfactionData} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>

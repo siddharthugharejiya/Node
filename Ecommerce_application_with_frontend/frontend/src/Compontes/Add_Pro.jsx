@@ -11,6 +11,7 @@ import {
   Grid,
   Box,
 } from "@mui/material";
+import Swal from 'sweetalert2';
 
 export function Add_Pro() {
   const [state, setState] = useState({
@@ -67,8 +68,22 @@ export function Add_Pro() {
         },
         body: JSON.stringify(state),
       });
-      alert(update ? "Product added successfully!" : "Product updated successfully!");
-      setUpdate(true);
+      Swal.fire({
+        icon: 'success',
+        title: 'Added to Cart!',
+        text: update ? 'Product added successfully!' : 'Product updated successfully!',
+        confirmButtonText: 'Okay'
+      });
+        
+      setUpdate(true)
+      setState({
+        name: "",
+        image: "",
+        price: "",
+        description: "",
+        category: "",
+        subcategory: "",
+      })
     } catch (error) {
       alert("Backend server error.");
     }
@@ -81,16 +96,16 @@ export function Add_Pro() {
     axios.get(`http://localhost:9596/getCategory`).then((res) => {
       setCategory(res.data.data);
     });
-  }, []);
+  }, [state]);
 
   useLayoutEffect(() => {
     axios.get(`http://localhost:9596/subget`).then((res) => {
       setSubcategory(res.data.data);
     });
-  }, []);
+  }, [state]);
 
   return (
-    <div className="bg-dark" style={{ background: "black", color: "white", minHeight: "100vh" }}>
+    <div className="bg-dark h-auto">
       <Box display="flex">
         <div className="col-lg-3">
           <Asidebar />

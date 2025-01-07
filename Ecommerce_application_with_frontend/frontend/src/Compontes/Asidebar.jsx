@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 export const Asidebar = () => {
   
   
   return (
     <div className="container-fluid">
       <div className="row">
-        <div id="wrapper" className="col-xl-12 col-lg-4 col-md-5 d-flex flex-column">
+        <div id="wrapper" className="col-xl-12 col-lg-12 col-md-5 d-flex flex-column">
           <ul
             className="navbar-nav sidebar sidebar-dark bg-dark accordion"
             id="accordionSidebar"

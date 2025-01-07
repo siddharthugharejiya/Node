@@ -2,9 +2,10 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { product_action } from "../Redux/action";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import "./section.css"
 
 const AllProduct = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,10 @@ const AllProduct = () => {
     <>
       <div className="row justify-content-center ">
       <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-8">
+
+  
+
+ 
                 <div className="row">
                   <div className="col-xxl-12 cate">
                     <div className="cate-sub col-xxl-9 col-sm-12 col-12">
@@ -322,6 +327,7 @@ const AllProduct = () => {
                 </div>
               </div>
         <div className="col-xxl-8 d-flex flex-wrap justify-content-around">
+
           {products?.length > 0 ? (
             products.map((el, index) => (
               <Card
@@ -388,3 +394,5 @@ const AllProduct = () => {
 }
 
 export default AllProduct
+
+

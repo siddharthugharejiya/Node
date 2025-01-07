@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Link, useNavigate } from "react-router-dom";
@@ -144,8 +143,8 @@ function Navbar_1() {
                 style={{ fontSize: "20px", margin: "0px 5px" }}
               ></i>
               <div>
-                <div className="paste-button">
-                  <button className="button" style={{ fontWeight: 500 }}>
+                <div className="paste-buttonn">
+                  <button className="btn" style={{ fontWeight: 500 }}>
                     Account
                   </button>
                   <div className="dropdown-content">
