@@ -57,10 +57,16 @@ const login = async (req, res) => {
 
   }
 }
+const login_Get = async(req,res) =>{
+    const data = await UserModel.find()
+    console.log(data)
+    res.send({data})
+    
+}
 const getall_data = async (req, res) => {
   const data = await CategoryModel.find().populate("categoryes")
   console.log(data)
   res.send({ data })
 
 }
-module.exports = { Form, getall_data, login }
+module.exports = { Form, getall_data, login , login_Get }

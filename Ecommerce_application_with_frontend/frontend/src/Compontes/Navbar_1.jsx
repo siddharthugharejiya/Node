@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCartData, remove_action } from "../Redux/action";
 
 function Navbar_1() {
-  const [activeCategory, setActiveCategory] = useState("Dairy & Bakery");
+  
   const [show, setShow] = useState(false);
   const [quantities, setQuantities] = useState({});
 

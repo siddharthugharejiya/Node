@@ -48,106 +48,111 @@ function GETPRO() {
   };
 
   return (
-    <Box display="flex" bgcolor="#121212">
+    <Box display="flex" bgcolor="#121212" className="40vh">
       {/* Sidebar */}
-      <Box width="25%" bgcolor="#1f1f1f" p={2} height={"95vh"}>
+      <div className="col-lg-3">
+
         <Asidebar />
-      </Box>
+      </div>
 
-      {/* Main Content */}
-      <Box flex={1} p={3} bgcolor="#181818">
-        <Container maxWidth="lg">
-          <Typography variant="h4" component="h1" gutterBottom color="white">
-            Product List
-          </Typography>
+      <div className="col-lg-9">
+        <Box flex={1} p={3} bgcolor="#181818">
+          <Container maxWidth="lg">
+            <Typography variant="h4" component="h1" gutterBottom color="white">
+              Product List
+            </Typography>
 
-          <Grid container spacing={3}>
-            {state.length > 0 ? (
-              state.map((el) => (
-                <Grid item xs={12} sm={6} md={4} key={el._id}>
-                  <Card
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      boxShadow: 3,
-                      borderRadius: 2,
-                      transition: "transform 0.3s ease",
-                      "&:hover": { transform: "scale(1.03)" },
-                      backgroundColor: "#2c2c2c",
-                      color: "white",
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image={el.image || "https://via.placeholder.com/150"}
-                      alt={el.name}
-                    />
-                    <CardContent>
-                      <Typography variant="h6" component="div" gutterBottom>
-                        {el.name}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        gutterBottom
-                      >
-                        Category: {el.category}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        gutterBottom
-                      >
-                        {el.description}
-                      </Typography>
-                      <Typography variant="subtitle1" color="primary">
-                        ₹{el.price}
-                      </Typography>
-                    </CardContent>
-                    <Box
+            <Grid container spacing={3}>
+              {state.length > 0 ? (
+                state.map((el) => (
+                  <Grid item xs={12} sm={6} md={4} key={el._id}>
+                    <Card
                       sx={{
+                        height: "100%",
                         display: "flex",
-                        justifyContent: "space-between",
-                        px: 2,
-                        pb: 2,
-                        mt: "auto",
+                        flexDirection: "column",
+                        boxShadow: 3,
+                        borderRadius: 2,
+                        transition: "transform 0.3s ease",
+                        "&:hover": { transform: "scale(1.03)" },
+                        backgroundColor: "#2c2c2c",
+                        color: "white",
                       }}
                     >
-                      <Button
-                        variant="contained"
-                        color="error"
-                        onClick={() => handledelete(el._id)}
+                      <CardMedia
+                        component="img"
+                        height="180"
+                        image={el.image || "https://via.placeholder.com/150"}
+                        alt={el.name}
+                      />
+                      <CardContent>
+                        <Typography variant="h6" component="div" gutterBottom>
+                          {el.name}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          gutterBottom
+                        >
+                          Category: {el.category}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          gutterBottom
+                        >
+                          {el.description}
+                        </Typography>
+                        <Typography variant="subtitle1" color="primary">
+                          ₹{el.price}
+                        </Typography>
+                      </CardContent>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          px: 2,
+                          pb: 2,
+                          mt: "auto",
+                        }}
                       >
-                        Delete
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleedite(el._id)}
-                      >
-                        Edit
-                      </Button>
-                    </Box>
-                  </Card>
+                        <Button
+                          variant="contained"
+                          color="error"
+                          onClick={() => handledelete(el._id)}
+                        >
+                          Delete
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() => handleedite(el._id)}
+                        >
+                          Edit
+                        </Button>
+                      </Box>
+                    </Card>
+                  </Grid>
+                ))
+              ) : (
+                <Grid item xs={12}>
+                  <Typography
+                    variant="body1"
+                    color="textSecondary"
+                    align="center"
+                    style={{ color: "white" }}
+                  >
+                    No products available
+                  </Typography>
                 </Grid>
-              ))
-            ) : (
-              <Grid item xs={12}>
-                <Typography
-                  variant="body1"
-                  color="textSecondary"
-                  align="center"
-                  style={{ color: "white" }}
-                >
-                  No products available
-                </Typography>
-              </Grid>
-            )}
-          </Grid>
-        </Container>
-      </Box>
+              )}
+            </Grid>
+          </Container>
+        </Box>
+      </div>
+
+
+
     </Box>
   );
 }

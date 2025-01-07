@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import "../App.css";
 import { Asidebar } from "./Asidebar";
 import {
@@ -18,7 +18,6 @@ import {
 } from 'chart.js';
 import { Line, Bar, Doughnut, Pie } from "react-chartjs-2";
 
-// Register the components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -35,6 +34,16 @@ ChartJS.register(
 );
 
 export const Dashboard = () => {
+
+  const [state, setState] = useState([])
+  useLayoutEffect(() => {
+    fetch(`http://localhost:9596/login`)
+      .then(res => res.json())
+      .then(res => {
+        setState(res.data)
+      })
+  }, [])
+
   const userGrowthData = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
@@ -66,7 +75,7 @@ export const Dashboard = () => {
         label: "Traffic Source",
         data: [60, 20, 20],
         backgroundColor: ["#36b9cc", "#f6c23e", "#e74a3b"],
-      },  
+      },
     ],
   };
 
@@ -97,43 +106,36 @@ export const Dashboard = () => {
   return (
     <div className="dashboard container-fluid bg-dark text-white">
       <div className="row">
-        {/* Sidebar Section */}
-        <div className="col-lg-3">
+
+        <div className="col-lg-3 col-md-4 col-sm-12">
           <Asidebar />
         </div>
 
-        {/* Main Content Section */}
-        <div className="col-lg-9">
+        <div className="col-lg-9 col-md-8 col-sm-12">
           <div className="main-content">
-            {/* User Data Table Section */}
+
             <div className="row mb-4">
-              <div className="col-lg-12">
-                
+              <div className="col-12">
+
                 <div className="card shadow bg-dark text-white">
                   <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">User Data</h6>
+                    <h6 className="m-0 font-weight-bold text-light">User Data</h6>
                   </div>
                   <div className="card-body">
-                    <table className="table table-bordered table-dark">
+                    <table className="table table-bordered table-dark table-striped">
                       <thead>
                         <tr>
                           <th>Name</th>
                           <th>Email</th>
                           <th>Role</th>
-                          <th>Status</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {[
-                          { name: "John Doe", email: "john@example.com", role: "Admin", status: "Active" },
-                          { name: "Jane Smith", email: "jane@example.com", role: "Editor", status: "Inactive" },
-                          { name: "Sam Wilson", email: "sam@example.com", role: "Subscriber", status: "Active" },
-                        ].map((user, idx) => (
-                          <tr key={idx}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.role}</td>
-                            <td>{user.status}</td>
+                        {state.map((el) => (
+                          <tr key={el._id}>
+                            <td>{el.username}</td>
+                            <td>{el.email}</td>
+                            <td>{el.role}</td> 
                           </tr>
                         ))}
                       </tbody>
@@ -142,42 +144,42 @@ export const Dashboard = () => {
                 </div>
               </div>
             </div>
-             {/* Social Media Section */}
-             <div className="row justify-content-between">
-              {[
-                { platform: "Facebook", logo: "facebook-f", data: "1.2k Followers" },
+
+            {/* Social Media Section */}
+            <div className="row justify-content-between">
+              {[{ platform: "Facebook", logo: "facebook-f", data: "1.2k Followers" },
                 { platform: "Twitter", logo: "twitter", data: "800 Followers" },
                 { platform: "Instagram", logo: "instagram", data: "1.5k Followers" },
-                { platform: "LinkedIn", logo: "linkedin-in", data: "500 Connections" },
-              ].map((social, idx) => (
-                <div className="col-lg-3 mb-4" key={idx}>
-                  <div className="card shadow text-center bg-dark text-white">
-                    <div className="card-body">
-                      <i className={`fab fa-${social.logo} fa-2x mb-3`}></i>
-                      <h6 className="font-weight-bold text-primary">{social.platform}</h6>
-                      <p className="fs-light">{social.data}</p>
+                { platform: "LinkedIn", logo: "linkedin-in", data: "500 Connections" }]
+                .map((social, idx) => (
+                  <div className="col-lg-3 col-md-6 col-sm-12 mb-4" key={idx}>
+                    <div className="card shadow text-center bg-dark text-white">
+                      <div className="card-body">
+                        <i className={`fab fa-${social.logo} fa-2x mb-3`}></i>
+                        <h6 className="font-weight-bold text-light">{social.platform}</h6>
+                        <p className="fs-light">{social.data}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
 
             {/* Charts Section */}
             <div className="row mb-4">
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-md-12">
                 <div className="card shadow bg-dark text-white">
                   <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">User Growth Chart</h6>
+                    <h6 className="m-0 font-weight-bold text-light">User Growth Chart</h6>
                   </div>
                   <div className="card-body">
                     <Line data={userGrowthData} />
                   </div>
                 </div>
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-md-12">
                 <div className="card shadow bg-dark text-white">
                   <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Sales Chart</h6>
+                    <h6 className="m-0 font-weight-bold text-light">Sales Chart</h6>
                   </div>
                   <div className="card-body">
                     <Bar data={salesData} />
@@ -188,10 +190,10 @@ export const Dashboard = () => {
 
             {/* Traffic Source Section */}
             <div className="row mb-4">
-              <div className="col-lg-12">
+              <div className="col-12">
                 <div className="card shadow bg-dark text-white">
                   <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Traffic Source</h6>
+                    <h6 className="m-0 font-weight-bold text-light">Traffic Source</h6>
                   </div>
                   <div className="card-body">
                     <Bar data={trafficData} options={{ indexAxis: 'y' }} />
@@ -202,20 +204,20 @@ export const Dashboard = () => {
 
             {/* Doughnut Chart Section */}
             <div className="row mb-4">
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-md-12">
                 <div className="card shadow bg-dark text-white">
                   <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Doughnut Chart</h6>
+                    <h6 className="m-0 font-weight-bold text-light">Doughnut Chart</h6>
                   </div>
                   <div className="card-body">
                     <Doughnut data={doughnutData} />
                   </div>
                 </div>
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-md-12">
                 <div className="card shadow bg-dark text-white">
                   <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Pie Chart</h6>
+                    <h6 className="m-0 font-weight-bold text-light">Pie Chart</h6>
                   </div>
                   <div className="card-body">
                     <Pie data={pieData} />
@@ -224,7 +226,6 @@ export const Dashboard = () => {
               </div>
             </div>
 
-           
           </div>
         </div>
       </div>

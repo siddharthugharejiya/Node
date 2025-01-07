@@ -358,8 +358,8 @@ const AllProduct = () => {
                     {el.category || "Card Title"}
                   </Card.Title>
                   <Card.Text>
-                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>{" "}
-                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>{" "}
+                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
+                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
                     <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
                     <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
                     <i className="fa-regular fa-star" style={{ color: "orange" }}></i>

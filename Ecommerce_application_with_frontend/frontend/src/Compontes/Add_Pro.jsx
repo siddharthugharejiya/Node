@@ -9,10 +9,8 @@ import {
   Typography,
   MenuItem,
   Grid,
-  Paper,
   Box,
 } from "@mui/material";
-
 
 export function Add_Pro() {
   const [state, setState] = useState({
@@ -57,26 +55,19 @@ export function Add_Pro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (!update) {
-        await fetch(`http://localhost:9596/product/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(state),
-        });
-        alert("Product updated successfully!");
-      } else {
-        await fetch("http://localhost:9596/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Token}`,
-          },
-          body: JSON.stringify(state),
-        });
-        alert("Product added successfully!");
-      }
+      const url = update
+        ? "http://localhost:9596/add"
+        : `http://localhost:9596/product/${id}`;
+      const method = update ? "POST" : "PUT";
+      await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Token}`,
+        },
+        body: JSON.stringify(state),
+      });
+      alert(update ? "Product added successfully!" : "Product updated successfully!");
       setUpdate(true);
     } catch (error) {
       alert("Backend server error.");
@@ -99,134 +90,174 @@ export function Add_Pro() {
   }, []);
 
   return (
-    <Box display="flex" minHeight="100vh">
-    
-      <Box width="240px" bgcolor="lightgray" p={2}>
-        <Asidebar />
+    <div className="bg-dark" style={{ background: "black", color: "white", minHeight: "100vh" }}>
+      <Box display="flex">
+        <div className="col-lg-3">
+          <Asidebar />
+        </div>
+        <div className="col-lg-6">
+          <Box flex={1} p={4}>
+            <Container maxWidth="sm">
+              <Typography variant="h4" component="h1" gutterBottom align="center" sx={{ color: "white" }}>
+                {update ? "Add Product" : "Update Product"}
+              </Typography>
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Product Name"
+                      name="name"
+                      value={state.name}
+                      onChange={change}
+                      variant="outlined"
+                      required
+                      sx={{
+                        input: { color: "white" },
+                        label: { color: "white" },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": { borderColor: "white" },
+                          "&:hover fieldset": { borderColor: "white" },
+                          "&.Mui-focused fieldset": { borderColor: "white" },
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Image URL"
+                      name="image"
+                      value={state.image}
+                      onChange={change}
+                      variant="outlined"
+                      required
+                      sx={{
+                        input: { color: "white" },
+                        label: { color: "white" },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": { borderColor: "white" },
+                          "&:hover fieldset": { borderColor: "white" },
+                          "&.Mui-focused fieldset": { borderColor: "white" },
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Price"
+                      name="price"
+                      value={state.price}
+                      onChange={change}
+                      variant="outlined"
+                      required
+                      type="number"
+                      sx={{
+                        input: { color: "white" },
+                        label: { color: "white" },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": { borderColor: "white" },
+                          "&:hover fieldset": { borderColor: "white" },
+                          "&.Mui-focused fieldset": { borderColor: "white" },
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Description"
+                      name="description"
+                      value={state.description}
+                      onChange={change}
+                      variant="outlined"
+                      multiline
+                      rows={4}
+                      required
+                      sx={{
+                        input: { color: "white" },
+                        label: { color: "white" },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": { borderColor: "white" },
+                          "&:hover fieldset": { borderColor: "white" },
+                          "&.Mui-focused fieldset": { borderColor: "white" },
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      select
+                      fullWidth
+                      label="Category"
+                      name="category"
+                      value={state.category}
+                      onChange={change}
+                      variant="outlined"
+                      required
+                      sx={{
+                        input: { color: "white" },
+                        label: { color: "white" },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": { borderColor: "white" },
+                          "&:hover fieldset": { borderColor: "white" },
+                          "&.Mui-focused fieldset": { borderColor: "white" },
+                        },
+                      }}
+                    >
+                      <MenuItem value="">Select Category</MenuItem>
+                      {category.map((el) => (
+                        <MenuItem key={el._id} value={el._id}>
+                          {el.name}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      select
+                      fullWidth
+                      label="Subcategory"
+                      name="subcategory"
+                      value={state.subcategory}
+                      onChange={change}
+                      variant="outlined"
+                      required
+                      sx={{
+                        input: { color: "white" },
+                        label: { color: "white" },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": { borderColor: "white" },
+                          "&:hover fieldset": { borderColor: "white" },
+                          "&.Mui-focused fieldset": { borderColor: "white" },
+                        },
+                      }}
+                    >
+                      <MenuItem value="">Select Subcategory</MenuItem>
+                      {subcategory.map((el) => (
+                        <MenuItem key={el._id} value={el._id}>
+                          {el.name}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      type="submit"
+                      sx={{ backgroundColor: "white", color: "black" }}
+                    >
+                      {update ? "Submit" : "Update"}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Container>
+          </Box>
+        </div>
       </Box>
-
-    
-      <Box flex={1} p={4} bgcolor="#f7f8fa">
-        <Container maxWidth="sm">
-          <Paper elevation={3} sx={{ padding: 4 }}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              {update ? "Add Product" : "Update Product"}
-            </Typography>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={3}>
-                {/* Product Name */}
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Product Name"
-                    name="name"
-                    value={state.name}
-                    onChange={change}
-                    variant="outlined"
-                    required
-                  />
-                </Grid>
-
-                {/* Image URL */}
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Image URL"
-                    name="image"
-                    value={state.image}
-                    onChange={change}
-                    variant="outlined"
-                    required
-                  />
-                </Grid>
-
-                {/* Price */}
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Price"
-                    name="price"
-                    value={state.price}
-                    onChange={change}
-                    variant="outlined"
-                    required
-                    type="number"
-                  />
-                </Grid>
-
-                {/* Description */}
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Description"
-                    name="description"
-                    value={state.description}
-                    onChange={change}
-                    variant="outlined"
-                    multiline
-                    rows={4}
-                    required
-                  />
-                </Grid>
-
-                {/* Category */}
-                <Grid item xs={12}>
-                  <TextField
-                    select
-                    fullWidth
-                    label="Category"
-                    name="category"
-                    value={state.category}
-                    onChange={change}
-                    variant="outlined"
-                    required
-                  >
-                    <MenuItem value="">Select Category</MenuItem>
-                    {category.map((el) => (
-                      <MenuItem key={el._id} value={el._id}>
-                        {el.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
-
-                {/* Subcategory */}
-                <Grid item xs={12}>
-                  <TextField
-                    select
-                    fullWidth
-                    label="Subcategory"
-                    name="subcategory"
-                    value={state.subcategory}
-                    onChange={change}
-                    variant="outlined"
-                    required
-                  >
-                    <MenuItem value="">Select Subcategory</MenuItem>
-                    {subcategory.map((el) => (
-                      <MenuItem key={el._id} value={el._id}>
-                        {el.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
-
-                {/* Submit Button */}
-                <Grid item xs={12}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    type="submit"
-                    style={{background:"black"}}
-                  >
-                    {update ? "Submit" : "Update"}
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Paper>
-        </Container>
-      </Box>
-    </Box>
+    </div>
   );
 }
