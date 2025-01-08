@@ -16,7 +16,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { product_action } from "../Redux/action";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ const Home = () => {
       setLoading(false);
     }, 2000); 
     return () => clearTimeout(timer);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     dispatch(product_action());
@@ -48,9 +48,12 @@ const Home = () => {
  
 
  
- 
+
+
   useLayoutEffect(() => {
-    const containers = document.querySelectorAll(".image-container")
+  
+
+    const containers = document.querySelectorAll(".image-container");
 
     containers.forEach((container) => {
       const img = container.querySelector("img");
@@ -66,19 +69,17 @@ const Home = () => {
         };
 
         const handleMouseLeave = () => {
-       
           img.style.transform = "scale(1)";
-          img.style.height = "100%"
-          img.style.width = "100%"
-          img.style.position ="absolute"
+          img.style.height = "100%";
+          img.style.width = "100%";
+          img.style.position = "absolute";
         };
 
-       
         container.addEventListener("mousemove", handleMouseMove);
         container.addEventListener("mouseleave", handleMouseLeave);
       }
     });
-  }, []); 
+  }, [product_action()]); 
   const handleclick = (id) => {
     console.log(id);
     nav(`/product`);
@@ -320,7 +321,7 @@ const Home = () => {
       ${(props) => (props === "dark" ? grey[900] : grey[200])};
   `;
   
-  fetch("")
+
 
   return (
     <>
@@ -1017,7 +1018,7 @@ const Home = () => {
           </div>
         </div>
 
-         <div className="col-xl-8 aos-init aos-animate" data-aos="fade-up">
+  <div className="col-xl-8 aos-init aos-animate" data-aos="fade-up">
   <div className="card-content">
     {loading
       ? Array.from({ length: 6 }).map((_, index) => (
@@ -1128,8 +1129,7 @@ const Home = () => {
 </div>
 
       </div>
-    {/* </div> */} 
-      {/* </div> */}
+
 
       <div className="container d-flex justify-content-center align-items-center">
         <div className="fresh">

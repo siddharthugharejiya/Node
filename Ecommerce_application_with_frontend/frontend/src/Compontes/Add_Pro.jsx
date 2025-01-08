@@ -124,7 +124,7 @@ export function Add_Pro() {
   }, [state]);
 
   return (
-    <div className="bg-dark h-auto flex-wrap vh-100">
+    <div className="bg-dark h-auto flex-wrap">
       <Box className="d-flex flex-wrap">
         <div className="col-lg-3 col-md-5 col-12">
           <Asidebar />

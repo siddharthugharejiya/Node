@@ -2,28 +2,38 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { product_action } from "../Redux/action";
 import Card from "react-bootstrap/Card";
-
+import { Skeleton } from "@mui/material";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import "./section.css"
 
 const AllProduct = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.data.data);
+  const product = useSelector((state) => state.product.data.data);
   const [filtered, setfiltered] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+   
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); 
+    return () => clearTimeout(timer);
+  }, [product]);
 
   useEffect(() => {
     dispatch(product_action());
   }, [dispatch]);
 
   useEffect(() => {
-    setfiltered(products);
-  }, [products]);
+    setfiltered(product);
+  }, [product]);
 
   const [price, setprice] = useState([300]);
 
   const handlefilter = () => {
-    const filter_pro = products.filter((el) => el.price <= price);
+    const filter_pro = product.filter((el) => el.price <= price);
     setfiltered(filter_pro);
   };
 
@@ -55,7 +65,7 @@ const AllProduct = () => {
         container.addEventListener("mouseleave", handleMouseLeave);
       }
     });
-  }, [products]);
+  }, [product_action()]);
 
   const nav = useNavigate();
   const handleclick = (id) => {
@@ -67,9 +77,6 @@ const AllProduct = () => {
     <>
       <div className="row justify-content-center ">
       <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-8">
-
-  
-
  
                 <div className="row">
                   <div className="col-xxl-12 cate">
@@ -326,68 +333,116 @@ const AllProduct = () => {
                   </div>
                 </div>
               </div>
-        <div className="col-xxl-8 d-flex flex-wrap justify-content-around">
-
-          {products?.length > 0 ? (
-            products.map((el, index) => (
-              <Card
-                id="card-product"
-                key={index}
-                onClick={() => handleclick(el._id)}
+        
+  <div className="col-xl-8 aos-init aos-animate" data-aos="fade-up">
+  <div className="card-content">
+    {loading
+      ? Array.from({ length: 6 }).map((_, index) => (
+          <Card key={index} id="card-product" style={{ marginBottom: "20px" }}>
+            <div className="image-container">
+              <Skeleton
+                variant="rectangular"
+                height={200}
                 style={{
-                  height: "fit-content",
-                  color: "white",
+                  borderRadius: "10px",
+                  marginBottom: "10px",
+                  width: "100%",
                 }}
-              >
-                <div className="image-container">
-                  <Card.Img
-                    variant="top"
-                    alt="image"
-                    src={el.image}
-                    className="zoom-image"
-                  />
-                </div>
-                <div id="shop">
-                  <i className="fa-solid fa-bag-shopping"></i>
-                </div>
-                <div id="product-icon">
+              />
+            </div>
+            <div id="shop">
+              <Skeleton variant="circular" width={30} height={30} />
+            </div>
+            <div id="product-icon" style={{ display: "flex", gap: "10px" }}>
+              <Skeleton variant="circular" width={25} height={25} />
+              <Skeleton variant="circular" width={25} height={25} />
+            </div>
+            <Card.Body id="card-body-1">
+              <Skeleton
+                variant="text"
+                width="60%"
+                height={20}
+                style={{ marginBottom: "5px" }}
+              />
+              <Skeleton
+                variant="text"
+                width="80%"
+                height={20}
+                style={{ marginBottom: "5px" }}
+              />
+              <Skeleton variant="text" width="40%" height={20} />
+            </Card.Body>
+          </Card>
+        ))
+      : product.map((el, index) => (
+          <Card
+            id="card-product"
+            key={index}
+            onClick={() => handleclick(el._id)}
+          >
+            <div className="image-container">
+              <Card.Img
+                variant="top"
+                alt="image"
+                src={el.image}
+                className="zoom-image"
+              />
+            </div>
+            <div id="shop">
+              <i className="fa-solid fa-bag-shopping"></i>
+            </div>
+            <div id="product-icon">
               <i className="fa-regular fa-eye p-3" id="product-icon-1"></i>
               <i className="fa-regular fa-heart p-3" id="product-icon-1"></i>
             </div>
-                <Card.Body id="card-body-1">
-                  <Card.Title
-                    style={{
-                      fontSize: "15px",
-                      color: "rgb(119 119 119 / 1)",
-                    }}
-                  >
-                    {el.category || "Card Title"}
-                  </Card.Title>
-                  <Card.Text>
-                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
-                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
-                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
-                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
-                    <i className="fa-regular fa-star" style={{ color: "orange" }}></i>
-                  </Card.Text>
-                  <Card.Text>
-                    {el.description || "Description goes here."}
-                  </Card.Text>
-                  <Card.Text
-                    style={{
-                      padding: "10px",
-                      color: "rgb(100 180 150 / 1)",
-                      fontWeight: "800",
-                    }} >
-                    ${el.price}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            ))
-          ) : (
-            <div>No products available</div>
-          )}
-        </div>
+            <Card.Body id="card-body-1">
+              <Card.Title
+                style={{
+                  fontSize: "15px",
+                  color: "rgb(119 119 119 / 1)",
+                }}
+              >
+                {el.category || "Card Title"}
+              </Card.Title>
+              <Card.Text>
+                <i
+                  className="fa-regular fa-star"
+                  style={{ color: "orange" }}
+                ></i>{" "}
+                <i
+                  className="fa-regular fa-star"
+                  style={{ color: "orange" }}
+                ></i>{" "}
+                <i
+                  className="fa-regular fa-star"
+                  style={{ color: "orange" }}
+                ></i>
+                <i
+                  className="fa-regular fa-star"
+                  style={{ color: "orange" }}
+                ></i>
+                <i
+                  className="fa-regular fa-star"
+                  style={{ color: "orange" }}
+                ></i>
+              </Card.Text>
+              <Card.Text>
+                {el.description || "Description goes here."}
+              </Card.Text>
+              <Card.Text
+                style={{
+                  padding: "10px",
+                  color: "rgb(100 180 150 / 1)",
+                  fontWeight: "800",
+                }}
+              >
+                ${el.price}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        ))}
+  </div>
+</div>
       </div>
     </>
   )

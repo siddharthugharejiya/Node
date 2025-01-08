@@ -5,9 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCartData, remove_action } from "../Redux/action";
+import { fetchCartData, product_action, remove_action } from "../Redux/action";
 
 function Navbar_1() {
+  const dispatch = useDispatch();
   
   const [show, setShow] = useState(false);
   const [quantities, setQuantities] = useState({});
@@ -17,7 +18,9 @@ function Navbar_1() {
 
   const nav = useNavigate();
 
-  const cartData = useSelector((state) => state.cart.data);
+  const cartData = useSelector((state) => state.cart.data)
+  console.log(cartData);
+  
 
 
   const remove_card = useSelector((state) => state.remove_items.data);
@@ -26,10 +29,9 @@ function Navbar_1() {
     {
       dispatch(remove_action())
     }
-  },[])
+  },[dispatch])
 
 
-  const dispatch = useDispatch();
 
   useLayoutEffect(() => {
     dispatch(fetchCartData());
@@ -54,10 +56,10 @@ function Navbar_1() {
     }
     return 0;
   };
-
+     
   const handleclose = (id) => {
     dispatch(remove_action(id));
-    window.location.reload();
+    dispatch(product_action())
   };
 
   const checkout = () => {
@@ -182,9 +184,7 @@ function Navbar_1() {
 
                         <div className="d-flex flex-column ms-3 col-6" style={{position : "relative"}}>
                           <div className="cart-item-details">
-                            <h5 className="cart-item-name">Title : {item.name}</h5>
-                            <p className="cart-item-description">description : {item.description}</p>
-                            <div className="cart-item-category text-muted">Category: {item.category?.name || 'Unknown'}</div>
+                            <h5 className="cart-item-name">{item.name}</h5>
                             <div className="cart-item-price">${item.price} x {quantities[item._id] || 1} Kg</div>
                           </div>
 

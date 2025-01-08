@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, single_action} from "../Redux/action";
+import { addToCart, single_action } from "../Redux/action";
 import { useNavigate, useParams } from "react-router-dom";
 import "./single.css"
 import "slick-carousel/slick/slick.css";
+import styled from 'styled-components';
 import "slick-carousel/slick/slick-theme.css";
 import "../App.css";
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 import Form from "react-bootstrap/Form";
 
+
 export default function Singlepage() {
   const { id } = useParams();
-  console.log(id);
 
+
+
+  // const [isHovered, setIsHovered] = useState(true);
   const dispatch = useDispatch();
 
   const [price, setprice] = useState([1000]);
 
   const productData = useSelector((state) => state.single.data)
   const product = productData ? productData.data : null
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      {product.price}
+    </Tooltip>
+  );
   useEffect(() => {
     dispatch(single_action(id));
     // dispatch(wholedata());
@@ -332,34 +344,19 @@ export default function Singlepage() {
                             <h2 style={{ color: "rgb(100 180 150 / 1)" }}>${product.price}</h2>
                             <p className="foooo">Size / Weight : <div className="fooo">50kg </div>  <div className="fooo">80kg </div>  <div className="fooo">120kg </div>  <div className="fooo">200kg </div> </p>
                           </div>
-                          {/* <button className="btn" onClick={() => handleCart(product)} style={{ background: "rgb(100, 180, 150)" }} data-tooltip="PRICE $20"> <div class="button-wrapper"> */}
-
-
-
-
-                          <div className="button" data-tooltip="PRICE $20">
-                            <div className="button-wrapper">
-                              <div className="text">Add To Cart</div>
-                              <span className="icon">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="16"
-                                  height="16"
-                                  fill="currentColor"
-                                  className="bi bi-cart2"
-                                  viewBox="0 0 16 16"
-                                >
-                                  <path
-                                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-                                  ></path>
-                                </svg>
-                              </span>
-                            </div>
-                          </div>
-
+              
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 200, hide: 200 }}
+                            overlay={renderTooltip}
+                          >
+                            <Button variant="dark" onClick={() => handleCart(product)}>Add To Cart</Button>
+                          </OverlayTrigger>
                         </div>
+
                       </div>
                     </div>
+
                   }
                 </div>
 
@@ -371,7 +368,8 @@ export default function Singlepage() {
 
 
         </div>
-      </div>
+      </div >
     </>
   )
 }
+
