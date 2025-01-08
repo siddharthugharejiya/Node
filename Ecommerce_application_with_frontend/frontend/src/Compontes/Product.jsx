@@ -351,9 +351,9 @@ const AllProduct = () => {
                   <i className="fa-solid fa-bag-shopping"></i>
                 </div>
                 <div id="product-icon">
-                  <i className="fa-regular fa-eye p-3" id="product-icon-1"></i>
-                  <i className="fa-regular fa-heart p-3" id="product-icon-1"></i>
-                </div>
+              <i className="fa-regular fa-eye p-3" id="product-icon-1"></i>
+              <i className="fa-regular fa-heart p-3" id="product-icon-1"></i>
+            </div>
                 <Card.Body id="card-body-1">
                   <Card.Title
                     style={{

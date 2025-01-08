@@ -234,14 +234,14 @@ export const Dashboard = () => {
             </div>
 
             {/* Traffic Source Section */}
-            <div className="row mb-4">
-              <div className="col-12">
+            <div className="row mb-4 justify-content-center">
+              <div className="col-12 col-lg-9 col-md-8 "> 
                 <div className="card shadow bg-dark text-white">
                   <div className="card-header py-3">
                     <h6 className="m-0 font-weight-bold text-light">Traffic Source</h6>
                   </div>
                   <div className="card-body">
-                    <Bar data={trafficData} options={{ indexAxis: 'y' }} />
+                    <Bar data={trafficData} options={{ indexAxis: 'y' }}  style={{height:"400px"}}/>
                   </div>
                 </div>
               </div>

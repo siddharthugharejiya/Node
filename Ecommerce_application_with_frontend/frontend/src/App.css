@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: "Raleway", serif !important */
   font-family: "Cinzel Decorative", serif;
 }
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 .row{
   --bs-gutter-x:0.rem !important;  

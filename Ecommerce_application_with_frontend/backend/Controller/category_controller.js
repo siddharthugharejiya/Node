@@ -4,7 +4,7 @@ const category_add = async(req,res)=>{
     try {
            
         const data = await CategoryModel.create(req.body)
-        console.log(data)
+        // console.log(data)
         res.send({data})
     }
         catch (error) {

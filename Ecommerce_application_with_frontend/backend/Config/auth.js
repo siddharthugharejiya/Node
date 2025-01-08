@@ -12,7 +12,7 @@ const validation = (req, res, next) => {
       const decoded = jwt.verify(extractedToken, "SID");
       console.log("Decoded Token:", decoded);
 
-      req.user = { userId: decoded.userId, role: decoded.role };
+      req.user = { userId: decoded.userId, userRole: decoded.userRole };
       console.log("req.user:", req.user); 
       next();
     } catch (error) {
@@ -26,12 +26,17 @@ const validation = (req, res, next) => {
 };
 
 const Auth = (req, res, next) => {
-  console.log("req.user:", req.user);
-
-  if (req.user && req.user.role === "admin") {
-    next();
-  } else {
-    res.status(403).send({ data: "Unauthorized" });
+  try {
+    const token = req.headers.authorization.split(' ')[1]
+    const decodedToken = jwt.verify(token, "SID")
+    req.user = { userId: decodedToken.userId, userRole: decodedToken.userRole }    
+    if (req.user.userRole === 'admin') {
+      return next()
+    } else {
+     return res.status(401).send({ data : 'Access denied' });
+    }
+  } catch (error) {
+   return  res.status(401).json({ message: 'your not authorazetion' });
   }
 };
 

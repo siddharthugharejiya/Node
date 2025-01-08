@@ -17,40 +17,8 @@ function Navbar_1() {
 
   const nav = useNavigate();
 
-  const categories = {
-    "Dairy & Bakery": {
-      Dairy: ["Milk", "Ice Cream", "Cheese", "Frozen Custard", "Frozen Yogurt"],
-      Bakery: [
-        "Cake And Pastry",
-        "Rusk Toast",
-        "Bread & Buns",
-        "Chocolate Brownie",
-        "Cream Roll",
-      ],
-    },
-    "Fruits & Vegetables": {
-      Fruits: ["Apples", "Bananas", "Oranges"],
-      Vegetables: ["Carrots", "Broccoli", "Spinach"],
-    },
-    "Snack & Spice": {
-      Snacks: ["Chips", "Popcorn", "Nuts"],
-      Spice: ["Cumin", "Coriander", "Turmeric"],
-    },
-    "Juice & Drinks": {
-      Juice: ["Orange Juice", "Apple Juice", "Grape Juice"],
-      Drinks: ["Soda", "Water", "Tea"],
-    },
-  };
-
-  const handleCategoryClick = (category) => {
-    setActiveCategory(category);
-  };
-
-  // const cartt = useSelector((state) => state.All.data);
-  // const cart = cartt.cartItems || [];
-
   const cartData = useSelector((state) => state.cart.data);
-  console.log(cartData);
+
 
   const remove_card = useSelector((state) => state.remove_items.data);
   useEffect(()=>{
@@ -94,7 +62,27 @@ function Navbar_1() {
 
   const checkout = () => {
     nav("/");
-  };
+  }
+  const [add, setAdd] = useState(false);
+  const admin = localStorage.getItem("UserRole");
+
+  useEffect(() => {
+    if (admin === "admin") {
+      setAdd(true);
+    } else {
+      setAdd(false);
+    }
+  }, [admin]); 
+
+  console.log(add)
+  
+  const handleLog = () =>{
+    nav("/")
+    localStorage.removeItem("Token")
+    localStorage.removeItem("UserId")
+    localStorage.removeItem("UserRole")
+    localStorage.removeItem("login")
+  }
 
   return (
     <div className="container-fluid">
@@ -151,7 +139,12 @@ function Navbar_1() {
                     <Link id="top" to={"/signup"}>Register</Link>
                     <Link id="middle" to={"/"}>Checkout</Link>
                     <Link id="bottom" to={"/login"}>Login</Link>
-                    <Link id="bottom" to={"/add"}>admin</Link>
+                    {
+                      add == true ?  <Link id="bottom"  to={"/add"}>admin</Link> : ""
+                    }
+                   
+                    <Link id="bottom" onClick={handleLog}>LogOut</Link>
+                    
                   </div>
                 </div>
               </div>

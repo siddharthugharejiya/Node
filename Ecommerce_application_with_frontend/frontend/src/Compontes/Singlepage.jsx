@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, single_action, wholedata } from "../Redux/action";
+import { addToCart, single_action} from "../Redux/action";
 import { useNavigate, useParams } from "react-router-dom";
 import "./single.css"
 import "slick-carousel/slick/slick.css";
@@ -21,7 +21,7 @@ export default function Singlepage() {
   const product = productData ? productData.data : null
   useEffect(() => {
     dispatch(single_action(id));
-    dispatch(wholedata());
+    // dispatch(wholedata());
   }, [id]);
 
   const handleCart = (product) => {
@@ -120,7 +120,7 @@ export default function Singlepage() {
 
                   <div className="cate-sub col-xxl-9 col-sm-12">
                     <div className="px-b bbb">
-                      {" "}
+
                       <b>Price </b>
                     </div>
                     <div className="bo"></div>
@@ -336,27 +336,27 @@ export default function Singlepage() {
 
 
 
-                     
+
                           <div className="button" data-tooltip="PRICE $20">
-      <div className="button-wrapper">
-        <div className="text">Add To Cart</div>
-        <span className="icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-cart2"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-            ></path>
-          </svg>
-        </span>
-      </div>
-    </div>
-                      
+                            <div className="button-wrapper">
+                              <div className="text">Add To Cart</div>
+                              <span className="icon">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  fill="currentColor"
+                                  className="bi bi-cart2"
+                                  viewBox="0 0 16 16"
+                                >
+                                  <path
+                                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+                                  ></path>
+                                </svg>
+                              </span>
+                            </div>
+                          </div>
+
                         </div>
                       </div>
                     </div>

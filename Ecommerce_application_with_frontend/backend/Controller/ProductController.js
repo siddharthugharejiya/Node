@@ -14,14 +14,11 @@ const addproduct = async (req, res) => {
       subcategory,
       adminId: req.user.id,
     };
-    console.log(req.id);
-
-
-    console.log(product);
-
+   
     const data = await ProductModel.create(product);
+   const userRole = req.user.userRole
     console.log(data);
-    res.status(201).send({ data });
+    res.status(201).send({ data,userRole });
   } catch (error) {
     res.status(400).send({ message: error.message });
   }
@@ -29,16 +26,17 @@ const addproduct = async (req, res) => {
 
 const Getproduct = async (req, res) => {
   try {
-    const data = await ProductModel.find();
-    res.status(200).send({ data });
+    
+    const data = await ProductModel.find() 
+   return res.status(200).send({ data })
   } catch (error) {
-    res.status(400).send({ message: error.message });
+   return res.status(400).send({ message: error.message });
   }
 }
 const del = async (req, res) => {
   try {
     const { id } = req.params
-    console.log(id);
+    // console.log(id);
 
     const data = await ProductModel.findByIdAndDelete(id)
     res.send({ data })
@@ -52,7 +50,8 @@ const edite = async (req, res) => {
     const { id } = req.params
 
     const data = await ProductModel.findById(id)
-    console.log(data);
+    // console.log(data);
+
 
     res.send({ data })
   } catch (error) {
@@ -93,7 +92,7 @@ const cart_post = async (req, res) => {
   const product = req.body;
 
   try {
-    console.log(product);  // Debugging to see the received product data
+   
 
     const existingCartItem = await CartModel.findOne({ userId: id, productId: product._id });
 

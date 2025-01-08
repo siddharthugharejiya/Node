@@ -11,7 +11,7 @@ export const Asidebar = () => {
           <ul
             className="navbar-nav sidebar sidebar-dark bg-dark accordion"
             id="accordionSidebar"
-            style={{ height: "auto", position: "sticky", top: 0 }}
+            style={{ height: "auto", width:"auto", position: "sticky", top: 0 }}
           >
             {/* Sidebar Brand */}
             <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/index">

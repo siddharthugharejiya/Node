@@ -1,10 +1,12 @@
 import Swal from 'sweetalert2';
-import { CART_ADD, CART_FETCH, DATA, EMAIL, L_EMAIL, L_PASSWORD, PASSWORD, SINGLE, USERNAME } from "./action_type";
+import { CART_ADD, CART_FETCH, DATA, SINGLE} from "./action_type";
 
 export const product_action = () => (dispatch) => {
     fetch('http://localhost:9596/product')
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
+          
             dispatch({
                 type: DATA,
                 payload: data
@@ -101,6 +103,8 @@ export const remove_action = (id) => (dispatch) => {
     })
     .then((res) => res.json())
     .then((data) => {
+    
+      
       if (data.success) {
         Swal.fire({
           icon: 'success',
@@ -126,13 +130,4 @@ export const remove_action = (id) => (dispatch) => {
     });
 };
 
-export const wholedata = () => (dispatch) => {
-    fetch('https://data-3-hyvi.onrender.com/products')
-    .then(res => res.json())
-    .then((res) => {
-        dispatch({
-            type: "WHOLE",
-            payload: res
-        })
-    })
-};
+

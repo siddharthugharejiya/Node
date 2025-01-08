@@ -33,15 +33,8 @@ const Form = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body
-    console.log(email, password);
-
    
      const userdata = await UserModel.findOne({ email });
-
-     console.log("Found User:", userdata);
-     console.log(`User ROle in login ${userdata.role}`);
-     
-       
 
     if (!userdata) {
       return res.send({ msg: "User Not register" })
@@ -59,13 +52,13 @@ const login = async (req, res) => {
 }
 const login_Get = async(req,res) =>{
     const data = await UserModel.find()
-    console.log(data)
+    // console.log(data)
     res.send({data})
     
 }
 const getall_data = async (req, res) => {
   const data = await CategoryModel.find().populate("categoryes")
-  console.log(data)
+  // console.log(data)
   res.send({ data })
 
 }

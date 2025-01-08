@@ -21,18 +21,17 @@ import { product_action } from "../Redux/action";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
- // Run only once on mount
-
+ 
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.data.data);
-  console.log(product);
+  
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading delay
+   
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Adjust delay as needed
+    }, 2000); 
     return () => clearTimeout(timer);
   }, []);
 
@@ -46,25 +45,10 @@ const Home = () => {
   const buttonClick = (category) => {
     setFilter(category);
   };
-  console.log(filter);
+ 
 
-  const getFilteredProducts = () => {
-    if (filter === "All") {
-      return product;
-    } else if (filter === "Snacks") {
-      return product.filter((el) => el.category === "Snacks");
-    } else if (filter === "Fruits") {
-      return product.filter((el) => el.category === "Fruits");
-    } else if (filter === "Bakery") {
-      return product.filter((el) => el.category === "Bakery");
-    } else if (filter === "Vegetables") {
-      return product.filter((el) => el.category === "Vegetables");
-    } else {
-      return [];
-    }
-  };
-
-  // const filteredProducts = getFilteredProducts();
+ 
+ 
   useLayoutEffect(() => {
     const containers = document.querySelectorAll(".image-container")
 
@@ -335,47 +319,8 @@ const Home = () => {
     box-shadow: 0px 4px 8px
       ${(props) => (props === "dark" ? grey[900] : grey[200])};
   `;
-  // function updateCountdown() {
-  //   const targetDate = new Date("2025-01-01T00:00:00");
-  //   const now = new Date();
-  //   const timeDifference = targetDate - now;
   
-  //   if (timeDifference <= 0) {
-  //     // Set all countdown values to 00 when the target date is reached or passed
-  //     document.getElementById("months").innerText = "00";
-  //     document.getElementById("days").innerText = "00";
-  //     document.getElementById("hours").innerText = "00";
-  //     document.getElementById("minutes").innerText = "00";
-  //     document.getElementById("seconds").innerText = "00";
-  //     return;
-  //   }
-  
-  //   // Calculate time remaining
-  //   const months = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 30));
-  //   const days = Math.floor(
-  //     (timeDifference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)
-  //   );
-  //   const hours = Math.floor(
-  //     (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //   );
-  //   const minutes = Math.floor(
-  //     (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-  //   );
-  //   const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-  
-  //   // Update the countdown elements
-  //   document.getElementById("months").innerText = String(months).padStart(2, "0");
-  //   document.getElementById("days").innerText = String(days).padStart(2, "0");
-  //   document.getElementById("hours").innerText = String(hours).padStart(2, "0");
-  //   document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
-  //   document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
-  // }
-  
-  // // Update the countdown every second
-  // setInterval(updateCountdown, 1000);
-  
-
-
+  fetch("")
 
   return (
     <>
@@ -1116,7 +1061,7 @@ const Home = () => {
           <Card
             id="card-product"
             key={index}
-            onClick={() => handleclick(el.id)}
+            onClick={() => handleclick(el._id)}
           >
             <div className="image-container">
               <Card.Img

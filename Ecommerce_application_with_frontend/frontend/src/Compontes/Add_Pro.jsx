@@ -53,6 +53,7 @@ export function Add_Pro() {
     }
   }, [id]);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -66,14 +67,32 @@ export function Add_Pro() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${Token}`,
         },
-        body: JSON.stringify(state),
-      });
-      Swal.fire({
-        icon: 'success',
-        title: 'Added to Cart!',
-        text: update ? 'Product added successfully!' : 'Product updated successfully!',
-        confirmButtonText: 'Okay'
-      });
+        body: JSON.stringify(state)
+      })
+      .then((res) => res.json())
+      .then(data =>{
+        console.log(data);
+        if(data.data == "Access denied")
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Access denied',
+            text: "Your Not Authorization",
+           
+          });
+        }
+        else{
+          Swal.fire({
+            icon: 'success',
+            title: 'Added to Cart!',
+            text: update ? 'Product added successfully!' : 'Product updated successfully!',
+            confirmButtonText: 'Okay'
+          });
+        }
+        
+      })
+      
+      
         
       setUpdate(true)
       setState({
@@ -105,12 +124,12 @@ export function Add_Pro() {
   }, [state]);
 
   return (
-    <div className="bg-dark h-auto">
-      <Box display="flex">
-        <div className="col-lg-3">
+    <div className="bg-dark h-auto flex-wrap vh-100">
+      <Box className="d-flex flex-wrap">
+        <div className="col-lg-3 col-md-5 col-12">
           <Asidebar />
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-6 col-md-7">
           <Box flex={1} p={4}>
             <Container maxWidth="sm">
               <Typography variant="h4" component="h1" gutterBottom align="center" sx={{ color: "white" }}>
