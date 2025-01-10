@@ -22,19 +22,25 @@ function Navbar_1() {
   console.log(cartData);
   
 
-
-  const remove_card = useSelector((state) => state.remove_items.data);
-  useEffect(()=>{
-    if(remove_card)
-    {
-      dispatch(remove_action())
+  const remove_card = useSelector((state) => state.remove_items)
+  console.log(remove_card);
+  
+ 
+  const handleclose = (id) => {
+    dispatch(remove_action(id))
+    if(remove_card.length > 0)
+      {
+        dispatch(fetchCartData())
     }
-  },[dispatch])
+    dispatch(product_action()) 
+  }
+
 
 
 
   useLayoutEffect(() => {
     dispatch(fetchCartData());
+
   }, [dispatch]);
 
   const handleQuantityChange = (id, change) => {
@@ -57,10 +63,7 @@ function Navbar_1() {
     return 0;
   };
      
-  const handleclose = (id) => {
-    dispatch(remove_action(id));
-    dispatch(product_action())
-  };
+
 
   const checkout = () => {
     nav("/");
@@ -87,7 +90,7 @@ function Navbar_1() {
   }
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <Navbar expand="lg" className="flex-wrap">
         <div id="con">
           <Navbar.Brand as={Link} to={"/"}>

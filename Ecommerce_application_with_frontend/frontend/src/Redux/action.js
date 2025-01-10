@@ -98,14 +98,16 @@ export const fetchCartData = () => (dispatch) => {
 };
 
 export const remove_action = (id) => (dispatch) => {
-    fetch(`http://localhost:9596/cart/${id}`, {
-      method: "DELETE",
-    })
+  console.log(id);
+  
+  fetch(`http://localhost:9596/cart/${id}`, {
+    method: "DELETE",
+  })
     .then((res) => res.json())
     .then((data) => {
-    
-      
-      if (data.success) {
+      if (data) {
+        console.log(data);
+        
         Swal.fire({
           icon: 'success',
           title: 'Item Removed!',
@@ -129,5 +131,4 @@ export const remove_action = (id) => (dispatch) => {
       });
     });
 };
-
 
