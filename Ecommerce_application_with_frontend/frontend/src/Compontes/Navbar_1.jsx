@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, fetchCartData, remove_action } from "../Redux/action";
+import Card from "react-bootstrap/Card";
+
 
 function Navbar_1() {
   const dispatch = useDispatch();
@@ -21,22 +23,49 @@ function Navbar_1() {
   const cartData = useSelector((state) => state.All.data);
   const d = useSelector((state) => state.cart.data);
   const remove_card = useSelector((state) => state.remove_items.data);
-  useLayoutEffect(()=>{
+  useLayoutEffect(() => {
     dispatch(fetchCartData())
-    
-  },[d])
+
+  }, [d])
   useEffect(() => {
     if (remove_card && remove_card.length > 0) {
       dispatch(fetchCartData());
     }
   }, [dispatch, remove_card])
-  
+
   const handlecloseItems = (id) => {
-    
+
     dispatch(remove_action(id))
-  
+
   }
 
+    useLayoutEffect(() => {
+      const containers = document.querySelectorAll(".image-container");
+      containers.forEach((container) => {
+        const img = container.querySelector("img");
+  
+        if (img) {
+          const handleMouseMove = (e) => {
+            const { left, top, width, height } = container.getBoundingClientRect();
+            const x = ((e.clientX - left) / width) * 100;
+            const y = ((e.clientY - top) / height) * 100;
+  
+            img.style.transformOrigin = `${x}% ${y}%`;
+            img.style.transform = "scale(3)";
+          };
+  
+          const handleMouseLeave = () => {
+            img.style.transform = "scale(1)";
+            img.style.height = "100%";
+            img.style.width = "100%";
+            img.style.position = "absolute";
+          };
+  
+          container.addEventListener("mousemove", handleMouseMove);
+          container.addEventListener("mouseleave", handleMouseLeave);
+        }
+      });
+    }, []);
 
   const handleQuantityChange = (id, change) => {
     setQuantities((prevQuantities) => {
@@ -75,12 +104,14 @@ function Navbar_1() {
     }
   }, [admin]);
 
+  const n = useNavigate()
   const handleLog = () => {
-    nav("/")
-    localStorage.removeItem("Token")
-    localStorage.removeItem("UserId")
-    localStorage.removeItem("UserRole")
-    localStorage.removeItem("login")
+
+    n("/login")
+    // localStorage.removeItem("Token")
+    // localStorage.removeItem("UserId")
+    // localStorage.removeItem("UserRole")
+    // localStorage.removeItem("login")
   }
 
   return (
@@ -142,7 +173,11 @@ function Navbar_1() {
                       add == true ? <Link id="bottom" to={"/add"}>admin</Link> : ""
                     }
 
-                    <Link id="bottom" onClick={handleLog}>LogOut</Link>
+                    <div id="bottom">
+
+                      <button className="btn" style={{ fontSize: "13px", border: "none" }} type="submit" onClick={handleLog}> LogOut</button>
+                    </div>
+
 
                   </div>
                 </div>
@@ -163,69 +198,80 @@ function Navbar_1() {
               </div>
               <Offcanvas show={show} onHide={handleClose} placement="end">
                 <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
+                  <Offcanvas.Title className="fw-bold fs-4">Shopping Cart</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                   {cartData.length > 0 ? (
-                    cartData.map((item) => (
-                      <div key={item._id} className="cart-item d-flex align-items-center mb-3 p-3 border rounded">
-                        <div className="cart-item-image col-3 d-flex justify-content-center">
-                          <img
+                  cartData.map((item) => (
+                    <div key={item._id} className="cart-item d-flex align-items-center mb-4 p-3 border rounded shadow-sm">
+                      <div className="cart-item-image col-3 d-flex justify-content-center">
+                        <div className="image-container d-flex justify-content-center align-items-center" style={{ height: "100px" }}>
+                          <Card.Img
+                            variant="top"
+                            alt="image"
                             src={item.image}
-                            alt={item.name}
-                            className="cart-item-img img-fluid"
-                            style={{ maxHeight: "100px", objectFit: "contain", borderRadius: "8px" }}
+                            className="zoom-image"
+                            style={{ objectFit: "contain", maxHeight: "100%" }}
                           />
                         </div>
-
-                        <div className="d-flex flex-column ms-3 col-6" style={{ position: "relative" }}>
-                          <div className="cart-item-details">
-                            <h5 className="cart-item-name">{item.name}</h5>
-                            <div className="cart-item-price">${item.price} x {quantities[item._id] || 1} Kg</div>
-                          </div>
-
-                          <div className="cart-item-quantity d-flex align-items-center mt-2">
-                            <Button
-                              variant="outline-dark"
-                              onClick={() => handleQuantityChange(item._id, -1)}
-                              style={{ marginRight: "10px" }}
-                            >
-                              -
-                            </Button>
-                            <div className="cart-item-quantity-value">{quantities[item._id] || 1}</div>
-                            <Button
-                              variant="outline-dark"
-                              onClick={() => handleQuantityChange(item._id, 1)}
-                              style={{ marginLeft: "10px" }}
-                            >
-                              +
-                            </Button>
-                          </div>
+                      </div>
+                  
+                      <div className="d-flex flex-column ms-3 col-6">
+                        <div className="cart-item-details">
+                          <h5 className="cart-item-name mb-1 fw-semibold">{item.name}</h5>
+                          <div className="cart-item-price text-muted">${item.price} x {quantities[item._id] || 1} Kg</div>
                         </div>
-
-                        <div className="cart-item-remove ms-3" style={{ margin: "-20%" }}>
-                          <i
-                            className="fa-solid fa-xmark text-danger"
-                            onClick={() => handlecloseItems(item._id)}
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                          ></i>
+                  
+                        <div className="cart-item-quantity d-flex align-items-center mt-2">
+                          <Button
+                            variant="outline-secondary"
+                            size="sm"
+                            onClick={() => handleQuantityChange(item._id, -1)}
+                            className="me-2"
+                          >
+                            -
+                          </Button>
+                          <span className="cart-item-quantity-value px-3 py-1 border rounded bg-light">{quantities[item._id] || 1}</span>
+                          <Button
+                            variant="outline-secondary"
+                            size="sm"
+                            onClick={() => handleQuantityChange(item._id, 1)}
+                            className="ms-2"
+                          >
+                            +
+                          </Button>
                         </div>
                       </div>
-                    ))
+                  
+                      <div className="cart-item-remove ms-3">
+                        <i
+                          className="fa-solid fa-xmark text-danger"
+                          onClick={() => handlecloseItems(item._id)}
+                          style={{ cursor: "pointer", fontSize: "20px" }}
+                        ></i>
+                      </div>
+                    </div>
+                  ))
+                  
                   ) : (
                     <div className="text-center mt-4">
-                      <p>No items in the cart.</p>
+                      <p className="text-muted">No items in the cart.</p>
                     </div>
                   )}
 
-
-
-                  <div className="mt-3">
-                    <strong>Total: ${calculateTotal().toFixed(2)}</strong>
+                  <div className="mt-4">
+                    <strong className="fs-5">Total: ${calculateTotal().toFixed(2)}</strong>
                   </div>
-                  <button className="btn text-light mt-1" style={{ background: "rgb(100, 180, 150)" }} onClick={checkout}>Checkout</button>
+                  <button
+                    className="btn mt-3 w-100 py-2"
+                    style={{ backgroundColor: "#64B496", color: "#fff", fontWeight: "bold" }}
+                    onClick={checkout}
+                  >
+                    Checkout
+                  </button>
                 </Offcanvas.Body>
               </Offcanvas>
+
             </div>
           </div>
           <div className="bor"></div>

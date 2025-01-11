@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { product_action } from "../Redux/action";
 import { useNavigate } from "react-router-dom";
+import Navbar_1 from "./Navbar_1";
 
 const Home = () => {
  
@@ -325,6 +326,7 @@ const Home = () => {
 
   return (
     <>
+    <Navbar_1/>
       <div className="slider-1">
         <Carousel data-bs-theme="dark">
           <Carousel.Item>

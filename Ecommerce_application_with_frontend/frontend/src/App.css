@@ -1974,8 +1974,9 @@ i.fa-solid.fa-bag-shopping{
     margin-bottom: 10px;
    }
    .slick-list{
-    height: 130vh !important;
+    height: 55vh !important;
     margin: 30px 0;
+    border: 1px solid red;
   
   }
   .css-11lwzu7{
@@ -2041,7 +2042,7 @@ i.fa-solid.fa-bag-shopping{
     height: auto;
   }
   .slick-list{
-    height: 75vh !important;
+    height:95vh !important;
   }
 
 }
@@ -2064,6 +2065,9 @@ i.fa-solid.fa-bag-shopping{
   }
   #hide{
     display: none !important;
+  }
+  #ro{
+    flex-direction: column;
   }
   .food{
     height: auto;
@@ -2145,7 +2149,7 @@ i.fa-solid.fa-bag-shopping{
   }
   .slick-list{
     margin: 10px;
-    height: fit-content;
+    height: 50vh;
   }
   .packing{
     height: auto;
@@ -2271,7 +2275,7 @@ i.fa-solid.fa-bag-shopping{
 }
 
 
-@media (max-width: 480px) {
+@media (min-width: 480px) {
   #card-body {
     font-size: 12px;
   }
@@ -2305,7 +2309,7 @@ i.fa-solid.fa-bag-shopping{
   } */
   
 }
-@media (max-width:300px)
+@media (min-width:300px)
 {
   #card-img-icon{
     top: 46%;
