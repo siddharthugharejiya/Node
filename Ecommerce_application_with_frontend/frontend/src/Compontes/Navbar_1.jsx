@@ -13,8 +13,8 @@ function Navbar_1() {
   const [show, setShow] = useState(false);
   const [quantities, setQuantities] = useState({});
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const nav = useNavigate();
 
@@ -25,14 +25,17 @@ function Navbar_1() {
   const remove_card = useSelector((state) => state.remove_items)
   console.log(remove_card);
   
- 
-  const handleclose = (id) => {
-    dispatch(remove_action(id))
+   useEffect(()=>{
     if(remove_card.length > 0)
       {
         dispatch(fetchCartData())
+        setAdd(false)
     }
-    dispatch(product_action()) 
+
+   },[dispatch])
+  const handlecloseItems = (id) => {
+    dispatch(remove_action(id))
+      dispatch(product_action()) 
   }
 
 
@@ -61,7 +64,7 @@ function Navbar_1() {
       }, 0);
     }
     return 0;
-  };
+  }
      
 
 
@@ -215,7 +218,7 @@ function Navbar_1() {
                         <div className="cart-item-remove ms-3" style={{margin:"-20%"}}>
                           <i
                             className="fa-solid fa-xmark text-danger"
-                            onClick={() => handleclose(item._id)}
+                            onClick={() => handlecloseItems(item._id)}
                             style={{ cursor: "pointer", fontSize: "20px" }}
                           ></i>
                         </div>

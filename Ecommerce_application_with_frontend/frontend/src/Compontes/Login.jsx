@@ -75,7 +75,7 @@ const Login = () => {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} className="mb-3">
+          <Col xs={12} className="mb-3 text-center">
             <Form.Label>Email</Form.Label>
             <div className='d-flex justify-content-center align-items-center'>
             <Form.Control
@@ -88,7 +88,7 @@ const Login = () => {
             </div>
            
           </Col>
-          <Col xs={12} className="mb-3">
+          <Col xs={12} className="mb-3 text-center">
             <Form.Label>Password</Form.Label>
             <div className='d-flex justify-content-center align-items-center'>
 
@@ -105,7 +105,7 @@ const Login = () => {
         <div className='d-flex justify-content-center align-items-center'>
 
         <Button
-          className="btn btn-dark w-100"
+          className="btn btn-dark w-75"
           type="submit"
           >
           Submit

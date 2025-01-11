@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, single_action } from "../Redux/action";
 import { useNavigate, useParams } from "react-router-dom";
 import "./single.css"
 import "slick-carousel/slick/slick.css";
-import styled from 'styled-components';
 import "slick-carousel/slick/slick-theme.css";
 import "../App.css";
+import Card from "react-bootstrap/Card";
+
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 import Form from "react-bootstrap/Form";
+import { height } from "@mui/system";
 
 
 export default function Singlepage() {
@@ -41,6 +43,34 @@ export default function Singlepage() {
 
     dispatch(addToCart(product, id));
   };
+
+  useLayoutEffect(() => {
+    const containers = document.querySelectorAll(".image-container");
+    containers.forEach((container) => {
+      const img = container.querySelector("img");
+
+      if (img) {
+        const handleMouseMove = (e) => {
+          const { left, top, width, height } = container.getBoundingClientRect();
+          const x = ((e.clientX - left) / width) * 100;
+          const y = ((e.clientY - top) / height) * 100;
+
+          img.style.transformOrigin = `${x}% ${y}%`;
+          img.style.transform = "scale(3)";
+        };
+
+        const handleMouseLeave = () => {
+          img.style.transform = "scale(1)";
+          img.style.height = "100%";
+          img.style.width = "100%";
+          img.style.position = "absolute";
+        };
+
+        container.addEventListener("mousemove", handleMouseMove);
+        container.addEventListener("mouseleave", handleMouseLeave);
+      }
+    });
+  }, [id]);
 
   return (
     <>
@@ -297,7 +327,7 @@ export default function Singlepage() {
                           30kg Pack
                         </label>
                       </div>
-                      {/* <span>[64]</span> */}
+
                     </div>
                   </div>
 
@@ -327,7 +357,16 @@ export default function Singlepage() {
                     <div class="card mb-3" style={{ maxWidth: "100%" }}>
                       <div class="row g-0">
                         <div class="col-md-5">
-                          <img src={product.image} class="img-fluid rounded-start" alt="..." id="roo" />
+                          <div className="image-container" style={{height:"75vh"}}>
+                            <Card.Img
+                              variant="top"
+                              alt="image"
+                              src={product.image}
+                              className="zoom-image"
+                            
+                            />
+                          </div>
+                          {/* <img src={product.image} class="img-fluid rounded-start" alt="..." id="roo" /> */}
                         </div>
                         <div class="col-md-7">
                           <div class="card-body" style={{ alignItems: "start" }}>
@@ -344,7 +383,7 @@ export default function Singlepage() {
                             <h2 style={{ color: "rgb(100 180 150 / 1)" }}>${product.price}</h2>
                             <p className="foooo">Size / Weight : <div className="fooo">50kg </div>  <div className="fooo">80kg </div>  <div className="fooo">120kg </div>  <div className="fooo">200kg </div> </p>
                           </div>
-              
+
                           <OverlayTrigger
                             placement="top"
                             delay={{ show: 200, hide: 200 }}
