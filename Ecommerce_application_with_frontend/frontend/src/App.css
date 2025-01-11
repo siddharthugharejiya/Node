@@ -1517,7 +1517,7 @@ article div h1 {
   /* padding: 20px; */
   position: relative;
   /* border-radius: 10px 10px 0 0; */
-  object-fit: cover;
+  object-fit: fill;
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -1969,8 +1969,12 @@ i.fa-solid.fa-bag-shopping{
    .packing {
     width: auto;
    }
+   .bottom-silder{
+    height: auto;
+    margin-bottom: 10px;
+   }
    .slick-list{
-    height: 50vh !important;
+    height: 130vh !important;
     margin: 30px 0;
   
   }
@@ -2032,6 +2036,12 @@ i.fa-solid.fa-bag-shopping{
   .cate-sub {
     margin: 0;
     padding: 20px;
+  }
+  .latest-news{
+    height: auto;
+  }
+  .slick-list{
+    height: 75vh !important;
   }
 
 }
@@ -2303,5 +2313,8 @@ i.fa-solid.fa-bag-shopping{
   }
   .slick-slide.slick-cloned{
     width: 310px;
+  }
+  .slick-list{
+    height: 100vh !important;
   }
 }

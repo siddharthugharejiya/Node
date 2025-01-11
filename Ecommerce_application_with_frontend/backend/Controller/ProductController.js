@@ -73,9 +73,16 @@ const cart = async (req,res) =>{
 }
 const cart_del = async (req,res) =>{
   try {
-    const {id} = req.params
-    const data = await CartModel.findByIdAndDelete(id)
-    res.status(200).send({data})
+    const { id } = req.params;
+    console.log("this is bakend id ",id);
+    
+    const data = await CartModel.findByIdAndDelete(id);
+    
+    if (!data) {
+      return res.status(404).send({ message: "Item not found" });
+    }
+
+    res.status(200).send({ message: "Item deleted successfully", data });
   } catch (error) {
     res.status(500).send({ message: error.message });
 

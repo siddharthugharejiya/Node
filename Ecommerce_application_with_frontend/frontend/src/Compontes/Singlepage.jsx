@@ -13,34 +13,27 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 import Form from "react-bootstrap/Form";
-import { height } from "@mui/system";
+
 
 
 export default function Singlepage() {
   const { id } = useParams();
 
-
-
-  // const [isHovered, setIsHovered] = useState(true);
   const dispatch = useDispatch();
 
   const [price, setprice] = useState([1000]);
 
   const productData = useSelector((state) => state.single.data)
   const product = productData ? productData.data : null
+  
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       {product.price}
     </Tooltip>
   );
-  useEffect(() => {
-    dispatch(single_action(id));
-    // dispatch(wholedata());
-  }, [id]);
-
+ 
   const handleCart = (product) => {
     console.log(product);
-
     dispatch(addToCart(product, id));
   };
 
@@ -70,7 +63,12 @@ export default function Singlepage() {
         container.addEventListener("mouseleave", handleMouseLeave);
       }
     });
-  }, [id]);
+  }, [ product,id]);
+  useEffect(() => {
+    dispatch(single_action(id));
+    // dispatch(wholedata());
+  }, [product]);
+
 
   return (
     <>
@@ -90,12 +88,12 @@ export default function Singlepage() {
         <div className="col-xl-5 text-center">Home - Product - Singlepage</div>
       </div>
 
-      <div className="container">
+      <div className="container mt-2">
         <div className="row">
           <div className="row justify-content-center">
             <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-8">
               <div className="row">
-                <div className="col-xxl-12 cate">
+                <div className="col-xxl-11 cate shadow ">
                   <div className="cate-sub col-xxl-9 col-sm-12 col-12">
                     <div className="px-b bbb">
                       {" "}
@@ -349,9 +347,9 @@ export default function Singlepage() {
                 </div>
               </div>
             </div>
-            <div className="col-xxl-9">
+            <div className="col-xxl-9 ">
               {product ? (
-                <div className="col-xxl-12">
+                <div className="col-xxl-12 shadow">
                   {
 
                     <div class="card mb-3" style={{ maxWidth: "100%" }}>
@@ -363,10 +361,11 @@ export default function Singlepage() {
                               alt="image"
                               src={product.image}
                               className="zoom-image"
+                              style={{objectFit:"contain"}}
                             
                             />
                           </div>
-                          {/* <img src={product.image} class="img-fluid rounded-start" alt="..." id="roo" /> */}
+                          
                         </div>
                         <div class="col-md-7">
                           <div class="card-body" style={{ alignItems: "start" }}>
@@ -382,15 +381,16 @@ export default function Singlepage() {
                             <p>Items : <span style={{ color: "rgb(122 122 122 / 1)" }}>1</span></p>
                             <h2 style={{ color: "rgb(100 180 150 / 1)" }}>${product.price}</h2>
                             <p className="foooo">Size / Weight : <div className="fooo">50kg </div>  <div className="fooo">80kg </div>  <div className="fooo">120kg </div>  <div className="fooo">200kg </div> </p>
-                          </div>
-
-                          <OverlayTrigger
+                            <OverlayTrigger
                             placement="top"
                             delay={{ show: 200, hide: 200 }}
                             overlay={renderTooltip}
                           >
-                            <Button variant="dark" onClick={() => handleCart(product)}>Add To Cart</Button>
+                            <Button style={{background:"rgb(100, 180, 150)",border:"none"}} onClick={() => handleCart(product)}>Add To Cart</Button>
                           </OverlayTrigger>
+                          </div>
+
+                       
                         </div>
 
                       </div>

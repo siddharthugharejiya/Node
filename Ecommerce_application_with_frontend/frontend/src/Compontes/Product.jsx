@@ -75,11 +75,11 @@ const AllProduct = () => {
 
   return (
     <>
-      <div className="row justify-content-center ">
+      <div className="row justify-content-center mt-2">
       <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-8">
  
                 <div className="row">
-                  <div className="col-xxl-12 cate">
+                  <div className="col-xxl-10 cate shadow">
                     <div className="cate-sub col-xxl-9 col-sm-12 col-12">
                       <div className="px-b bbb">
                         {" "}
@@ -334,11 +334,19 @@ const AllProduct = () => {
                 </div>
               </div>
         
-  <div className="col-xl-8 aos-init aos-animate" data-aos="fade-up">
-  <div className="card-content">
+              <div className="col-xl-8 aos-init aos-animate " data-aos="fade-up">
+  <div className="card-content ">
     {loading
       ? Array.from({ length: 6 }).map((_, index) => (
-          <Card key={index} id="card-product" style={{ marginBottom: "20px" }}>
+          <Card
+            key={index}
+            id="card-product"
+            style={{
+              marginBottom: "20px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            className="shadow"
+          >
             <div className="image-container">
               <Skeleton
                 variant="rectangular"
@@ -379,6 +387,10 @@ const AllProduct = () => {
             id="card-product"
             key={index}
             onClick={() => handleclick(el._id)}
+            style={{
+              marginBottom: "20px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
           >
             <div className="image-container">
               <Card.Img
@@ -443,6 +455,7 @@ const AllProduct = () => {
         ))}
   </div>
 </div>
+
       </div>
     </>
   )

@@ -5,11 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCartData, product_action, remove_action } from "../Redux/action";
+import { addToCart, fetchCartData, remove_action } from "../Redux/action";
 
 function Navbar_1() {
   const dispatch = useDispatch();
-  
+
   const [show, setShow] = useState(false);
   const [quantities, setQuantities] = useState({});
 
@@ -18,33 +18,25 @@ function Navbar_1() {
 
   const nav = useNavigate();
 
-  const cartData = useSelector((state) => state.cart.data)
-  console.log(cartData);
-  
-
-  const remove_card = useSelector((state) => state.remove_items)
-  console.log(remove_card);
-  
-   useEffect(()=>{
-    if(remove_card.length > 0)
-      {
-        dispatch(fetchCartData())
-        setAdd(false)
+  const cartData = useSelector((state) => state.All.data);
+  const d = useSelector((state) => state.cart.data);
+  const remove_card = useSelector((state) => state.remove_items.data);
+  useLayoutEffect(()=>{
+    dispatch(fetchCartData())
+    
+  },[d])
+  useEffect(() => {
+    if (remove_card && remove_card.length > 0) {
+      dispatch(fetchCartData());
     }
-
-   },[dispatch])
+  }, [dispatch, remove_card])
+  
   const handlecloseItems = (id) => {
+    
     dispatch(remove_action(id))
-      dispatch(product_action()) 
+  
   }
 
-
-
-
-  useLayoutEffect(() => {
-    dispatch(fetchCartData());
-
-  }, [dispatch]);
 
   const handleQuantityChange = (id, change) => {
     setQuantities((prevQuantities) => {
@@ -65,11 +57,12 @@ function Navbar_1() {
     }
     return 0;
   }
-     
+
 
 
   const checkout = () => {
     nav("/");
+    handleClose()
   }
   const [add, setAdd] = useState(false);
   const admin = localStorage.getItem("UserRole");
@@ -80,11 +73,9 @@ function Navbar_1() {
     } else {
       setAdd(false);
     }
-  }, [admin]); 
+  }, [admin]);
 
-  console.log(add)
-  
-  const handleLog = () =>{
+  const handleLog = () => {
     nav("/")
     localStorage.removeItem("Token")
     localStorage.removeItem("UserId")
@@ -148,11 +139,11 @@ function Navbar_1() {
                     <Link id="middle" to={"/"}>Checkout</Link>
                     <Link id="bottom" to={"/login"}>Login</Link>
                     {
-                      add == true ?  <Link id="bottom"  to={"/add"}>admin</Link> : ""
+                      add == true ? <Link id="bottom" to={"/add"}>admin</Link> : ""
                     }
-                   
+
                     <Link id="bottom" onClick={handleLog}>LogOut</Link>
-                    
+
                   </div>
                 </div>
               </div>
@@ -175,26 +166,24 @@ function Navbar_1() {
                   <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                  {Array.isArray(cartData) && cartData.length > 0 ? (
+                  {cartData.length > 0 ? (
                     cartData.map((item) => (
                       <div key={item._id} className="cart-item d-flex align-items-center mb-3 p-3 border rounded">
-                       
                         <div className="cart-item-image col-3 d-flex justify-content-center">
                           <img
                             src={item.image}
                             alt={item.name}
                             className="cart-item-img img-fluid"
-                            style={{ maxHeight: "100px", objectFit: "cover", borderRadius: "8px" }}
+                            style={{ maxHeight: "100px", objectFit: "contain", borderRadius: "8px" }}
                           />
                         </div>
 
-                        <div className="d-flex flex-column ms-3 col-6" style={{position : "relative"}}>
+                        <div className="d-flex flex-column ms-3 col-6" style={{ position: "relative" }}>
                           <div className="cart-item-details">
                             <h5 className="cart-item-name">{item.name}</h5>
                             <div className="cart-item-price">${item.price} x {quantities[item._id] || 1} Kg</div>
                           </div>
 
-                          {/* Quantity Controls */}
                           <div className="cart-item-quantity d-flex align-items-center mt-2">
                             <Button
                               variant="outline-dark"
@@ -214,8 +203,7 @@ function Navbar_1() {
                           </div>
                         </div>
 
-                      
-                        <div className="cart-item-remove ms-3" style={{margin:"-20%"}}>
+                        <div className="cart-item-remove ms-3" style={{ margin: "-20%" }}>
                           <i
                             className="fa-solid fa-xmark text-danger"
                             onClick={() => handlecloseItems(item._id)}
@@ -229,6 +217,7 @@ function Navbar_1() {
                       <p>No items in the cart.</p>
                     </div>
                   )}
+
 
 
                   <div className="mt-3">

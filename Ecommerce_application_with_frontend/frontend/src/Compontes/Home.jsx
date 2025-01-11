@@ -1018,11 +1018,19 @@ const Home = () => {
           </div>
         </div>
 
-  <div className="col-xl-8 aos-init aos-animate" data-aos="fade-up">
-  <div className="card-content">
+        <div className="col-xl-8 aos-init aos-animate " data-aos="fade-up">
+  <div className="card-content ">
     {loading
       ? Array.from({ length: 6 }).map((_, index) => (
-          <Card key={index} id="card-product" style={{ marginBottom: "20px" }}>
+          <Card
+            key={index}
+            id="card-product"
+            style={{
+              marginBottom: "20px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            className="shadow"
+          >
             <div className="image-container">
               <Skeleton
                 variant="rectangular"
@@ -1063,6 +1071,10 @@ const Home = () => {
             id="card-product"
             key={index}
             onClick={() => handleclick(el._id)}
+            style={{
+              marginBottom: "20px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
           >
             <div className="image-container">
               <Card.Img
@@ -1070,6 +1082,7 @@ const Home = () => {
                 alt="image"
                 src={el.image}
                 className="zoom-image"
+
               />
             </div>
             <div id="shop">
@@ -1446,30 +1459,27 @@ const Home = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               maecenas accumsan lacus vel facilisis.
             </p>
-            {/* <div className="food-timer">
+            <div className="food-timer">
               <div className="countdown">
                 <div>
-                  <span id="months">00</span>
+                  <span id="months">12</span>
                   <div className="label">Months</div>
                 </div>
                 <div>
-                  <span id="days">00</span>
+                  <span id="days">30</span>
                   <div className="label">Days</div>
                 </div>
                 <div>
-                  <span id="hours">00</span>
+                  <span id="hours">24</span>
                   <div className="label">Hours</div>
                 </div>
                 <div>
-                  <span id="minutes">00</span>
+                  <span id="minutes">60</span>
                   <div className="label">Minutes</div>
                 </div>
-                <div>
-                  <span id="seconds">00</span>
-                  <div className="label">Seconds</div>
-                </div>
+                
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

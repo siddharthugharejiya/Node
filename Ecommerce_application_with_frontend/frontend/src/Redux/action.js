@@ -81,9 +81,11 @@ export const fetchCartData = () => (dispatch) => {
     fetch(`http://localhost:9596/cart`)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
+      
         dispatch({
           type: CART_FETCH,
-          payload: data.cartItems || [],
+          payload: data.cartItems,
         })
     })
     .catch((error) => {
