@@ -351,14 +351,14 @@ export default function Singlepage() {
                 </div>
               </div>
             </div>
-            <div className="col-xxl-9 col-xl-6  col-lg-7">
+            <div className="col-xxl-8 col-xl-6  col-lg-7">
               {product ? (
                 <div className="col-xxl-12 shadow">
                   {
 
                     <div class="card mb-3" style={{ maxWidth: "100%" }}>
                       <div class="row g-0" id="ro">
-                        <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                           <div className="image-container" style={{ height: "75vh" }}>
                             <Card.Img
                               variant="top"

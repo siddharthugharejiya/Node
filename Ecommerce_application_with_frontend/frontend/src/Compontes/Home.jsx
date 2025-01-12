@@ -476,13 +476,13 @@ const Home = () => {
           </Carousel.Item>
         </Carousel>
       </div>
-      <div className="t" data-aos="fade-up">
+      <div className="t" >
         <Tabs
           defaultValue={0}
           orientation="vertical"
-          // style={{ flexWrap: "wrap" }}
+          style={{ flexWrap: "wrap" }}
         >
-          <TabsList className="tabs-list col-lg-4 col-sm-12 col-12">
+          <TabsList className="tabs-list col-xl-4 col-lg-4 col-sm-12 col-12">
             <Tab>
               Cake and Milk <br />
               (65 Items)
@@ -511,7 +511,7 @@ const Home = () => {
 
           <TabPanel value={0} className="tab-panel">
             <div className="tab-image row justify-content-around">
-              <div className="col-lg-5 col-md-6 col-sm-12 col-12 mb-3 d-flex justify-content-around">
+              <div className="col-lg-6 col-md-6 col-sm-12 col-12 mb-3 d-flex justify-content-around">
                 <div
                   className="card car"
                   style={{
@@ -542,7 +542,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-lg-5 col-md-6 col-sm-12 col-12 mb-3 d-flex justify-content-center">
+              <div className="col-lg-6 col-md-6 col-sm-12 col-12 mb-3 d-flex justify-content-center">
                 <div
                   className="card car "
                   style={{
@@ -577,7 +577,7 @@ const Home = () => {
 
           <TabPanel value={1} className="tab-panel">
             <div className="tab-image row justify-content-around">
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
                 <div
                   className="card car"
                   style={{
@@ -608,7 +608,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
                 <div
                   className="card car"
                   style={{
@@ -643,7 +643,7 @@ const Home = () => {
 
           <TabPanel value={2} className="tab-panel">
             <div className="tab-image row justify-content-around">
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
                 <div
                   className="card car"
                   style={{
@@ -674,7 +674,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
                 <div
                   className="card car"
                   style={{
@@ -709,7 +709,7 @@ const Home = () => {
 
           <TabPanel value={3} className="tab-panel">
             <div className="tab-image row justify-content-around">
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
                 <div
                   className="card car"
                   style={{
@@ -740,7 +740,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-around">
                 <div
                   className="card car"
                   style={{
@@ -775,7 +775,7 @@ const Home = () => {
 
           <TabPanel value={4} className="tab-panel">
             <div className="tab-image row justify-content-around">
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
                 <div
                   className="card car"
                   style={{
@@ -806,7 +806,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
                 <div
                   className="card car"
                   style={{
@@ -841,7 +841,7 @@ const Home = () => {
 
           <TabPanel value={5} className="tab-panel">
             <div className="tab-image row justify-content-around">
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
                 <div
                   className="card car"
                   style={{
@@ -872,7 +872,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-lg-5 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+              <div className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
                 <div
                   className="card car"
                   style={{
@@ -906,7 +906,7 @@ const Home = () => {
           </TabPanel>
         </Tabs>
       </div>
-      <div className="row fruits aos-init aos-animate" data-aos="fade-up">
+      <div className="row fruits" >
       <div className="col-xxl-12 d-flex justify-content-center mt-3">
           <div className="bottom-text d-flex justify-content-center flex-column align-items-center">
             <h1>Popular Products</h1>
@@ -991,7 +991,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="side-2 col-xxl-12 col-xl-12 col-lg-5 col-sm-6 col-6">
+            <div className="side-2 col-xxl-12 col-xl-12 col-lg-6 col-sm-6 col-6">
               <div className="side-2-sub">
                 <div className="side-2-sub-text p-3 py-5 ">
                   <span className="text-light" style={{ fontSize: "40px" }}>
@@ -1020,7 +1020,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="col-xl-8 aos-init aos-animate " data-aos="fade-up">
+        <div className="col-xl-8 " >
   <div className="card-content ">
     {loading
       ? Array.from({ length: 6 }).map((_, index) => (
@@ -1149,8 +1149,8 @@ const Home = () => {
       <div className="container d-flex justify-content-center align-items-center">
         <div className="fresh">
           <div className="row">
-            <div className="slider-container" data-aos="fade-up">
-              <Slider {...settings} data-aos="fade-up">
+            <div className="slider-container" >
+              <Slider {...settings} >
                 <div className="d-flex justify-content-center align-items-center">
                   <div
                     className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
@@ -1330,7 +1330,7 @@ const Home = () => {
 
       <div className="pro">
         <div className="row">
-          <div className="slid-1" data-aos="fade-up">
+          <div className="slid-1">
             <Slider {...settings1}>
               <div
                 className="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12"
@@ -1440,9 +1440,9 @@ const Home = () => {
 
     
       <div className="food">
-        <div className="col-xxl-5 m-5 aos-init aos-animate" data-aos="fade-up">
+        <div className="col-xxl-5 m-5" data-aos="fade-up">
           <div
-            className="food-count col-xxl-11  col-xl-6 col-lg-7 col-sm-8 col-12 aos-init aos-animate" data-aos="fade-up"
+            className="food-count col-xxl-11  col-xl-6 col-lg-7 col-sm-8 col-12" data-aos="fade-up"
             style={{ display: "flex", flexWrap: "wrap" }}
           >
             <div className="col-12 d-flex">
@@ -1486,8 +1486,8 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="bottom-silder row mt-5 aos-init aos-animate" data-aos="fade-up">
-        <div className="col-xxl-12 d-flex justify-content-center aos-init aos-animate" data-aos="fade-up">
+      <div className="bottom-silder row mt-5" >
+        <div className="col-xxl-12 d-flex justify-content-center" >
           <div className="bottom-text d-flex justify-content-center flex-column align-items-center">
             <h1>Great Words From People</h1>
             <div className="d-flex justify-content-center">
@@ -1501,7 +1501,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Slider {...settings} data-aos="fade-up">
+        <Slider {...settings} >
           <div className="col-xl-3">
             <article>
               <figure>
@@ -1662,8 +1662,8 @@ const Home = () => {
         </Slider>
       </div>
 
-      <div className="latest-news aos-init aos-animate" data-aos="fade-up">
-        <div className="col-xxl-12 d-flex justify-content-center aos-init aos-animate" data-aos="fade-up">
+      <div className="latest-news mt-5 mb-3">
+        <div className="col-xxl-12 d-flex justify-content-center">
           <div className="bottom-text d-flex justify-content-center flex-column align-items-center">
             <h1>Latest News</h1>
             <div className="d-flex justify-content-center">
@@ -1678,7 +1678,7 @@ const Home = () => {
           </div>
         </div>
 
-        <Slider {...settings} data-aos="fade-up">
+        <Slider {...settings}>
           <div className="col-xl-12 col-md-12">
             <Card id="card">
               <Card.Body id="card-body">
@@ -1768,7 +1768,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      <div className="footer aos-init aos-animate" data-aos="fade-up">
+      <div className="footer" >
         <div className="container-fluid">
           <div className="container mt-5">
             <div className="row">
@@ -1892,3 +1892,8 @@ const Home = () => {
   );
 };
 export default Home;
+
+
+
+
+

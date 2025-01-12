@@ -83,7 +83,7 @@ const AllProduct = () => {
 
           <div className="row">
             <div className="col-xxl-10 cate shadow">
-              <div className="cate-sub col-xxl-9 col-sm-12 col-12">
+              <div className="cate-sub col-xxl-9 col-lg-9 col-md-9 col-sm-12 col-12">
                 <div className="px-b bbb">
                   {" "}
                   <b>Category </b>
@@ -147,7 +147,7 @@ const AllProduct = () => {
                 </div>
               </div>
 
-              <div className="cate-sub col-xxl-9 col-sm-12">
+              <div className="cate-sub col-xxl-9 col-lg-9 col-md-9 col-sm-12 col-12">
                 <div className="px-b bbb">
                   {" "}
                   <b>Price </b>
@@ -173,7 +173,7 @@ const AllProduct = () => {
                 </div>
               </div>
 
-              <div className="cate-sub col-xxl-9">
+              <div className="cate-sub col-xxl-9 col-lg-9 col-md-9 col-sm-12 col-12">
                 <div className="px-b bbb">
                   {" "}
                   <b>Colors </b>
@@ -255,7 +255,7 @@ const AllProduct = () => {
                 </div>
               </div>
 
-              <div className="cate-sub col-xxl-9">
+              <div className="cate-sub col-xxl-9 col-lg-9 col-md-9 col-sm-12 col-12">
                 <div className="px-b bbb">
                   {" "}
                   <b>Weight </b>
@@ -318,7 +318,7 @@ const AllProduct = () => {
                 </div>
               </div>
 
-              <div className="cate-subb col-xxl-9">
+              <div className="cate-sub col-xxl-9 col-lg-9 col-md-9 col-sm-12 col-12">
                 <div className="px-b bbb">
                   {" "}
                   <b>Tages </b>

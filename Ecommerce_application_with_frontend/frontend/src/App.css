@@ -657,6 +657,8 @@ span.carousel-control-next-icon,span.carousel-control-prev-icon{
 
 .css-11lwzu7{
   /* flex-wrap: wra; */
+  justify-content: center;
+
   width: 75% !important;
 }
 /* Vertical Tabs layout */
@@ -825,6 +827,11 @@ span.carousel-control-next-icon,span.carousel-control-prev-icon{
   /* border:1px solid red; */
 
 }
+.slid-1{
+  height: 100% !important;
+  width: 100% !important;
+  /* border: 1px solid red; */
+}
 .slick-dots li.slick-active button:before{
   display: none;
 }
@@ -836,15 +843,16 @@ span.carousel-control-next-icon,span.carousel-control-prev-icon{
 .slick-slider{
   height: auto;
   margin: auto;
-  width:92% !important;
-  /* border: 1px solid red; */
+  position: relative;
+  width:90% !important;
+
 
 }
 
 .packing{
   height:auto;
   width: 86%;
-  /* border: 1px solid red; */
+
   background: #f7f7f8;
   display: flex;
   justify-content: center;
@@ -875,6 +883,7 @@ div#pro-1{
   margin: 0px 10px !important;
 }
 .slick-list{
+  position: absolute;
   height: auto !important;
   margin: 15px 0;
 }
@@ -891,12 +900,12 @@ div#pro-1{
 .pro{
   height: auto;
   width: 100%;
-  /* border: 1px solid red; */
+
 }
 .food{
   height: 85vh;
   width: 100%;
-  /* border: 1px solid red; */
+
   background-image: url(../public/image/bg-deal.jpg) ;
   background-position: center;
   background-size: cover;
@@ -907,7 +916,7 @@ div#pro-1{
 .food-count{
   height: auto;
   width: 85%;
-  /* border: 1px solid red; */
+
   margin-left: 30px;
   /* margin-top: 25px; */
   padding: 40px;
@@ -956,7 +965,7 @@ div#pro-1{
 }
 
 .bottom-silder{
-  height:100vh;
+  height:auto;
   width:100%;
   /* border:1px solid red; */
 
@@ -1129,8 +1138,8 @@ article div h1 {
 }
 
 .latest-news{
-  height: 90vh;
-  width: auto;
+  height: auto;
+  width: 100%;
   /* border: 1px solid red; */
 }
 /* Card styling */
@@ -1946,7 +1955,10 @@ i.fa-solid.fa-bag-shopping{
   color: #6c757d;
 }
 
-@media (max-width:2000px) {
+.css-fcnm4n,.css-fcnm4n , .css-fcnm4n{
+  width: 65% !important;
+}
+@media (min-width:2000px) {
   .t{
     height: auto;
     margin: 20px 0;
@@ -1954,10 +1966,37 @@ i.fa-solid.fa-bag-shopping{
   #hide{
     margin: -5px !important ;
   }
+  .slick-list{
+    height: 100vh !important;
+    margin: 30px 0;
+    border: 1px solid red;
+  }
+  .fresh {
+    height: 40vh !important;
+  
+  }
+  .slid-1{
+    height: 40vh !important;
+    width: 100%;
+  }
+  .slick-slider{
+    height: 75vh;
+    width: 100%;
+  }
+  .bottom-silder , .latest-news{
+    height: 51vh !important;
+    border: 1px solid red;
+  }
 
 }
+@media (max-width : 1800px)
+{
+  .bottom-silder , .latest-news{
+    height: 164vh;
 
-@media (max-width:1500px)
+  }
+}
+@media (min-width:1500px)
 {
   .t{
     height: auto;
@@ -1970,14 +2009,13 @@ i.fa-solid.fa-bag-shopping{
     width: auto;
    }
    .bottom-silder{
-    height: auto;
+    height: 100vh;
     margin-bottom: 10px;
    }
    .slick-list{
-    height: 55vh !important;
+    height: auto !important;
     margin: 30px 0;
-    border: 1px solid red;
-  
+    /* border: 1px solid red; */
   }
   .css-11lwzu7{
     flex-wrap: nowrap;
@@ -1991,9 +2029,12 @@ i.fa-solid.fa-bag-shopping{
   #button-icon{
     left: 210px;
   }
+  .bottom-silder , .latest-news{
+    height: 164vh;
+  }
 
 }
-@media (max-width:1400px)
+@media (min-width:1400px)
 {
   
   .product{
@@ -2015,8 +2056,11 @@ i.fa-solid.fa-bag-shopping{
     margin: 0;
     padding: 20px;
   }
+  .bottom-silder , .latest-news{
+    height: 150vh;
+  }
 }
-@media (max-width:1200px)
+@media (min-width:1200px)
 {
   .product{
     height: auto !important;
@@ -2041,12 +2085,12 @@ i.fa-solid.fa-bag-shopping{
   .latest-news{
     height: auto;
   }
-  .slick-list{
-    height:95vh !important;
+  .bottom-silder , .latest-news{
+    height: 150vh;
   }
 
 }
-@media (max-width: 992px){
+@media (min-width: 992px){
   #phone {
     width: 100%;
   }
@@ -2072,8 +2116,9 @@ i.fa-solid.fa-bag-shopping{
   .food{
     height: auto;
   }
-  .slick-list{
-    height:fit-content;
+  .slick-list {
+    height: fit-content;
+    margin: 10px;
   }
   .car{
     margin: 10px;
@@ -2093,6 +2138,13 @@ i.fa-solid.fa-bag-shopping{
   .cate-sub {
     margin: 0;
     padding: 20px;
+  }
+  .fresh , .slid-1{
+    height: 40vh !important;
+    /* border: 1px solid red; */
+  }
+  .bottom-silder , .latest-news{
+    height: 90vh;
   }
 }
 @media (max-width: 768px) {
@@ -2147,9 +2199,9 @@ i.fa-solid.fa-bag-shopping{
     width: 255px;
   
   }
-  .slick-list{
-    margin: 10px;
+  .slick-list {
     height: 50vh;
+    margin: 10px;
   }
   .packing{
     height: auto;
@@ -2193,6 +2245,14 @@ i.fa-solid.fa-bag-shopping{
     margin: 0;
     padding: 20px;
   }
+  .bottom-silder , .latest-news{
+    height: 95vh;
+  }
+  .fresh , .slid-1{
+    height: 40vh !important;
+    /* border: 1px solid red; */
+  }
+  
 }
 
 @media(max-width:576px)
@@ -2271,14 +2331,32 @@ i.fa-solid.fa-bag-shopping{
     margin: 0;
     padding: 20px;
   }
+  .slick-list {
+    height: 90vh !important;
+  }
+  .bottom-silder , .latest-news{
+    height: 160vh;
+  }
+  .fresh , .slid-1{
+    height: 60vh !important;
+    /* border: 1px solid red; */
+  }
   
 }
 
 
-@media (min-width: 480px) {
+@media (max-width: 480px) {
   #card-body {
     font-size: 12px;
   }
+  .slick-list{
+    height: 100vh !important;
+  }
+  .fresh , .slid-1{
+    height: 40vh !important;
+    /* border: 1px solid red; */
+  }
+  
 
   .cta {
     font-size: 12px;
@@ -2303,13 +2381,13 @@ i.fa-solid.fa-bag-shopping{
     margin: 0;
     padding: 20px;
   }
-  /* .slick-slide.slick-cloned{
-    width: 400px !important;
-    margin: auto !important;
-  } */
+  .bottom-silder,.latest-news{
+    height: 90vh;
+  }
+
   
 }
-@media (min-width:300px)
+@media (max-width:300px)
 {
   #card-img-icon{
     top: 46%;
@@ -2319,6 +2397,6 @@ i.fa-solid.fa-bag-shopping{
     width: 310px;
   }
   .slick-list{
-    height: 100vh !important;
+    height: auto !important;
   }
 }
